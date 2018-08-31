@@ -398,7 +398,7 @@ switch (state)
 			}
 			else
 			{
-				state = player_states.walk;
+				state = player_states.stop;
 			}
 		}
 		else
@@ -574,7 +574,8 @@ switch (state)
 			h_speed = max(target_speed, h_speed - (move_speed / 8));
 		}
 		
-		v_speed = v_speed + v_gravity;
+		
+		v_speed = v_speed + v_gravity + (v_gravity * input_y);
 
 		// Horizontal collisions
 
@@ -624,7 +625,7 @@ switch (state)
 		{
 			sprite_index = sprPlayerFallDown1;
 		}
-		else if (v_speed < (jump_speed * 2))
+		else if (v_speed < (jump_speed * 1.5))
 		{
 			sprite_index = sprPlayerFallDown2;
 		}
