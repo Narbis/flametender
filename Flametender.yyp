@@ -82,7 +82,7 @@
             "Key": "1af3dc42-7ce6-4f3d-b106-759dfa99960f",
             "Value": {
                 "id": "75ef715b-285f-43f8-aaa1-6115c3f10567",
-                "resourcePath": "sprites\\sprPlayerJumpUp\\sprPlayerJumpUp.yy",
+                "resourcePath": "sprites\\sprPlayerFallUp1\\sprPlayerFallUp1.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -359,6 +359,14 @@
             }
         },
         {
+            "Key": "97813274-985c-4a64-bc6a-67b793f394ef",
+            "Value": {
+                "id": "6ae33ae4-3f01-4d05-9851-b63a22dcb1d4",
+                "resourcePath": "sprites\\sprPlayerFallUp3\\sprPlayerFallUp3.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "98a6aa5a-8061-4ad5-aff3-850d03bdbcc3",
             "Value": {
                 "id": "668b53a4-6af4-4004-90b2-ba42b4c43687",
@@ -386,7 +394,7 @@
             "Key": "a10f7123-c138-4aa2-8cdd-cd324391a258",
             "Value": {
                 "id": "b145c699-cbfd-43ac-b4f9-fb17bea8b946",
-                "resourcePath": "sprites\\sprPlayerJumpDown\\sprPlayerJumpDown.yy",
+                "resourcePath": "sprites\\sprPlayerFallDown1\\sprPlayerFallDown1.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -455,6 +463,14 @@
             }
         },
         {
+            "Key": "c16deeda-40a6-4ef8-ac15-f77c6e118d9a",
+            "Value": {
+                "id": "105dadf3-ba99-4da0-9ecb-ec7b9b208828",
+                "resourcePath": "sprites\\sprPlayerFallUp2\\sprPlayerFallUp2.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "c3685a64-5cdb-486e-a2d5-016de239bbd3",
             "Value": {
                 "id": "883d2d20-0d5f-42d1-821f-3622be37a15e",
@@ -511,6 +527,14 @@
             }
         },
         {
+            "Key": "dae244b9-c9c7-4900-be90-d4afc8ce8c1e",
+            "Value": {
+                "id": "b1effe16-b4dc-478c-ad92-ecacff29f43b",
+                "resourcePath": "sprites\\sprPlayerFallDown2\\sprPlayerFallDown2.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "dcbcbe66-a861-45ed-9507-766394216108",
             "Value": {
                 "id": "6ed259a4-5d3d-4eea-8af1-5adf69772b9e",
@@ -543,10 +567,26 @@
             }
         },
         {
+            "Key": "e99f5bba-d398-4706-bef9-1cbdf6156f6e",
+            "Value": {
+                "id": "8353f193-573b-4880-9d0c-6b28bd170527",
+                "resourcePath": "sprites\\sprPlayerFallDown3\\sprPlayerFallDown3.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "e9ff1fac-0118-4d3c-b935-4e661298382c",
             "Value": {
                 "id": "ae9df1ac-a4c2-47f6-857a-884ebe24b2e3",
                 "resourcePath": "sprites\\sprPlayerStop\\sprPlayerStop.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "ecb8ea9e-d963-44d0-a1eb-166726558915",
+            "Value": {
+                "id": "5da765c5-d3aa-4def-96ad-50f7f8b0cce2",
+                "resourcePath": "sprites\\sprPlayerFallDown0\\sprPlayerFallDown0.yy",
                 "resourceType": "GMSprite"
             }
         },

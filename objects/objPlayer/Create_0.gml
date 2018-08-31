@@ -21,7 +21,7 @@ face_right = true;
 h_speed = 0;
 v_speed = 0;
 v_gravity = 0.25;
-move_speed = 1.8;
+move_speed = 3;
 jump_speed = 3;
 
 gamepad = false;

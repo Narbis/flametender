@@ -403,7 +403,7 @@ switch (state)
 		}
 		else
 		{
-			state = player_states.idle;
+			state = player_states.stop;
 		}
 		
 		// Reset image index if necessary
@@ -454,7 +454,7 @@ switch (state)
 				input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
 			}
 			
-			if (input_x != 0)
+			if ((face_right && input_x < 0) || (!face_right && input_x > 0))
 			{
 				state = player_states.turnaround;
 			}
@@ -527,7 +527,7 @@ switch (state)
 	
 		// Add initial vertical speed
 		
-		v_speed = -jump_speed;
+		v_speed = -10;
 		
 		// Enter fall state
 		
@@ -604,13 +604,33 @@ switch (state)
 		
 		// Animations
 		
-		if (v_speed > 0)
+		if (v_speed < -jump_speed)
 		{
-			sprite_index = sprPlayerJumpDown;
+			sprite_index = sprPlayerFallUp1;
+		}
+		else if (v_speed < -(jump_speed / 2))
+		{
+			sprite_index = sprPlayerFallUp2;
+		}
+		else if (v_speed < 0)
+		{
+			sprite_index = sprPlayerFallUp3;
+		}
+		else if (v_speed < (jump_speed / 2))
+		{
+			sprite_index = sprPlayerFallDown0;
+		}
+		else if (v_speed < jump_speed)
+		{
+			sprite_index = sprPlayerFallDown1;
+		}
+		else if (v_speed < (jump_speed * 2))
+		{
+			sprite_index = sprPlayerFallDown2;
 		}
 		else
 		{
-			sprite_index = sprPlayerJumpUp;
+			sprite_index = sprPlayerFallDown3;
 		}
 			
 		// Moving left and right flips the sprite to face the appropriate direction
