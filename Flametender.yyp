@@ -338,7 +338,7 @@
             "Key": "8753d9d2-3f2f-41a5-833f-0913ca217e97",
             "Value": {
                 "id": "523aad03-897c-4ff7-a4c8-be6f677165fc",
-                "resourcePath": "objects\\objGameStart\\objGameStart.yy",
+                "resourcePath": "objects\\objControls\\objControls.yy",
                 "resourceType": "GMObject"
             }
         },

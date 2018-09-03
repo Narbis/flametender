@@ -527,11 +527,13 @@ switch (state)
 	
 		// Add initial vertical speed
 		
-		v_speed = -10;
+		v_speed = -5;
 		
 		// Enter fall state
 		
 		state = player_states.fall;
+		
+		break;
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: FALL
@@ -574,8 +576,11 @@ switch (state)
 			h_speed = max(target_speed, h_speed - (move_speed / 8));
 		}
 		
-		
-		v_speed = v_speed + v_gravity + (v_gravity * input_y);
+		v_speed = v_speed + v_gravity;
+		if (v_speed >= 0 && input_y > 0.5)
+		{
+			v_speed = v_speed + v_gravity;
+		}
 
 		// Horizontal collisions
 
@@ -682,6 +687,26 @@ switch (state)
 		}
 		
 		break;
+		
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: LAND
+	//
+	// The character is transitioning out of the fall state on the ground
+	//-----------------------------------------------------------------------------------------------------------------	
+		
+	case player_states.land:
+	
+		//Do things
+		
+		break;
+		
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: CLIMB
+	//
+	// The character is...
+	//-----------------------------------------------------------------------------------------------------------------
+	
+	case player_states.climb:
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: ATTACK
