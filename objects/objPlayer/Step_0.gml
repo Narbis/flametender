@@ -16,26 +16,6 @@ switch (state)
 	
 	case player_states.idle:
 		
-		// Calculate movement
-		
-		h_speed = 0;
-		v_speed = 0;
-		
-		// Animations
-		
-		sprite_index = sprPlayerIdle;
-		
-		// Set facing of sprite based on state of the face_right variable
-		
-		if (face_right)
-		{
-			image_xscale = 1;
-		}
-		else
-		{
-			image_xscale = -1;
-		}
-		
 		// Change player to appropriate state
 		
 		if (controls.action == input.attack)
@@ -61,7 +41,7 @@ switch (state)
 		}
 		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
 		{
-			if (abs(controls.input_x) > 0.4)
+			if (abs(controls.input_x) > run_threshold)
 			{
 				state = player_states.dash;
 			}
@@ -75,11 +55,32 @@ switch (state)
 			state = player_states.idle;
 		}
 		
-		// Reset image index if necessary
+		// Reset image index and break if necessary
 		
 		if (state != player_states.idle)
 		{
 			image_index = 0;
+			break;
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
+		
+		// Animations
+		
+		sprite_index = sprPlayerIdle;
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
 		}
 		
 		break;
@@ -91,6 +92,58 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	case player_states.walk:
+		
+		// Change player to appropriate state
+
+		if (!place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.fall;
+			jump_buffer = 5;
+		}
+		else if (controls.action == input.attack)
+		{
+			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.dash)
+		{
+			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
+		{
+			if (abs(controls.input_x) > run_threshold)
+			{
+				state = player_states.dash;
+			}
+			else
+			{
+				state = player_states.walk;
+			}
+		}
+		else
+		{
+			state = player_states.idle;
+		}
+		
+		// Reset image index and break if necessary
+		
+		if (state != player_states.walk)
+		{
+			image_index = 0;
+			break;
+		}
 		
 		// Calculate movement
 		
@@ -139,56 +192,6 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// Change player to appropriate state
-
-		if (!place_meeting(x, y + 1, objWall))
-		{
-			state = player_states.fall;
-		}
-		else if (controls.action == input.attack)
-		{
-			//state = player_states.attack;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		else if (controls.action == input.dash)
-		{
-			//state = player_states.flamedash;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		else if (controls.action == input.jump)
-		{
-			state = player_states.jump;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
-		{
-			if (abs(controls.input_x) > run_threshold)
-			{
-				state = player_states.dash;
-			}
-			else
-			{
-				state = player_states.walk;
-			}
-		}
-		else
-		{
-			state = player_states.idle;
-		}
-		
-		// Reset image index if necessary
-		
-		if (state != player_states.walk)
-		{
-			image_index = 0;
-		}
-		
 		break;
 		
 	//-----------------------------------------------------------------------------------------------------------------
@@ -205,9 +208,17 @@ switch (state)
 		
 		// If animation finishes, enter run state
 		
-		if (image_index > image_number - 1)
+		if (floor(image_index) == 0)
 		{
-			state = player_states.run;
+			if (reset_run_animation == true)
+			{
+				reset_run_animation = false;
+				state = player_states.run;
+			}
+		}
+		else
+		{
+			reset_run_animation = true;
 		}
 		
 	//-----------------------------------------------------------------------------------------------------------------
@@ -217,15 +228,59 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	case player_states.run:
-	
-		// Check for run stop (this is a special state-change)
 		
-		if (h_speed != 0 && sign(controls.input_x) != sign(h_speed))
+		// Change player to appropriate state
+		
+		if (!place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.fall;
+			jump_buffer = 5;
+		}
+		else if (controls.action = input.attack)
+		{
+			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action = input.dash)
+		{
+			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action = input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.input_x != 0)
+		{
+			if (abs(controls.input_x) <= run_threshold)
+			{				
+				state = player_states.walk;
+			}
+			else if (sign(controls.input_x) == -sign(h_speed))
+			{
+				state = player_states.dash;
+			}
+		}
+		else
 		{
 			state = player_states.stop;
+		}
+		
+		// Reset image index and break if necessary
+		
+		if (state != player_states.run && state != player_states.dash)
+		{
 			image_index = 0;
+			reset_run_animation = false;
 			break;
-		}	
+		}
 		
 		// Calculate movement
 		
@@ -277,13 +332,19 @@ switch (state)
 			image_xscale = -1;
 		}
 		
+		break;
+		
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: STOP
+	//
+	// The character is transitioning into the idle state
+	//-----------------------------------------------------------------------------------------------------------------	
+		
+	case player_states.stop:
+		
 		// Change player to appropriate state
 		
-		if (!place_meeting(x, y + 1, objWall))
-		{
-			state = player_states.fall;
-		}
-		else if (controls.action = input.attack)
+		if (controls.action = input.attack)
 		{
 			//state = player_states.attack;
 			controls.action = input.none;
@@ -304,29 +365,15 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (h_speed != 0)
+		else if (controls.input_x != 0  && !place_meeting(x + sign(controls.input_x), y, objWall))
 		{
-			if (abs(controls.input_x) > run_threshold)
-			{
-				if (state != player_states.dash)
-				{
-					state = player_states.run;
-				}
-				else
-				{
-					state = player_states.dash;
-				}
-				
-				walk_counter = 0;
+			if (abs(controls.input_x) <= run_threshold)
+			{				
+				state = player_states.walk;
 			}
 			else
 			{
-				walk_counter += 1;
-				if (walk_counter == 5)
-				{
-					state = player_states.walk;
-					walk_counter = 0;
-				}
+				state = player_states.dash;
 			}
 		}
 		else
@@ -334,22 +381,13 @@ switch (state)
 			state = player_states.stop;
 		}
 		
-		// Reset image index if necessary
+		// Reset image index and break if necessary
 		
-		if (state != player_states.run && state != player_states.dash)
+		if (state != player_states.stop)
 		{
 			image_index = 0;
+			break;
 		}
-		
-		break;
-		
-	//-----------------------------------------------------------------------------------------------------------------
-	// STATE: STOP
-	//
-	// The character is transitioning into the idle or turnaround state
-	//-----------------------------------------------------------------------------------------------------------------	
-		
-	case player_states.stop:
 		
 		// Calculate movement
 		
@@ -371,98 +409,15 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// Change state if action is interrupted
-		
-		if (controls.action == input.jump)
-		{
-			state = player_states.jump;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		else if (!place_meeting(x + sign(controls.input_x), y, objWall) && ((!face_right && controls.input_x < 0) || (face_right && controls.input_x > 0)))
-		{
-			state = player_states.run;
-		}
-		
-		// If animation finishes, enter idle or turnaround state
+		// If animation finishes, enter idle state
 		
 		if (image_index > image_number - 1)
 		{
-			
-			if ((face_right && controls.input_x < 0) || (!face_right && controls.input_x > 0))
-			{
-				state = player_states.turnaround;
-			}
-			else
-			{
-				state = player_states.idle;
-			}
-		}
-		
-		// Reset image index if necessary
-		
-		if (state != player_states.stop)
-		{
-			image_index = 0;
+			state = player_states.idle;
 		}
 		
 		break;	
-		
-	//-----------------------------------------------------------------------------------------------------------------
-	// STATE: TURNAROUND
-	//
-	// The character is transitioning into moving in the opposite direction
-	//-----------------------------------------------------------------------------------------------------------------	
-		
-	case player_states.turnaround:
-	
-		// Calculate movement
-		
-		h_speed = 0;
-		v_speed = 0;
-		
-		// Animations
-		
-		sprite_index = sprPlayerTurn;
-		
-		// Set facing of sprite based on state of the face_right variable
-		
-		if (face_right)
-		{
-			image_xscale = 1;
-		}
-		else
-		{
-			image_xscale = -1;
-		}
-		
-		// Change state if action is interrupted
-		
-		if (controls.action == input.jump)
-		{
-			state = player_states.jump;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		
-		// Enter run state if animation finishes
-		
-		if (image_index > image_number - 1)
-		{
-			state = player_states.run;
-		}
-		
-		// Reset image index if necessary
-		
-		if (state != player_states.turnaround)
-		{
-			image_index = 0;
-		}
-		
-		break;
-		
+
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: JUMP
 	//
@@ -489,6 +444,48 @@ switch (state)
 		
 	case player_states.fall:
 	
+		// Change player to appropriate state
+		
+		if (controls.action == input.dash)
+		{
+			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (jump_buffer > 0 && controls.action == input.jump)
+		{
+			state = player_states.jump;
+		}
+		else if (v_speed >= 0 && place_meeting(x, y + 1, objWall))
+		{
+			if (controls.input_x == 0)
+			{
+				state = player_states.land;
+			}
+			else
+			{
+				state = player_states.run;
+			}
+		}
+		else
+		{
+			state = player_states.fall;
+		}
+		
+		// Reset image index and break if necessary
+		
+		if (state != player_states.fall)
+		{
+			image_index = 0;
+			jump_buffer = 0;
+			break;
+		}
+	
+		// Decrement jump buffer
+		
+		jump_buffer -= 1;
+		
 		// Calculate movement
 		
 		var target_speed = controls.input_x * move_speed;
@@ -586,31 +583,6 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// Change player to appropriate state
-		
-		if (controls.action = input.dash)
-		{
-			//state = player_states.flamedash;
-			controls.action = input.none;
-			controls.buffer = false;
-			controls.buffer_counter = 0;
-		}
-		else if (place_meeting(x, y + 1, objWall))
-		{
-			state = player_states.run;
-		}
-		else
-		{
-			state = player_states.fall;
-		}
-		
-		// Reset image index if necessary
-		
-		if (state != player_states.fall)
-		{
-			image_index = 0;
-		}
-		
 		break;
 		
 	//-----------------------------------------------------------------------------------------------------------------
@@ -621,9 +593,81 @@ switch (state)
 		
 	case player_states.land:
 	
-		//Do things
+		// Change player to appropriate state
 		
-		break;
+		if (controls.action = input.attack)
+		{
+			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action = input.dash)
+		{
+			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action = input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.input_x != 0)
+		{
+			if (abs(controls.input_x) <= run_threshold)
+			{				
+				state = player_states.walk;
+			}
+			else
+			{
+				state = player_states.dash;
+			}
+		}
+		else
+		{
+			state = player_states.land;
+		}
+		
+		// Reset image index and break if necessary
+		
+		if (state != player_states.land)
+		{
+			image_index = 0;
+			break;
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
+		
+		// Animations
+		
+		sprite_index = sprPlayerLand;
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// If animation finishes, enter idle state
+		
+		if (image_index > image_number - 1)
+		{
+			state = player_states.idle;
+		}
+		
+		break;	
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: CLIMB

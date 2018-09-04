@@ -5,7 +5,6 @@ enum player_states
 	dash,
 	run,
 	stop,
-	turnaround,
 	jump,
 	fall,
 	land,
@@ -26,7 +25,8 @@ jump_speed = 3;
 run_threshold = 0.5;
 fast_fall_threshold = 0.5;
 
-walk_counter = 0;
+jump_buffer = 0;
+reset_run_animation = false;
 
 if (instance_exists(objControls))
 {
