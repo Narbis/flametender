@@ -23,11 +23,12 @@ v_speed = 0;
 v_gravity = 0.25;
 move_speed = 3;
 jump_speed = 3;
+run_threshold = 0.5;
+fast_fall_threshold = 0.5;
 
-gamepad = false;
+walk_counter = 0;
 
-if gamepad_is_connected(0) 
+if (instance_exists(objControls))
 {
-	gamepad = true;
-	gamepad_set_axis_deadzone(0, 0.2);
+	controls = objControls;
 }

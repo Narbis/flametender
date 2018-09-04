@@ -9,6 +9,8 @@ enum input
 }
 
 action = input.none;
+input_x = 0;
+input_y = 0;
 
 // When the game starts check if a control is connected or not
 
@@ -21,3 +23,5 @@ if gamepad_is_connected(0)
 }
 
 buffer = false;
+buffer_size = 5;
+buffer_counter = 0;

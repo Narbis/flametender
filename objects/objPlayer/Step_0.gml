@@ -15,31 +15,6 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	case player_states.idle:
-	
-		// Check for user input
-		
-		if (gamepad)
-		{
-			
-			// User controller input if connected
-			
-			input_x = gamepad_axis_value(0, gp_axislh);
-			input_y = gamepad_axis_value(0, gp_axislv);
-			input_jump = gamepad_button_check_pressed(0, gp_face1);
-			input_dash = gamepad_button_check_pressed(0, gp_face2);
-			input_attack = gamepad_button_check_pressed(0, gp_face3);
-		}
-		else
-		{
-			
-			// Otherwise use keyboard input
-			
-			input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-			input_y = keyboard_check(vk_down) - keyboard_check(vk_up);
-			input_jump = keyboard_check_pressed(vk_space);
-			input_dash = keyboard_check_pressed(ord("Q"));
-			input_attack = keyboard_check_pressed(ord("W"));
-		}
 		
 		// Calculate movement
 		
@@ -61,21 +36,32 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		if (input_attack)
+		// Change player to appropriate state
+		
+		if (controls.action == input.attack)
 		{
 			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_dash)
+		else if (controls.action == input.dash)
 		{
 			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_jump)
+		else if (controls.action == input.jump)
 		{
 			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_x != 0 && !place_meeting(x + sign(input_x), y, objWall))
+		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
 		{
-			if (abs(input_x) > 0.5)
+			if (abs(controls.input_x) > 0.4)
 			{
 				state = player_states.dash;
 			}
@@ -105,35 +91,10 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	
 	case player_states.walk:
-	
-		// Check for user input
-		
-		if (gamepad)
-		{
-			
-			// User controller input if connected
-			
-			input_x = gamepad_axis_value(0, gp_axislh);
-			input_y = gamepad_axis_value(0, gp_axislv);
-			input_jump = gamepad_button_check_pressed(0, gp_face1);
-			input_dash = gamepad_button_check_pressed(0, gp_face2);
-			input_attack = gamepad_button_check_pressed(0, gp_face3);
-		}
-		else
-		{
-			
-			// Otherwise use keyboard input
-			
-			input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-			input_y = keyboard_check(vk_down) - keyboard_check(vk_up);
-			input_jump = keyboard_check_pressed(vk_space);
-			input_dash = keyboard_check_pressed(ord("Q"));
-			input_attack = keyboard_check_pressed(ord("W"));
-		}
 		
 		// Calculate movement
 		
-		h_speed = sign(input_x) * move_speed / 2;
+		h_speed = sign(controls.input_x) * move_speed / 2;
 		v_speed = 0;
 		
 		// Horizontal collisions
@@ -154,6 +115,7 @@ switch (state)
 		sprite_index = sprPlayerWalk;
 			
 		// Moving left and right flips the sprite to face the appropriate direction
+		
 		if (h_speed != 0)
 		{
 			if (h_speed > 0)
@@ -183,21 +145,30 @@ switch (state)
 		{
 			state = player_states.fall;
 		}
-		else if (input_attack)
+		else if (controls.action == input.attack)
 		{
 			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_dash)
+		else if (controls.action == input.dash)
 		{
 			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_jump)
+		else if (controls.action == input.jump)
 		{
 			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_x != 0 && !place_meeting(x + sign(input_x), y, objWall))
+		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
 		{
-			if (abs(input_x) > 0.5)
+			if (abs(controls.input_x) > run_threshold)
 			{
 				state = player_states.dash;
 			}
@@ -223,66 +194,21 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: DASH
 	//
-	// The character is transitioning into the run state
+	// The character is transitioning into the run state; this is a special case of the run state
 	//-----------------------------------------------------------------------------------------------------------------	
 		
 	case player_states.dash:
-		
-		// Check for user input
-		
-		if (gamepad)
-		{			
-			// User controller input if connected
-			input_x = gamepad_axis_value(0, gp_axislh);
-		}
-		else
-		{			
-			// Otherwise use keyboard input
-			input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-		}
-		
-		// Set left/right facing
-		
-		if (input_x > 0)
-		{
-			face_right = true;
-		}
-		if (input_x < 0)
-		{
-			face_right = false;
-		}
 		
 		// Animations
 		
 		sprite_index = sprPlayerDash;
 		
-		// Set facing of sprite based on state of the face_right variable
-		
-		if (face_right)
-		{
-			image_xscale = 1;
-		}
-		else
-		{
-			image_xscale = -1;
-		}
-		
-		// When animation finishes, enter run state
+		// If animation finishes, enter run state
 		
 		if (image_index > image_number - 1)
 		{
-			
 			state = player_states.run;
 		}
-		
-		// Reset image index if necessary
-		
-		if (state != player_states.dash)
-		{
-			image_index = 0;
-		}
-		
-		break;	
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: RUN
@@ -292,34 +218,9 @@ switch (state)
 	
 	case player_states.run:
 	
-		// Check for user input
-		
-		if (gamepad)
-		{
-			
-			// User controller input if connected
-			
-			input_x = gamepad_axis_value(0, gp_axislh);
-			input_y = gamepad_axis_value(0, gp_axislv);
-			input_jump = gamepad_button_check_pressed(0, gp_face1);
-			input_dash = gamepad_button_check_pressed(0, gp_face2);
-			input_attack = gamepad_button_check_pressed(0, gp_face3);
-		}
-		else
-		{
-			
-			// Otherwise use keyboard input
-			
-			input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-			input_y = keyboard_check(vk_down) - keyboard_check(vk_up);
-			input_jump = keyboard_check_pressed(vk_space);
-			input_dash = keyboard_check_pressed(ord("Q"));
-			input_attack = keyboard_check_pressed(ord("W"));
-		}
-		
 		// Check for run stop (this is a special state-change)
 		
-		if (h_speed != 0 && sign(input_x) != sign(h_speed))
+		if (h_speed != 0 && sign(controls.input_x) != sign(h_speed))
 		{
 			state = player_states.stop;
 			image_index = 0;
@@ -328,7 +229,7 @@ switch (state)
 		
 		// Calculate movement
 		
-		h_speed = sign(input_x) * move_speed;
+		h_speed = sign(controls.input_x) * move_speed;
 		v_speed = 0;
 		
 		// Horizontal collisions
@@ -346,9 +247,13 @@ switch (state)
 		
 		// Animations
 		
-		sprite_index = sprPlayerRun;
+		if (state != player_states.dash)
+		{
+			sprite_index = sprPlayerRun;
+		}
 			
 		// Moving left and right flips the sprite to face the appropriate direction
+		
 		if (h_speed != 0)
 		{
 			if (h_speed > 0)
@@ -378,27 +283,50 @@ switch (state)
 		{
 			state = player_states.fall;
 		}
-		else if (input_attack)
+		else if (controls.action = input.attack)
 		{
 			//state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_dash)
+		else if (controls.action = input.dash)
 		{
 			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
-		else if (input_jump)
+		else if (controls.action = input.jump)
 		{
 			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
 		else if (h_speed != 0)
 		{
-			if (abs(input_x) > 0.5)
+			if (abs(controls.input_x) > run_threshold)
 			{
-				state = player_states.run;
+				if (state != player_states.dash)
+				{
+					state = player_states.run;
+				}
+				else
+				{
+					state = player_states.dash;
+				}
+				
+				walk_counter = 0;
 			}
 			else
 			{
-				state = player_states.stop;
+				walk_counter += 1;
+				if (walk_counter == 5)
+				{
+					state = player_states.walk;
+					walk_counter = 0;
+				}
 			}
 		}
 		else
@@ -408,7 +336,7 @@ switch (state)
 		
 		// Reset image index if necessary
 		
-		if (state != player_states.run)
+		if (state != player_states.run && state != player_states.dash)
 		{
 			image_index = 0;
 		}
@@ -422,6 +350,11 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------	
 		
 	case player_states.stop:
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
 		
 		// Animations
 		
@@ -438,23 +371,26 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// When animation finishes, enter idle or turnaround state
+		// Change state if action is interrupted
+		
+		if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (!place_meeting(x + sign(controls.input_x), y, objWall) && ((!face_right && controls.input_x < 0) || (face_right && controls.input_x > 0)))
+		{
+			state = player_states.run;
+		}
+		
+		// If animation finishes, enter idle or turnaround state
 		
 		if (image_index > image_number - 1)
 		{
 			
-			// Check for x-axis user input
-		
-			if (gamepad)
-			{
-				input_x = gamepad_axis_value(0, gp_axislh);
-			}
-			else
-			{
-				input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-			}
-			
-			if ((face_right && input_x < 0) || (!face_right && input_x > 0))
+			if ((face_right && controls.input_x < 0) || (!face_right && controls.input_x > 0))
 			{
 				state = player_states.turnaround;
 			}
@@ -501,7 +437,17 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// Enter run state when animation finishes
+		// Change state if action is interrupted
+		
+		if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		
+		// Enter run state if animation finishes
 		
 		if (image_index > image_number - 1)
 		{
@@ -543,30 +489,9 @@ switch (state)
 		
 	case player_states.fall:
 	
-		// Check for user input
-		
-		if (gamepad)
-		{
-			
-			// User controller input if connected
-			
-			input_x = gamepad_axis_value(0, gp_axislh);
-			input_y = gamepad_axis_value(0, gp_axislv);
-			input_dash = gamepad_button_check_pressed(0, gp_face2);
-		}
-		else
-		{
-			
-			// Otherwise use keyboard input
-			
-			input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
-			input_y = keyboard_check(vk_down) - keyboard_check(vk_up);
-			input_dash = keyboard_check_pressed(ord("Q"));
-		}
-		
 		// Calculate movement
 		
-		var target_speed = input_x * move_speed;
+		var target_speed = controls.input_x * move_speed;
 		if (h_speed < target_speed)
 		{
 			h_speed = min(target_speed, h_speed + (move_speed / 8));
@@ -577,7 +502,7 @@ switch (state)
 		}
 		
 		v_speed = v_speed + v_gravity;
-		if (v_speed >= 0 && input_y > 0.5)
+		if (v_speed >= 0 && controls.input_y > fast_fall_threshold)
 		{
 			v_speed = v_speed + v_gravity;
 		}
@@ -641,16 +566,13 @@ switch (state)
 			
 		// Moving left and right flips the sprite to face the appropriate direction
 		
-		if (h_speed != 0)
+		if (h_speed > 0)
 		{
-			if (h_speed > 0)
-			{
-				face_right = true;
-			}
-			else
-			{
-				face_right = false;
-			}
+			face_right = true;
+		}
+		if (h_speed < 0)
+		{
+			face_right = false;
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -666,9 +588,12 @@ switch (state)
 		
 		// Change player to appropriate state
 		
-		if (input_dash)
+		if (controls.action = input.dash)
 		{
 			//state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
 		}
 		else if (place_meeting(x, y + 1, objWall))
 		{

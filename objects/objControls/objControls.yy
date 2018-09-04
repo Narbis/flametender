@@ -5,16 +5,6 @@
     "name": "objControls",
     "eventList": [
         {
-            "id": "9937f027-c601-404e-ad87-08afd0e03d8f",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
-            "enumb": 0,
-            "eventtype": 3,
-            "m_owner": "8753d9d2-3f2f-41a5-833f-0913ca217e97"
-        },
-        {
             "id": "b4009e5e-fddd-4b88-ad2a-a03e94bfbbc7",
             "modelName": "GMEvent",
             "mvc": "1.0",
@@ -22,6 +12,16 @@
             "collisionObjectId": "00000000-0000-0000-0000-000000000000",
             "enumb": 0,
             "eventtype": 0,
+            "m_owner": "8753d9d2-3f2f-41a5-833f-0913ca217e97"
+        },
+        {
+            "id": "a58a0ca2-a550-4090-8747-ff8fd2121b37",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 1,
+            "eventtype": 3,
             "m_owner": "8753d9d2-3f2f-41a5-833f-0913ca217e97"
         }
     ],
