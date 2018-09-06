@@ -100,6 +100,7 @@ else
 if (room == room_first && action == input.jump)
 {
 	room_goto_next();
+	audio_play_sound(sndSelect, 10, false);
 	action = input.none;
 	buffer = false;
 	buffer_counter = 0;

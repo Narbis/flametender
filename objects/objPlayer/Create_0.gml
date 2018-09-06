@@ -7,26 +7,52 @@ enum player_states
 	stop,
 	jump,
 	fall,
-	land,
+	lightland,
+	heavyland,
 	climb,
 	attack,
 	flamedash,
 	dead
 }
 
+enum fall_states
+{
+	light,
+	heavy,
+	hurt
+}
+
+// State and movement variables
+
 state = player_states.idle;
+fall = fall_states.light;
 face_right = true;
+reset_animation = false;
 
 h_speed = 0;
 v_speed = 0;
-v_gravity = 0.25;
-move_speed = 3;
-jump_speed = 3;
-run_threshold = 0.5;
-fast_fall_threshold = 0.5;
+
+// State counters
 
 jump_buffer = 0;
-reset_run_animation = false;
+walk_transition_counter = 0;
+flamedash_counter = 0;
+
+// State frame constants
+
+jump_buffer_frames = 5;
+walk_transition_frames = 3;
+flamedash_frames = 10;
+
+// Movement constants
+
+v_gravity = 0.25;
+move_speed = 1.8;
+jump_speed = 3;
+flamedash_speed = 5;
+
+run_threshold = 0.5;
+fast_fall_threshold = 0.5;
 
 if (instance_exists(objControls))
 {
