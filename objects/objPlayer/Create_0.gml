@@ -37,12 +37,14 @@ v_speed = 0;
 jump_buffer = 0;
 walk_transition_counter = 0;
 flamedash_counter = 0;
+attack_counter = 0;
 
 // State frame constants
 
 jump_buffer_frames = 5;
 walk_transition_frames = 3;
 flamedash_frames = 10;
+attack_frames = 20;
 
 // Movement constants
 

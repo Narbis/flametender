@@ -25,3 +25,7 @@ if gamepad_is_connected(0)
 buffer = false;
 buffer_size = 5;
 buffer_counter = 0;
+
+// Play some meme song
+
+audio_play_sound(mscWaveball, 10, true);

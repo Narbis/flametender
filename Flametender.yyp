@@ -335,6 +335,14 @@
             }
         },
         {
+            "Key": "852bb078-f9b2-4b35-9e3c-35a3bb213b8d",
+            "Value": {
+                "id": "6b0928bc-c5dd-4afa-a546-f6baa9cb0067",
+                "resourcePath": "objects\\objSpearmanAshes\\objSpearmanAshes.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "8753d9d2-3f2f-41a5-833f-0913ca217e97",
             "Value": {
                 "id": "523aad03-897c-4ff7-a4c8-be6f677165fc",
@@ -684,6 +692,14 @@
                 "id": "2451411a-97d1-4d69-9e3d-de2354b707ae",
                 "resourcePath": "views\\f8262196-fb76-458e-9e11-c061207b4372.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "f8d08980-e3f4-4ab8-83b6-d9c14bd14ceb",
+            "Value": {
+                "id": "e09548bd-16c4-4cb7-be2b-235023bc69ee",
+                "resourcePath": "sounds\\mscWaveball\\mscWaveball.yy",
+                "resourceType": "GMSound"
             }
         },
         {

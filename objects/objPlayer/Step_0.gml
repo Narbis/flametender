@@ -48,7 +48,7 @@ switch (state)
 		
 		if (controls.action == input.attack)
 		{
-			//state = player_states.attack;
+			state = player_states.attack;
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -160,7 +160,7 @@ switch (state)
 		}
 		else if (controls.action == input.attack)
 		{
-			//state = player_states.attack;
+			state = player_states.attack;
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -310,7 +310,7 @@ switch (state)
 		}
 		else if (controls.action = input.attack)
 		{
-			//state = player_states.attack;
+			state = player_states.attack;
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -399,7 +399,7 @@ switch (state)
 		
 		if (controls.action = input.attack)
 		{
-			//state = player_states.attack;
+			state = player_states.attack;
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -668,7 +668,7 @@ switch (state)
 		
 		if (controls.action = input.attack)
 		{
-			//state = player_states.attack;
+			state = player_states.attack;
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -778,7 +778,85 @@ switch (state)
 	
 	case player_states.attack:
 	
-		//do things
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Facing and animations are set on frame 1
+		
+		if (attack_counter == 0)
+		{
+
+			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
+			{
+				// RIGHT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				face_right = true;
+				image_xscale = 1;
+				
+				// Animations
+				sprite_index = sprPlayerAttack;
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				face_right = false;
+				image_xscale = -1;
+				
+				// Animations
+				sprite_index = sprPlayerAttack;
+				
+			}
+			
+		}
+		
+		// Sounds and projectile creation are done on frame 7
+		
+		if (attack_counter == 7)
+		{
+			if (face_right)
+			{
+				// Create fireball instance
+				var fireball = instance_create_layer(x + 7, y + 2, "Player", objFireball);
+			}
+			else
+			{
+				// Create fireball instance
+				var fireball = instance_create_layer(x - 7, y + 2, "Player", objFireball);
+			}
+			
+			// Play sound
+			audio_play_sound(sndFireballAttack, 10, false);
+		}
+		
+		// Increment attack counter
+		
+		attack_counter += 1;
+		
+		// When state finishes, enter idle state
+		
+		if (attack_counter > attack_frames)
+		{
+			attack_counter = 0;
+			state = player_states.idle;
+			reset_animation = true;
+		}
 		
 		break;
 	
@@ -821,6 +899,10 @@ switch (state)
 				// Facing
 				face_right = true;
 				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 315;
+				
 			}
 			else if (dash_direction >= 67.5 && dash_direction <= 112.5)
 			{
@@ -832,6 +914,9 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFlameDashUp;
+				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
 				
 			}
 			else if (dash_direction > 112.5 && dash_direction < 157.5)
@@ -848,6 +933,10 @@ switch (state)
 				// Facing
 				face_right = false;
 				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 45;
+				
 			}
 			else if (dash_direction >= 157.5 && dash_direction <= 202.5)
 			{
@@ -862,6 +951,10 @@ switch (state)
 				
 				// Facing
 				face_right = false;
+				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 90;
 				
 			}
 			else if (dash_direction > 202.5 && dash_direction < 247.5)
@@ -878,6 +971,10 @@ switch (state)
 				// Facing
 				face_right = false;
 				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 135;
+				
 			}
 			else if (dash_direction >= 247.5 && dash_direction <= 292.5)
 			{
@@ -889,6 +986,10 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFallDown3;
+				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 180;
 				
 			}
 			else if (dash_direction > 292.5 && dash_direction < 337.5)
@@ -905,6 +1006,10 @@ switch (state)
 				// Facing
 				face_right = true;
 				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 225;
+				
 			}
 			else
 			{
@@ -920,12 +1025,11 @@ switch (state)
 				// Facing
 				face_right = true;
 				
+				// Flamedash trail
+				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
+				trail.image_angle = 270;
+				
 			}
-			
-			// Create flamedash objects (maybe later)
-			
-			//instance_create_layer(x, y, "Player", objFlameDash);
-			//instance_create_layer(x, y, "Player", objFlameDashTrail);
 			
 			// Set facing of sprite based on state of the face_right variable
 		

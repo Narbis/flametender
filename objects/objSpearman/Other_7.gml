@@ -4,12 +4,20 @@
 /// @DnDArgument : "expr" "sprite_index == sprSpearmanDeath"
 if(sprite_index == sprSpearmanDeath)
 {
-	/// @DnDAction : YoYo Games.Instances.Set_Sprite
+	/// @DnDAction : YoYo Games.Instances.Create_Instance
 	/// @DnDVersion : 1
-	/// @DnDHash : 1178CE4E
+	/// @DnDHash : 1D7C4CF9
 	/// @DnDParent : 1BCD9839
-	/// @DnDArgument : "spriteind" "sprSpearmanAshes"
-	/// @DnDSaveInfo : "spriteind" "4727ddfb-5de9-479b-ad25-4bbfca51b4f2"
-	sprite_index = sprSpearmanAshes;
-	image_index = 0;
+	/// @DnDArgument : "xpos" "x"
+	/// @DnDArgument : "ypos" "y"
+	/// @DnDArgument : "objectid" "objSpearmanAshes"
+	/// @DnDArgument : "layer" ""Player""
+	/// @DnDSaveInfo : "objectid" "852bb078-f9b2-4b35-9e3c-35a3bb213b8d"
+	instance_create_layer(x, y, "Player", objSpearmanAshes);
+
+	/// @DnDAction : YoYo Games.Instances.Destroy_Instance
+	/// @DnDVersion : 1
+	/// @DnDHash : 62A5CFA9
+	/// @DnDParent : 1BCD9839
+	instance_destroy();
 }
