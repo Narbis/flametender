@@ -1,0 +1,1 @@
+// Collision with an enemy hitbox will overwrite whatever state the player is currently in

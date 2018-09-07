@@ -36,19 +36,23 @@ if (gamepad)
 	input_x = gamepad_axis_value(0, gp_axislh);
 	input_y = gamepad_axis_value(0, gp_axislv);
 			
-	if (gamepad_button_check_pressed(0, gp_face1))
+	if (gamepad_button_check_pressed(0, gp_start))
+	{
+		start = true;
+	}
+	else if (gamepad_button_check_pressed(0, gp_face1))
 	{
 		action = input.jump;
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (gamepad_button_check_pressed(0, gp_face2))
+	else if (gamepad_button_check_pressed(0, gp_shoulderrb))
 	{
 		action = input.dash;
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (gamepad_button_check_pressed(0, gp_face3))
+	else if (gamepad_button_check_pressed(0, gp_face2))
 	{
 		action = input.attack;
 		buffer = true;
@@ -70,7 +74,11 @@ else
 	input_x = keyboard_check(vk_right) - keyboard_check(vk_left);
 	input_y = keyboard_check(vk_down) - keyboard_check(vk_up);
 			
-	if (keyboard_check_pressed(vk_space))
+	if (keyboard_check_pressed(vk_enter))
+	{
+		start = true;
+	}
+	else if (keyboard_check_pressed(vk_space))
 	{
 		action = input.jump;
 		buffer = true;
@@ -97,10 +105,11 @@ else
 	}
 }
 
-if (room == room_first && action == input.jump)
+if (start == true && room == room_first)
 {
 	room_goto_next();
 	audio_play_sound(sndSelect, 10, false);
+	start = false;
 	action = input.none;
 	buffer = false;
 	buffer_counter = 0;

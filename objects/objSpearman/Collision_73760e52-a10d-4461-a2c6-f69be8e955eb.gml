@@ -38,6 +38,14 @@ if(!(dead))
 
 	/// @DnDAction : YoYo Games.Audio.Play_Audio
 	/// @DnDVersion : 1
+	/// @DnDHash : 077C0F85
+	/// @DnDParent : 3E12405F
+	/// @DnDArgument : "soundid" "sndSpearmanHurt"
+	/// @DnDSaveInfo : "soundid" "f6b1896a-e8fc-4df0-bcc1-2e0b106d4b66"
+	audio_play_sound(sndSpearmanHurt, 0, 0);
+
+	/// @DnDAction : YoYo Games.Audio.Play_Audio
+	/// @DnDVersion : 1
 	/// @DnDHash : 2EB1C9AA
 	/// @DnDParent : 3E12405F
 	/// @DnDArgument : "soundid" "sndBurn"

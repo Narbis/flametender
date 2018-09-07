@@ -12,6 +12,7 @@ enum player_states
 	climb,
 	attack,
 	flamedash,
+	hurt,
 	dead
 }
 
@@ -19,7 +20,7 @@ enum fall_states
 {
 	light,
 	heavy,
-	hurt
+	danger
 }
 
 // State and movement variables
