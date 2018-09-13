@@ -61,3 +61,7 @@ if (instance_exists(objControls))
 {
 	controls = objControls;
 }
+
+// Particle system
+
+flamedash_emitter = part_emitter_create(global.particle_system);

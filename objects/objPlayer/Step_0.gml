@@ -899,10 +899,6 @@ switch (state)
 				// Facing
 				face_right = true;
 				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 315;
-				
 			}
 			else if (dash_direction >= 67.5 && dash_direction <= 112.5)
 			{
@@ -914,9 +910,6 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFlameDashUp;
-				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
 				
 			}
 			else if (dash_direction > 112.5 && dash_direction < 157.5)
@@ -933,10 +926,6 @@ switch (state)
 				// Facing
 				face_right = false;
 				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 45;
-				
 			}
 			else if (dash_direction >= 157.5 && dash_direction <= 202.5)
 			{
@@ -951,10 +940,6 @@ switch (state)
 				
 				// Facing
 				face_right = false;
-				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 90;
 				
 			}
 			else if (dash_direction > 202.5 && dash_direction < 247.5)
@@ -971,10 +956,6 @@ switch (state)
 				// Facing
 				face_right = false;
 				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 135;
-				
 			}
 			else if (dash_direction >= 247.5 && dash_direction <= 292.5)
 			{
@@ -986,10 +967,6 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFallDown3;
-				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 180;
 				
 			}
 			else if (dash_direction > 292.5 && dash_direction < 337.5)
@@ -1006,10 +983,6 @@ switch (state)
 				// Facing
 				face_right = true;
 				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 225;
-				
 			}
 			else
 			{
@@ -1024,10 +997,6 @@ switch (state)
 				
 				// Facing
 				face_right = true;
-				
-				// Flamedash trail
-				var trail = instance_create_layer(x, y, "Player", objFlameDashTrail);
-				trail.image_angle = 270;
 				
 			}
 			
@@ -1044,12 +1013,18 @@ switch (state)
 			
 			// Play sound
 			
+			audio_sound_pitch(sndFlameDash, random_range(0.95, 1.05));
 			audio_play_sound(sndFlameDash, 10, false);
 		}
 		
 		// Increment flamedash counter
 		
 		flamedash_counter += 1;
+		
+		// EXPERIMENTAL: Particle effect
+			
+		part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
+		part_emitter_burst(global.particle_system, flamedash_emitter, global.ember_particle, 3);
 		
 		// Horizontal collisions
 
@@ -1111,4 +1086,9 @@ switch (state)
 		//do things
 		
 		break;
+}
+
+if (mouse_check_button(mb_left))
+{
+	part_particles_create(global.particle_system, mouse_x, mouse_y, global.flame_particle, 1);
 }

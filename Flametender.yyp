@@ -127,6 +127,14 @@
             }
         },
         {
+            "Key": "2e3011cc-d499-4898-9047-82f5ebd28863",
+            "Value": {
+                "id": "1f8087ad-0cd0-47ee-8871-a4008765dc40",
+                "resourcePath": "sprites\\sprFire\\sprFire.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "2fee90bc-ea87-4c6c-97cd-8dc69fd90338",
             "Value": {
                 "id": "801c0b96-95aa-4a9a-b7be-43f06a5c2b4f",
@@ -636,6 +644,14 @@
                 "id": "6ed259a4-5d3d-4eea-8af1-5adf69772b9e",
                 "resourcePath": "sounds\\sndFlameDash\\sndFlameDash.yy",
                 "resourceType": "GMSound"
+            }
+        },
+        {
+            "Key": "dfc93030-36f2-49d6-9471-0d5ee7cd1083",
+            "Value": {
+                "id": "3af674ce-ad97-44c0-bab3-0594fc0a47cc",
+                "resourcePath": "views\\dfc93030-36f2-49d6-9471-0d5ee7cd1083.yy",
+                "resourceType": "GMFolder"
             }
         },
         {

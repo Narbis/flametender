@@ -113,4 +113,10 @@ if (start == true && room == room_first)
 	action = input.none;
 	buffer = false;
 	buffer_counter = 0;
+	
+	// Update ember particle
+	part_type_speed(global.ember_particle, 0.1, 1, 0, 0.5);
+	part_type_gravity(global.ember_particle, 0.01, 90);
+	part_type_scale(global.ember_particle, 1, 1);
 }
+
