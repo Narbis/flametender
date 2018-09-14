@@ -833,12 +833,12 @@ switch (state)
 			if (face_right)
 			{
 				// Create fireball instance
-				var fireball = instance_create_layer(x + 7, y + 2, "Player", objFireball);
+				var fireball = instance_create_layer(x + 7, y + 3, "Player", objFireball);
 			}
 			else
 			{
 				// Create fireball instance
-				var fireball = instance_create_layer(x - 7, y + 2, "Player", objFireball);
+				var fireball = instance_create_layer(x - 7, y + 3, "Player", objFireball);
 			}
 			
 			// Play sound
@@ -899,6 +899,9 @@ switch (state)
 				// Facing
 				face_right = true;
 				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 220, 230, 0, 0);
+				
 			}
 			else if (dash_direction >= 67.5 && dash_direction <= 112.5)
 			{
@@ -910,6 +913,9 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFlameDashUp;
+				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 265, 275, 0, 0);
 				
 			}
 			else if (dash_direction > 112.5 && dash_direction < 157.5)
@@ -926,6 +932,9 @@ switch (state)
 				// Facing
 				face_right = false;
 				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 310, 320, 0, 0);
+				
 			}
 			else if (dash_direction >= 157.5 && dash_direction <= 202.5)
 			{
@@ -940,6 +949,9 @@ switch (state)
 				
 				// Facing
 				face_right = false;
+				
+				// Set particle direction
+				part_type_direction(global.dash_particle, -5, 5, 0, 0);
 				
 			}
 			else if (dash_direction > 202.5 && dash_direction < 247.5)
@@ -956,6 +968,9 @@ switch (state)
 				// Facing
 				face_right = false;
 				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 40, 50, 0, 0);
+				
 			}
 			else if (dash_direction >= 247.5 && dash_direction <= 292.5)
 			{
@@ -967,6 +982,9 @@ switch (state)
 				
 				// Animations
 				sprite_index = sprPlayerFallDown3;
+				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 40, 50, 0, 0);
 				
 			}
 			else if (dash_direction > 292.5 && dash_direction < 337.5)
@@ -983,6 +1001,9 @@ switch (state)
 				// Facing
 				face_right = true;
 				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 130, 140, 0, 0);
+				
 			}
 			else
 			{
@@ -997,6 +1018,9 @@ switch (state)
 				
 				// Facing
 				face_right = true;
+				
+				// Set particle direction
+				part_type_direction(global.dash_particle, 175, 185, 0, 0);
 				
 			}
 			
@@ -1015,6 +1039,9 @@ switch (state)
 			
 			audio_sound_pitch(sndFlameDash, random_range(0.95, 1.05));
 			audio_play_sound(sndFlameDash, 10, false);
+			
+			// EXPERIMENTAL: Shockwave effect
+			part_particles_create(global.particle_system, x, y, global.shockwave_particle, 1);
 		}
 		
 		// Increment flamedash counter
@@ -1024,7 +1051,8 @@ switch (state)
 		// EXPERIMENTAL: Particle effect
 			
 		part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
-		part_emitter_burst(global.particle_system, flamedash_emitter, global.ember_particle, 3);
+		part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
+		part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
 		
 		// Horizontal collisions
 
@@ -1090,5 +1118,6 @@ switch (state)
 
 if (mouse_check_button(mb_left))
 {
-	part_particles_create(global.particle_system, mouse_x, mouse_y, global.flame_particle, 1);
+	part_particles_create(global.particle_system, mouse_x, mouse_y, global.s_flame_particle, 3);
+	part_particles_create(global.particle_system, mouse_x, mouse_y, global.ember_particle, 1);
 }
