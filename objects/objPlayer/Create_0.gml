@@ -29,6 +29,7 @@ state = player_states.idle;
 fall = fall_states.light;
 face_right = true;
 reset_animation = false;
+finish_animation = false;
 
 h_speed = 0;
 v_speed = 0;
@@ -37,13 +38,12 @@ v_speed = 0;
 
 jump_buffer = 0;
 walk_transition_counter = 0;
-flamedash_counter = 0;
-attack_counter = 0;
+frame_counter = 0;
 
 // State frame constants
 
 jump_buffer_frames = 5;
-walk_transition_frames = 3;
+walk_transition_frames = 10;
 flamedash_frames = 10;
 attack_frames = 20;
 
@@ -65,3 +65,10 @@ if (instance_exists(objControls))
 // Particle system
 
 flamedash_emitter = part_emitter_create(global.particle_system);
+
+// Dust particles
+global.dust_particle = part_type_create();
+part_type_sprite(global.dust_particle, sprRunDust, 1, 1, 0);
+part_type_scale(global.dust_particle, 1, 1);
+part_type_alpha2(global.dust_particle, 1, 0);
+part_type_life(global.dust_particle, 16, 16);

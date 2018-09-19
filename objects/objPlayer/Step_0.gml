@@ -5,6 +5,10 @@
 // sounds, and sprites/animations for that state
 //-----------------------------------------------------------------------------------------------------------------
 
+// Increment frame counter
+
+frame_counter += 1;
+
 switch (state)
 {
 	
@@ -44,7 +48,7 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// Change player to appropriate state
+		// Change player to appropriate state 
 		
 		if (controls.action == input.attack)
 		{
@@ -79,11 +83,12 @@ switch (state)
 			}
 		}
 		
-		// Reset animation if necessary
+		// Reset animation and frame counter if necessary
 		
 		if (state != player_states.idle)
 		{
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -191,11 +196,12 @@ switch (state)
 			state = player_states.idle;
 		}
 		
-		// Reset animation if necessary
+		// Reset animation and frame counter if necessary
 		
 		if (state != player_states.walk)
 		{
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -216,22 +222,41 @@ switch (state)
 			reset_animation = false;
 		}
 		
-		// Animations
+		// Animations and particles
 		
 		sprite_index = sprPlayerDash;
+		
+		if (frame_counter % 18 == 1)
+		{
+			if (controls.input_x > 0)
+			{
+				part_type_scale(global.dust_particle, 1, 1);
+				part_type_sprite(global.dust_particle, sprRunDust, 1, 1, 0);
+				part_type_life(global.dust_particle, 16, 16);
+				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+			}
+			else if (controls.input_x < 0)
+			{
+				part_type_scale(global.dust_particle, -1, 1);
+				part_type_sprite(global.dust_particle, sprRunDust, 1, 1, 0);
+				part_type_life(global.dust_particle, 16, 16);
+				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+			}
+		}
 		
 		// If animation finishes, enter run state
 		
 		if (floor(image_index) == 0)
 		{
-			if (reset_animation == true)
+			if (finish_animation == true)
 			{
-				reset_animation = false;
+				reset_animation = true;
+				finish_animation = false;
 			}
 		}
 		else
 		{
-			reset_animation = true;
+			finish_animation = true;
 		}
 		
 	//-----------------------------------------------------------------------------------------------------------------
@@ -242,18 +267,26 @@ switch (state)
 	
 	case player_states.run:
 		
-		// Reset animation
+		// Reset animation and frame counter
 		
 		if (reset_animation == true && state == player_states.dash)
 		{
 			image_index = 0;
 			reset_animation = false;
 			state = player_states.run;
+			frame_counter = 1;
 		}
 		
 		// Calculate movement
 		
-		h_speed = sign(controls.input_x) * move_speed;
+		if (sign(controls.input_x) == -sign(h_speed))
+		{
+			h_speed = 0;
+		}
+		else
+		{
+			h_speed = sign(controls.input_x) * move_speed;
+		}
 		v_speed = 0;
 		
 		// Horizontal collisions
@@ -269,11 +302,17 @@ switch (state)
 		}
 		x = x + h_speed;
 		
-		// Animations
+		// Animations and particles
 		
 		if (state != player_states.dash)
 		{
 			sprite_index = sprPlayerRun;
+			
+			if (frame_counter % 18 == 13)
+			{
+				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+			}
+			
 		}
 			
 		// Moving left and right flips the sprite to face the appropriate direction
@@ -329,7 +368,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.input_x != 0)
+		else if (h_speed != 0)
 		{
 			if (abs(controls.input_x) <= run_threshold)
 			{				
@@ -349,12 +388,14 @@ switch (state)
 			state = player_states.stop;
 		}
 		
-		// Reset animation if necessary
+		// Reset animation and frame counter if necessary
 		
-		if (state != player_states.run && state != player_states.dash)
+		if ((state != player_states.run && state != player_states.dash))
 		{
 			reset_animation = true;
+			finish_animation = false;
 			walk_transition_counter = 0;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -380,9 +421,24 @@ switch (state)
 		h_speed = 0;
 		v_speed = 0;
 		
-		// Animations
+		// Animations and particles
 		
 		sprite_index = sprPlayerStop;
+		
+		if (frame_counter == 5)
+		{
+			if (face_right)
+			{
+				part_type_scale(global.dust_particle, 1, 1);
+			}
+			else
+			{
+				part_type_scale(global.dust_particle, -1, 1);
+			}
+			part_type_sprite(global.dust_particle, sprStopDust, 1, 1, 0);
+			part_type_life(global.dust_particle, 16, 16);
+			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -432,13 +488,15 @@ switch (state)
 		else if (image_index > image_number - 1)
 		{
 			state = player_states.idle;
-		}	
+		}
 		
-		// Reset animation if necessary
+		
+		// Reset animation and frame counter if necessary
 		
 		if (state != player_states.stop)
 		{
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;	
@@ -605,7 +663,7 @@ switch (state)
 			{
 				if (controls.input_x != 0)
 				{
-					state = player_states.run;
+					state = player_states.dash;
 				}
 				else
 				{
@@ -618,12 +676,13 @@ switch (state)
 			}
 		}
 		
-		// Reset animation if necessary
+		// Reset animation and frame counter if necessary
 		
 		if (state != player_states.fall)
 		{
 			reset_animation = true;
 			jump_buffer = 0;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -649,9 +708,24 @@ switch (state)
 		h_speed = 0;
 		v_speed = 0;
 		
-		// Animations
+		// Animations and particles
 		
 		sprite_index = sprPlayerLightLand;
+		
+		if (frame_counter == 1)
+		{
+			if (face_right)
+			{
+				part_type_scale(global.dust_particle, 1, 1);
+			}
+			else
+			{
+				part_type_scale(global.dust_particle, -1, 1);
+			}
+			part_type_sprite(global.dust_particle, sprLightLandDust, 1, 1, 0);
+			part_type_life(global.dust_particle, 12, 12);
+			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -703,11 +777,12 @@ switch (state)
 			state = player_states.idle;
 		}
 		
-		// Reset animation if necessary
+		// Reset animation and frame counter if necessary
 		
 		if (state != player_states.lightland)
 		{
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -733,9 +808,24 @@ switch (state)
 		h_speed = 0;
 		v_speed = 0;
 		
-		// Animations
+		// Animations and particles
 		
 		sprite_index = sprPlayerHeavyLand;
+		
+		if (frame_counter == 1)
+		{
+			if (face_right)
+			{
+				part_type_scale(global.dust_particle, 1, 1);
+			}
+			else
+			{
+				part_type_scale(global.dust_particle, -1, 1);
+			}
+			part_type_sprite(global.dust_particle, sprHeavyLandDust, 1, 1, 0);
+			part_type_life(global.dust_particle, 24, 24);
+			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -748,12 +838,13 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// When animation finishes, enter idle state
+		// When animation finishes, enter idle state and reset frame counter
 		
 		if (image_index > image_number - 1)
 		{
 			state = player_states.idle;
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -788,7 +879,7 @@ switch (state)
 		
 		// Facing and animations are set on frame 1
 		
-		if (attack_counter == 0)
+		if (frame_counter == 1)
 		{
 
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
@@ -828,7 +919,7 @@ switch (state)
 		
 		// Sounds and projectile creation are done on frame 7
 		
-		if (attack_counter == 7)
+		if (frame_counter == 7)
 		{
 			if (face_right)
 			{
@@ -845,17 +936,13 @@ switch (state)
 			audio_play_sound(sndFireballAttack, 10, false);
 		}
 		
-		// Increment attack counter
+		// When state finishes, enter idle state and reset frame counter
 		
-		attack_counter += 1;
-		
-		// When state finishes, enter idle state
-		
-		if (attack_counter > attack_frames)
+		if (frame_counter >= attack_frames)
 		{
-			attack_counter = 0;
 			state = player_states.idle;
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
@@ -878,7 +965,7 @@ switch (state)
 		
 		// Direction, movement speed, animations, and facing are all determined on frame 1
 		
-		if (flamedash_counter == 0)
+		if (frame_counter == 1)
 		{
 			
 			// Determine dash direction
@@ -984,7 +1071,7 @@ switch (state)
 				sprite_index = sprPlayerFallDown3;
 				
 				// Set particle direction
-				part_type_direction(global.dash_particle, 40, 50, 0, 0);
+				part_type_direction(global.dash_particle, 85, 95, 0, 0);
 				
 			}
 			else if (dash_direction > 292.5 && dash_direction < 337.5)
@@ -1044,10 +1131,6 @@ switch (state)
 			part_particles_create(global.particle_system, x, y, global.shockwave_particle, 1);
 		}
 		
-		// Increment flamedash counter
-		
-		flamedash_counter += 1;
-		
 		// EXPERIMENTAL: Particle effect
 			
 		part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
@@ -1080,13 +1163,13 @@ switch (state)
 		}
 		y = y + v_speed;
 		
-		// When state finishes, enter fall state
+		// When state finishes, enter fall state and reset frame counter
 		
-		if (flamedash_counter > flamedash_frames)
+		if (frame_counter >= flamedash_frames)
 		{
-			flamedash_counter = 0;
 			state = player_states.fall;
 			reset_animation = true;
+			frame_counter = 0;
 		}
 		
 		break;
