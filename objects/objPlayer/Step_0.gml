@@ -1182,7 +1182,64 @@ switch (state)
 	
 	case player_states.hurt:
 		
-		//do things
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Facing and animations are set on frame 1
+		
+		if (frame_counter == 1)
+		{
+
+			if (face_right == true)
+			{
+				// RIGHT
+				
+				// Set facing
+				image_xscale = 1;
+				
+				// Animations
+				sprite_index = sprPlayerHit;
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Set facing
+				image_xscale = -1;
+				
+				// Animations
+				sprite_index = sprPlayerHit;
+				
+			}
+			
+			// Play hurt sound
+			audio_play_sound(sndPlayerHurt, 10, false);
+			
+			// Deduct life
+			life -= 1;
+			
+		}
+		
+		// When state finishes, enter dead state if out of life or enter idle state and reset frame counter
+		
+		if (life <= 0)
+		{
+			state = player_states.dead;
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		else if (frame_counter >= hurt_frames)
+		{
+			state = player_states.idle;
+			reset_animation = true;
+			frame_counter = 0;
+		}
 		
 		break;
 	
@@ -1194,7 +1251,61 @@ switch (state)
 	
 	case player_states.dead:
 		
-		//do things
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Facing and animations are set on frame 1
+		
+		if (frame_counter == 1)
+		{
+
+			if (face_right == true)
+			{
+				// RIGHT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				image_xscale = 1;
+				
+				// Animations
+				sprite_index = sprPlayerDeath;
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				image_xscale = -1;
+				
+				// Animations
+				sprite_index = sprPlayerDeath;
+				
+			}
+			
+		}
+		
+		// When state finishes, show game over screen
+		
+		if (frame_counter >= dead_frames)
+		{
+			state = player_states.idle;
+			reset_animation = true;
+			frame_counter = 0;
+			room_restart();
+		}
 		
 		break;
 }

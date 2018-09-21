@@ -33,6 +33,7 @@ finish_animation = false;
 
 h_speed = 0;
 v_speed = 0;
+life = 3;
 
 // State counters
 
@@ -46,6 +47,8 @@ jump_buffer_frames = 5;
 walk_transition_frames = 10;
 flamedash_frames = 10;
 attack_frames = 20;
+hurt_frames = 20;
+dead_frames = 120;
 
 // Movement constants
 
