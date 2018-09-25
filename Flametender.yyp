@@ -55,6 +55,14 @@
             }
         },
         {
+            "Key": "05112c91-4343-4fc9-966a-3a714a51021a",
+            "Value": {
+                "id": "10c8ba8c-1320-4779-b341-a8213d3c8629",
+                "resourcePath": "sprites\\sprClimbBox\\sprClimbBox.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "0a672063-01a5-413f-afa9-4b2c1e9bd13f",
             "Value": {
                 "id": "c4f899e9-ba3b-4846-8e10-94e42e1b8af2",
@@ -71,11 +79,27 @@
             }
         },
         {
+            "Key": "12e265ac-3b4e-404d-9b9e-a08d5685b5af",
+            "Value": {
+                "id": "fd8a8cad-336a-4c1a-8c7d-815d0268d3dd",
+                "resourcePath": "views\\12e265ac-3b4e-404d-9b9e-a08d5685b5af.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "13087e99-4929-43ab-bae0-66f015df5a39",
             "Value": {
                 "id": "653b4004-82a3-4987-a003-77d9022aa17d",
                 "resourcePath": "objects\\objFireball\\objFireball.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "146f1e8c-8d45-4c1a-b230-220a1d4d5cc6",
+            "Value": {
+                "id": "f39abb97-bc79-4efe-a741-9bd205e0b7df",
+                "resourcePath": "views\\146f1e8c-8d45-4c1a-b230-220a1d4d5cc6.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -92,6 +116,14 @@
                 "id": "75ef715b-285f-43f8-aaa1-6115c3f10567",
                 "resourcePath": "sprites\\sprPlayerFallUp1\\sprPlayerFallUp1.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "1d82ff13-0d7c-4daf-ae96-c86249365460",
+            "Value": {
+                "id": "afa864f3-7894-4388-afdf-44c6641e5da2",
+                "resourcePath": "objects\\objLedge\\objLedge.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -119,11 +151,27 @@
             }
         },
         {
+            "Key": "238a7413-62af-42ea-ac04-6906e343bf27",
+            "Value": {
+                "id": "92c1456e-5028-4dac-8252-674d375768f9",
+                "resourcePath": "sprites\\sprPlayerHang\\sprPlayerHang.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "25c16922-d727-4d12-8efd-d4312ec10a97",
             "Value": {
                 "id": "34d44242-3959-403b-b3f9-3a8360806c40",
                 "resourcePath": "views\\25c16922-d727-4d12-8efd-d4312ec10a97.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "287e0cfc-16e5-4b3f-885f-c40254b36206",
+            "Value": {
+                "id": "a24c9ef0-d9aa-42f4-bd53-1d799aca79bb",
+                "resourcePath": "objects\\objClimbBox\\objClimbBox.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -380,6 +428,14 @@
                 "id": "05d43645-6bda-493b-b917-98207771b92a",
                 "resourcePath": "objects\\objSpearmanHitbox\\objSpearmanHitbox.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "7ebaefce-ee6b-4a43-836b-e894f459a3cb",
+            "Value": {
+                "id": "13ba493c-9fd2-4985-92b0-575e749c7fee",
+                "resourcePath": "sprites\\sprLedge\\sprLedge.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -715,6 +771,14 @@
             "Value": {
                 "id": "4d5fa874-9561-4b6a-afd7-bd7f982feb91",
                 "resourcePath": "sprites\\sprTitleFlames\\sprTitleFlames.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "e4cd75cc-ceda-4c83-8db7-03c56e9e08d5",
+            "Value": {
+                "id": "2f735e42-023c-4769-86fe-11317fbddf2f",
+                "resourcePath": "sprites\\sprPlayerClimb\\sprPlayerClimb.yy",
                 "resourceType": "GMSprite"
             }
         },

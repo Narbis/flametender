@@ -30,6 +30,7 @@ fall = fall_states.light;
 face_right = true;
 reset_animation = false;
 finish_animation = false;
+ledge = noone;
 
 h_speed = 0;
 v_speed = 0;

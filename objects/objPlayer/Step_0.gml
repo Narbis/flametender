@@ -857,7 +857,60 @@ switch (state)
 	
 	case player_states.climb:
 	
-		//do things
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
+		
+		// Animations and positioning
+		
+		sprite_index = sprPlayerClimb;
+		
+		if (frame_counter == 1)
+		{
+			x = ledge.x;
+			y = ledge.y;
+		}
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// When animation finishes, enter idle state and reset frame counter
+		
+		if (image_index > image_number - 1)
+		{
+			state = player_states.idle;
+			reset_animation = true;
+			frame_counter = 0;
+			
+			sprite_index = sprPlayerIdle;
+			
+			y = y - 16;
+			if (face_right)
+			{
+				x = x + 5;
+			}
+			else
+			{
+				x = x - 5;
+			}
+		}
 		
 		break;
 	
