@@ -859,6 +859,11 @@ switch (state)
 	
 		// Reset animation
 		
+		if (controls.buffer == true)
+		{
+			part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
+		}
+		
 		if (reset_animation == true)
 		{
 			image_index = 0;
@@ -1365,6 +1370,5 @@ switch (state)
 
 if (mouse_check_button(mb_left))
 {
-	part_particles_create(global.particle_system, mouse_x, mouse_y, global.s_flame_particle, 3);
 	part_particles_create(global.particle_system, mouse_x, mouse_y, global.ember_particle, 1);
 }

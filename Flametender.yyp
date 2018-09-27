@@ -119,14 +119,6 @@
             }
         },
         {
-            "Key": "1d82ff13-0d7c-4daf-ae96-c86249365460",
-            "Value": {
-                "id": "afa864f3-7894-4388-afdf-44c6641e5da2",
-                "resourcePath": "objects\\objLedge\\objLedge.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
             "Key": "1f2c6638-f8fd-4341-bfd1-0ddef87f977c",
             "Value": {
                 "id": "923f3f8c-4e00-4c3c-b566-513633a169a6",
@@ -295,6 +287,14 @@
             }
         },
         {
+            "Key": "4e564f7b-596f-4768-90f6-143878ba5a3b",
+            "Value": {
+                "id": "8c217fd5-b1b9-4f43-b6d2-4825ef325190",
+                "resourcePath": "objects\\objLedge\\objLedge.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "4eac1818-1d4c-434e-b192-8bbe20fc0227",
             "Value": {
                 "id": "f81cf96e-96a6-46fa-9189-d88bc5d39758",
@@ -434,7 +434,7 @@
             "Key": "7ebaefce-ee6b-4a43-836b-e894f459a3cb",
             "Value": {
                 "id": "13ba493c-9fd2-4985-92b0-575e749c7fee",
-                "resourcePath": "sprites\\sprLedge\\sprLedge.yy",
+                "resourcePath": "sprites\\sprLedgeLeft\\sprLedgeLeft.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -551,6 +551,14 @@
             }
         },
         {
+            "Key": "a40edb37-99c6-440f-8c08-814d0386919a",
+            "Value": {
+                "id": "5517e01e-0991-49f6-b0f4-0d3e8e0038a0",
+                "resourcePath": "objects\\objLedgeRight\\objLedgeRight.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "a4ab5f42-7e7f-45c0-a506-95dfb0cbd103",
             "Value": {
                 "id": "0a67e37e-25b6-489d-9772-755398b54cab",
@@ -652,6 +660,22 @@
                 "id": "f5f13a77-3b6a-4df5-a3c3-460cfacdcbeb",
                 "resourcePath": "objects\\objCamera\\objCamera.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "bdcbdb0a-15c1-4910-9b99-daa0405a0e7b",
+            "Value": {
+                "id": "97c2017f-ed8d-4451-b785-e781e0b3e0e0",
+                "resourcePath": "objects\\objLedgeLeft\\objLedgeLeft.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "bfcf8f95-980e-4341-95ba-24bd63170f88",
+            "Value": {
+                "id": "c09156ac-48f7-4c1a-bd13-1021d0986fb5",
+                "resourcePath": "sprites\\sprLedgeRight\\sprLedgeRight.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

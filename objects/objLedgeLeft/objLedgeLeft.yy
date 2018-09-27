@@ -1,14 +1,14 @@
 {
-    "id": "4e564f7b-596f-4768-90f6-143878ba5a3b",
+    "id": "bdcbdb0a-15c1-4910-9b99-daa0405a0e7b",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "objLedge",
+    "name": "objLedgeLeft",
     "eventList": [
         
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
-    "parentObjectId": "00000000-0000-0000-0000-000000000000",
+    "parentObjectId": "4e564f7b-596f-4768-90f6-143878ba5a3b",
     "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
@@ -24,6 +24,6 @@
     "physicsStartAwake": true,
     "properties": null,
     "solid": false,
-    "spriteId": "00000000-0000-0000-0000-000000000000",
-    "visible": true
+    "spriteId": "7ebaefce-ee6b-4a43-836b-e894f459a3cb",
+    "visible": false
 }

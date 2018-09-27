@@ -2,7 +2,7 @@
     "id": "7ebaefce-ee6b-4a43-836b-e894f459a3cb",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "sprLedge",
+    "name": "sprLedgeLeft",
     "For3D": false,
     "HTile": false,
     "VTile": false,
