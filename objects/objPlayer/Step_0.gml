@@ -545,11 +545,11 @@ switch (state)
 		var target_speed = controls.input_x * move_speed;
 		if (h_speed < target_speed)
 		{
-			h_speed = min(target_speed, h_speed + (move_speed / 8));
+			h_speed = min(target_speed, h_speed + (move_speed / 16));
 		}
 		else
 		{
-			h_speed = max(target_speed, h_speed - (move_speed / 8));
+			h_speed = max(target_speed, h_speed - (move_speed / 16));
 		}
 		
 		v_speed = v_speed + v_gravity;
@@ -676,7 +676,7 @@ switch (state)
 				state = player_states.heavyland;
 			}
 		}
-		else if (v_speed >= 0 && (place_meeting(x + 1, y, objWall)  || place_meeting(x - 1, y, objWall)))
+		else if (v_speed >= 0 && ((position_meeting(x + 5, y + 15, objWall) && position_meeting(x + 5, y - 7, objWall)) || (position_meeting(x - 5, y + 15, objWall) && position_meeting(x - 5, y - 7, objWall))))
 		{
 			state = player_states.slide;
 		}
@@ -1020,10 +1020,41 @@ switch (state)
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
+			
+			// Add horizontal speed from jumping
+			if (face_right)
+			{
+				h_speed = move_speed;
+			}
+			else
+			{
+				h_speed = -move_speed;
+			}
 		}
-		else if ((face_right && !place_meeting(x - 1, y, objWall)) || (!face_right && !place_meeting(x + 1, y, objWall)))
+		else if ((face_right && (!position_meeting(x - 5, y + 15, objWall) || !position_meeting(x - 5, y - 7, objWall))) || (!face_right && (!position_meeting(x + 5, y + 15, objWall) || !position_meeting(x + 5, y - 7, objWall))))
 		{
 			state = player_states.fall;
+		}
+		else if ((face_right && controls.input_x > 0) || (!face_right && controls.input_x < 0))
+		{
+			// You need to hold away from the wall for 10 frames to let go
+			slide_fall_transition_counter += 1;
+			if (slide_fall_transition_counter == slide_fall_transition_frames)
+			{
+				if (face_right)
+				{
+					h_speed = 0.5;
+				}
+				else
+				{
+					h_speed = -0.5;
+				}
+				state = player_states.fall;
+			}
+		}
+		else
+		{
+			slide_fall_transition_counter = 0;
 		}
 		
 		// Reset animation and frame counter if necessary
@@ -1032,6 +1063,7 @@ switch (state)
 		{
 			reset_animation = true;
 			frame_counter = 0;
+			slide_fall_transition_counter = 0;
 		}
 		
 		break;

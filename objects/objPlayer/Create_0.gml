@@ -42,12 +42,14 @@ life = 3;
 
 jump_buffer = 0;
 walk_transition_counter = 0;
+slide_fall_transition_counter = 0;
 frame_counter = 0;
 
 // State frame constants
 
 jump_buffer_frames = 5;
 walk_transition_frames = 10;
+slide_fall_transition_frames = 10;
 flamedash_frames = 10;
 attack_frames = 20;
 hurt_frames = 20;
