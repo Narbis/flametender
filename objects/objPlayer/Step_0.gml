@@ -230,17 +230,11 @@ switch (state)
 		{
 			if (controls.input_x > 0)
 			{
-				part_type_scale(global.dust_particle, 1, 1);
-				part_type_sprite(global.dust_particle, sprRunDust, 1, 1, 0);
-				part_type_life(global.dust_particle, 16, 16);
-				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+				part_particles_create(global.particle_system, x, y, global.run_right_dust_particle, 1);
 			}
 			else if (controls.input_x < 0)
 			{
-				part_type_scale(global.dust_particle, -1, 1);
-				part_type_sprite(global.dust_particle, sprRunDust, 1, 1, 0);
-				part_type_life(global.dust_particle, 16, 16);
-				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+				part_particles_create(global.particle_system, x, y, global.run_left_dust_particle, 1);
 			}
 		}
 		
@@ -301,19 +295,6 @@ switch (state)
 			h_speed = h_move;
 		}
 		x = x + h_speed;
-		
-		// Animations and particles
-		
-		if (state != player_states.dash)
-		{
-			sprite_index = sprPlayerRun;
-			
-			if (frame_counter % 18 == 13)
-			{
-				part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
-			}
-			
-		}
 			
 		// Moving left and right flips the sprite to face the appropriate direction
 		
@@ -338,6 +319,25 @@ switch (state)
 		else
 		{
 			image_xscale = -1;
+		}
+		
+		// Animations and particles
+		
+		if (state != player_states.dash)
+		{
+			sprite_index = sprPlayerRun;
+			
+			if (frame_counter % 18 == 13)
+			{
+				if (face_right)
+				{
+					part_particles_create(global.particle_system, x, y, global.run_right_dust_particle, 1);
+				}
+				else
+				{
+					part_particles_create(global.particle_system, x, y, global.run_left_dust_particle, 1);
+				}
+			}
 		}
 		
 		// Change player to appropriate state
@@ -429,15 +429,12 @@ switch (state)
 		{
 			if (face_right)
 			{
-				part_type_scale(global.dust_particle, 1, 1);
+				part_particles_create(global.particle_system, x, y, global.stop_right_dust_particle, 1);
 			}
 			else
 			{
-				part_type_scale(global.dust_particle, -1, 1);
+				part_particles_create(global.particle_system, x, y, global.stop_left_dust_particle, 1);
 			}
-			part_type_sprite(global.dust_particle, sprStopDust, 1, 1, 0);
-			part_type_life(global.dust_particle, 16, 16);
-			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -560,6 +557,10 @@ switch (state)
 		{
 			v_speed = v_speed + v_gravity;
 		}
+		if (v_speed > 10)
+		{
+			v_speed = 10;
+		}
 
 		// Horizontal collisions
 
@@ -588,7 +589,7 @@ switch (state)
 		y = y + v_speed;
 		
 		// Animations
-		if (v_move == 0)
+		if (v_move == 0) // Makes sure the animation doesn't suddenly change before landing
 		{
 			if (v_speed < -jump_speed)
 			{
@@ -718,17 +719,7 @@ switch (state)
 		
 		if (frame_counter == 1)
 		{
-			if (face_right)
-			{
-				part_type_scale(global.dust_particle, 1, 1);
-			}
-			else
-			{
-				part_type_scale(global.dust_particle, -1, 1);
-			}
-			part_type_sprite(global.dust_particle, sprLightLandDust, 1, 1, 0);
-			part_type_life(global.dust_particle, 12, 12);
-			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+			part_particles_create(global.particle_system, x, y, global.lightland_dust_particle, 1);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -818,17 +809,7 @@ switch (state)
 		
 		if (frame_counter == 1)
 		{
-			if (face_right)
-			{
-				part_type_scale(global.dust_particle, 1, 1);
-			}
-			else
-			{
-				part_type_scale(global.dust_particle, -1, 1);
-			}
-			part_type_sprite(global.dust_particle, sprHeavyLandDust, 1, 1, 0);
-			part_type_life(global.dust_particle, 24, 24);
-			part_particles_create(global.particle_system, x, y, global.dust_particle, 1);
+			part_particles_create(global.particle_system, x, y, global.heavyland_dust_particle, 1);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -964,7 +945,21 @@ switch (state)
 		// Calculate movement
 		
 		h_speed = 0;
-		v_speed = 1.5;
+		
+		var target_speed = 1.5;
+		if (controls.input_y > fast_fall_threshold)
+		{
+			target_speed = 3;
+		}
+		
+		if (v_speed < target_speed)
+		{
+			v_speed = min(target_speed, v_speed + (1.5 / 8));
+		}
+		else
+		{
+			v_speed = max(target_speed, v_speed - (1.5 / 8));
+		}
 		
 		// Vertical collisions
 		
@@ -979,9 +974,21 @@ switch (state)
 		}
 		y = y + v_speed;
 		
-		// Animations
+		// Animations and particles
 		
 		sprite_index = sprPlayerSlide;
+		
+		if (frame_counter % 5 == 1)
+		{
+			if (face_right)
+			{
+				part_particles_create(global.particle_system, x, y, global.slide_right_dust_particle, 1);
+			}
+			else
+			{
+				part_particles_create(global.particle_system, x, y, global.slide_left_dust_particle, 1);
+			}
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
