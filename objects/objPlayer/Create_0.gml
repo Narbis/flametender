@@ -9,7 +9,9 @@ enum player_states
 	fall,
 	lightland,
 	heavyland,
+	hang,
 	climb,
+	slide,
 	attack,
 	flamedash,
 	hurt,
@@ -53,7 +55,7 @@ dead_frames = 120;
 
 // Movement constants
 
-v_gravity = 0.25;
+v_gravity = 0.22;
 move_speed = 1.8;
 jump_speed = 3;
 flamedash_speed = 5;

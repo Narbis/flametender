@@ -675,6 +675,10 @@ switch (state)
 				state = player_states.heavyland;
 			}
 		}
+		else if (v_speed >= 0 && (place_meeting(x + 1, y, objWall)  || place_meeting(x - 1, y, objWall)))
+		{
+			state = player_states.slide;
+		}
 		
 		// Reset animation and frame counter if necessary
 		
@@ -849,6 +853,19 @@ switch (state)
 		
 		break;
 		
+		
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: HANG
+	//
+	// The character is...
+	//-----------------------------------------------------------------------------------------------------------------	
+		
+	case player_states.hang:
+	
+		// Do things...
+		
+		break;
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: CLIMB
 	//
@@ -858,11 +875,6 @@ switch (state)
 	case player_states.climb:
 	
 		// Reset animation
-		
-		if (controls.buffer == true)
-		{
-			part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
-		}
 		
 		if (reset_animation == true)
 		{
@@ -918,7 +930,105 @@ switch (state)
 		}
 		
 		break;
+		
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: SLIDE
+	//
+	// The character is...
+	//-----------------------------------------------------------------------------------------------------------------	
+		
+	case player_states.slide:
 	
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Set facing on frame 1
+		
+		if (frame_counter == 1)
+		{
+			if (place_meeting(x - 1, y, objWall))
+			{
+				face_right = true;
+			}
+			else
+			{
+				face_right = false;
+			}
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 1.5;
+		
+		// Vertical collisions
+		
+		var v_move = 0;
+		if (place_meeting(x, y + v_speed, objWall))
+		{
+			while (!place_meeting(x, y + v_move + sign(v_speed), objWall))
+			{
+				v_move += sign(v_speed);
+			}
+			v_speed = v_move;
+		}
+		y = y + v_speed;
+		
+		// Animations
+		
+		sprite_index = sprPlayerSlide;
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// Change player to appropriate state
+
+		if (place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.lightland;
+		}
+		else if (controls.action == input.dash)
+		{
+			state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if ((face_right && !place_meeting(x - 1, y, objWall)) || (!face_right && !place_meeting(x + 1, y, objWall)))
+		{
+			state = player_states.fall;
+		}
+		
+		// Reset animation and frame counter if necessary
+		
+		if (state != player_states.slide)
+		{
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		
+		break;
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: ATTACK
 	//
