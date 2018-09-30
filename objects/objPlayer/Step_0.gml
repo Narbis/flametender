@@ -843,7 +843,124 @@ switch (state)
 		
 	case player_states.hang:
 	
-		// Do things...
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
+		
+		// Animations and positioning
+		
+		sprite_index = sprPlayerHang;
+		
+		if (image_index > image_number - 1)
+		{
+			image_speed = 0;
+		}
+		
+		if (frame_counter == 1)
+		{
+			x = ledge.x;
+			y = ledge.y;
+		}
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// Change player to appropriate state
+
+		if (controls.action == input.dash)
+		{
+			state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			if (face_right)
+			{
+				x = x - 5;
+				y = y + 3;
+			}
+			else
+			{
+				x = x + 5;
+				y = y + 3;
+			}
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+			
+			// Add horizontal speed from jumping
+			if (face_right)
+			{
+				h_speed = -move_speed;
+			}
+			else
+			{
+				h_speed = move_speed;
+			}
+			face_right = !face_right;
+		}
+		else if (controls.input_y > 0)
+		{
+			// You need to hold down for 10 frames to slide down
+			hang_slide_transition_counter += 1;
+			if (hang_slide_transition_counter == hang_slide_transition_frames)
+			{
+				state = player_states.slide;
+				if (face_right)
+				{
+					x = x - 5;
+					y = y + 7;
+				}
+				else
+				{
+					x = x + 5;
+					y = y + 7;
+				}
+				face_right = !face_right;
+			}
+			hang_climb_transition_counter = 0;
+		}
+		else if (((controls.input_x > 0 && face_right) || (controls.input_x < 0 && !face_right)) || controls.input_y < 0)
+		{
+			// You need to hold up or towards the wall for 10 frames to climb up
+			hang_climb_transition_counter += 1;
+			if (hang_climb_transition_counter == hang_climb_transition_frames)
+			{
+				state = player_states.climb;
+			}
+			hang_slide_transition_counter = 0;
+		}
+		
+		// Reset animation and frame counter if necessary
+		
+		if (state != player_states.hang)
+		{
+			reset_animation = true;
+			frame_counter = 0;
+			image_speed = 1;
+			hang_slide_transition_counter = 0;
+			hang_climb_transition_counter = 0;
+		}
 		
 		break;
 		
@@ -868,15 +985,9 @@ switch (state)
 		h_speed = 0;
 		v_speed = 0;
 		
-		// Animations and positioning
+		// Animations
 		
 		sprite_index = sprPlayerClimb;
-		
-		if (frame_counter == 1)
-		{
-			x = ledge.x;
-			y = ledge.y;
-		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
