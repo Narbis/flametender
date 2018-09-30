@@ -33,6 +33,7 @@ face_right = true;
 reset_animation = false;
 finish_animation = false;
 ledge = noone;
+dash_grounded = true; // this is only used for flamedashes
 
 h_speed = 0;
 v_speed = 0;

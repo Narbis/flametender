@@ -12,12 +12,13 @@ frame_counter += 1;
 switch (state)
 {
 	
+	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: IDLE
 	//
 	// The character is standing still
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region 
 	case player_states.idle:
 		
 		// Reset animation
@@ -92,13 +93,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: WALK
 	//
 	// The character is moving horizontally on the ground at a slow pace
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.walk:
 		
 		// Reset animation
@@ -205,13 +207,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: DASH
 	//
 	// The character is transitioning into the run state; this is a special case of the run state
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.dash:
 		
 		// Reset animation
@@ -253,12 +256,14 @@ switch (state)
 			finish_animation = true;
 		}
 		
+	#endregion
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: RUN
 	//
 	// The character is moving horizontally on the ground at a fast pace
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.run:
 		
 		// Reset animation and frame counter
@@ -273,6 +278,16 @@ switch (state)
 		
 		// Calculate movement
 		
+		var target_speed = sign(controls.input_x) * move_speed;
+		if (h_speed < target_speed)
+		{
+			h_speed = min(target_speed, h_speed + (move_speed / 8));
+		}
+		else
+		{
+			h_speed = max(target_speed, h_speed - (move_speed / 8));
+		}
+		/*
 		if (sign(controls.input_x) == -sign(h_speed))
 		{
 			h_speed = 0;
@@ -281,6 +296,7 @@ switch (state)
 		{
 			h_speed = sign(controls.input_x) * move_speed;
 		}
+		*/
 		v_speed = 0;
 		
 		// Horizontal collisions
@@ -340,6 +356,9 @@ switch (state)
 			}
 		}
 		
+		// Speed of animation corresponds to current run speed
+		image_speed = abs(h_speed / move_speed);
+		
 		// Change player to appropriate state
 		
 		if (!place_meeting(x, y + 1, objWall))
@@ -396,16 +415,18 @@ switch (state)
 			finish_animation = false;
 			walk_transition_counter = 0;
 			frame_counter = 0;
+			image_speed = 1;
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: STOP
 	//
 	// The character is transitioning into the idle state
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.stop:
 		
 		// Reset animation
@@ -496,14 +517,15 @@ switch (state)
 			frame_counter = 0;
 		}
 		
-		break;	
+		break;
+	#endregion
 
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: JUMP
 	//
 	// The character is transitioning into a fall after gaining some initial vertical speed
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.jump:
 	
 		// Add initial vertical speed
@@ -519,13 +541,14 @@ switch (state)
 		state = player_states.fall;
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: FALL
 	//
 	// The character is moving vertically and potentially horizontally and not touching the ground
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.fall:
 	
 		// Reset animation
@@ -542,7 +565,7 @@ switch (state)
 		
 		// Calculate movement
 		
-		var target_speed = controls.input_x * move_speed;
+		var target_speed = sign(controls.input_x) * max(move_speed, abs(h_speed));
 		if (h_speed < target_speed)
 		{
 			h_speed = min(target_speed, h_speed + (move_speed / 16));
@@ -662,14 +685,7 @@ switch (state)
 		{
 			if (fall == fall_states.light)
 			{
-				if (controls.input_x != 0)
-				{
-					state = player_states.dash;
-				}
-				else
-				{
-					state = player_states.lightland;
-				}
+				state = player_states.lightland;
 			}
 			else
 			{
@@ -691,13 +707,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: LIGHTLAND
 	//
 	// The character is transitioning out of the fall state on the ground with a short landing animation
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.lightland:
 		
 		// Reset animation
@@ -710,8 +727,25 @@ switch (state)
 		
 		// Calculate movement
 		
-		h_speed = 0;
+		if (!(frame_counter == 1 && controls.action == input.jump))
+		{
+			// If jump is input on frame 1 allow bunny-hopping (by not reducing h_speed)
+			h_speed = h_speed - (h_speed / 8);
+		}
 		v_speed = 0;
+		
+		// Horizontal collisions
+
+		if (place_meeting(x + h_speed, y, objWall))
+		{
+			var h_move = 0;
+			while (!place_meeting(x + h_move + sign(h_speed), y, objWall))
+			{
+				h_move += sign(h_speed);
+			}
+			h_speed = h_move;
+		}
+		x = x + h_speed;
 		
 		// Animations and particles
 		
@@ -735,7 +769,11 @@ switch (state)
 		
 		// Change player to appropriate state
 		
-		if (controls.action = input.attack)
+		if (!place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.fall;
+		}
+		else if (controls.action = input.attack)
 		{
 			state = player_states.attack;
 			controls.action = input.none;
@@ -781,13 +819,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: HEAVYLAND
 	//
 	// The character is transitioning out of the fall state on the ground with a long landing animation
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.heavyland:
 		
 		// Reset animation
@@ -800,8 +839,21 @@ switch (state)
 		
 		// Calculate movement
 		
-		h_speed = 0;
+		h_speed = h_speed - (h_speed / 8);
 		v_speed = 0;
+		
+		// Horizontal collisions
+
+		if (place_meeting(x + h_speed, y, objWall))
+		{
+			var h_move = 0;
+			while (!place_meeting(x + h_move + sign(h_speed), y, objWall))
+			{
+				h_move += sign(h_speed);
+			}
+			h_speed = h_move;
+		}
+		x = x + h_speed;
 		
 		// Animations and particles
 		
@@ -823,6 +875,13 @@ switch (state)
 			image_xscale = -1;
 		}
 		
+		// Change to fall state if sliding off of a ledge
+		
+		if (!place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.fall;
+		}
+		
 		// When animation finishes, enter idle state and reset frame counter
 		
 		if (image_index > image_number - 1)
@@ -833,14 +892,14 @@ switch (state)
 		}
 		
 		break;
-		
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: HANG
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.hang:
 	
 		// Reset animation
@@ -963,13 +1022,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: CLIMB
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.climb:
 	
 		// Reset animation
@@ -1022,13 +1082,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: SLIDE
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------	
-		
+	#region
 	case player_states.slide:
 	
 		// Reset animation
@@ -1178,13 +1239,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: ATTACK
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.attack:
 	
 		// Reset animation
@@ -1264,13 +1326,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: FLAMEDASH
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.flamedash:
 	
 		// Reset animation
@@ -1288,144 +1351,212 @@ switch (state)
 			
 			// Determine dash direction
 			
-			dash_direction = point_direction(x, y, x + controls.input_x, y + controls.input_y);
-			
-			if (dash_direction > 22.5 && dash_direction < 67.5)
+			var dash_direction;
+			if (controls.input_x == 0 && controls.input_y == 0)
 			{
-				// UP-RIGHT
-				
-				// Movement speed
-				h_speed = 0.707 * flamedash_speed;
-				v_speed = 0.707 * -flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashDiagUp;
-				
-				// Facing
-				face_right = true;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 220, 230, 0, 0);
-				
-			}
-			else if (dash_direction >= 67.5 && dash_direction <= 112.5)
-			{
-				// UP
-				
-				// Movement speed
-				h_speed = 0;
-				v_speed = -flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashUp;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 265, 275, 0, 0);
-				
-			}
-			else if (dash_direction > 112.5 && dash_direction < 157.5)
-			{
-				// UP-LEFT
-				
-				// Movement speed
-				h_speed = 0.707 * -flamedash_speed;
-				v_speed = 0.707 * -flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashDiagUp;
-				
-				// Facing
-				face_right = false;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 310, 320, 0, 0);
-				
-			}
-			else if (dash_direction >= 157.5 && dash_direction <= 202.5)
-			{
-				// LEFT
-				
-				// Movement speed
-				h_speed = -flamedash_speed;
-				v_speed = 0;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashSide;
-				
-				// Facing
-				face_right = false;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, -5, 5, 0, 0);
-				
-			}
-			else if (dash_direction > 202.5 && dash_direction < 247.5)
-			{
-				// DOWN-LEFT
-				
-				// Movement speed
-				h_speed = 0.707 * -flamedash_speed;
-				v_speed = 0.707 * flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashDiagDown;
-				
-				// Facing
-				face_right = false;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 40, 50, 0, 0);
-				
-			}
-			else if (dash_direction >= 247.5 && dash_direction <= 292.5)
-			{
-				// DOWN
-				
-				// Movement speed
-				h_speed = 0;
-				v_speed = flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFallDown3;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 85, 95, 0, 0);
-				
-			}
-			else if (dash_direction > 292.5 && dash_direction < 337.5)
-			{
-				// DOWN-RIGHT
-				
-				// Movement speed
-				h_speed = 0.707 * flamedash_speed;
-				v_speed = 0.707 * flamedash_speed;
-				
-				// Animations
-				sprite_index = sprPlayerFlameDashDiagDown;
-				
-				// Facing
-				face_right = true;
-				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 130, 140, 0, 0);
-				
+				if (face_right)
+				{
+					dash_direction = 0;
+				}
+				else
+				{
+					dash_direction = 180;
+				}
 			}
 			else
 			{
-				// RIGHT
+				dash_direction = point_direction(x, y, x + controls.input_x, y + controls.input_y);
+			}
+			
+			if (!place_meeting(x, y + 1, objWall) || (dash_direction > 22.5 && dash_direction < 157.5))
+			{
 				
-				// Movement speed
-				h_speed = flamedash_speed;
-				v_speed = 0;
+				// AERIAL DASH
 				
-				// Animations
-				sprite_index = sprPlayerFlameDashSide;
+				dash_grounded = false;
 				
-				// Facing
-				face_right = true;
+				if (dash_direction > 22.5 && dash_direction < 67.5)
+				{
+					// UP-RIGHT
 				
-				// Set particle direction
-				part_type_direction(global.dash_particle, 175, 185, 0, 0);
+					// Movement speed
+					h_speed = 0.707 * flamedash_speed;
+					v_speed = 0.707 * -flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashDiagUp;
+				
+					// Facing
+					face_right = true;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 220, 230, 0, 0);
+				
+				}
+				else if (dash_direction >= 67.5 && dash_direction <= 112.5)
+				{
+					// UP
+				
+					// Movement speed
+					h_speed = 0;
+					v_speed = -flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashUp;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 265, 275, 0, 0);
+				
+				}
+				else if (dash_direction > 112.5 && dash_direction < 157.5)
+				{
+					// UP-LEFT
+				
+					// Movement speed
+					h_speed = 0.707 * -flamedash_speed;
+					v_speed = 0.707 * -flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashDiagUp;
+				
+					// Facing
+					face_right = false;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 310, 320, 0, 0);
+				
+				}
+				else if (dash_direction >= 157.5 && dash_direction <= 202.5)
+				{
+					// LEFT
+				
+					// Movement speed
+					h_speed = -flamedash_speed;
+					v_speed = 0;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashSide;
+				
+					// Facing
+					face_right = false;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, -5, 5, 0, 0);
+				
+				}
+				else if (dash_direction > 202.5 && dash_direction < 247.5)
+				{
+					// DOWN-LEFT
+				
+					// Movement speed
+					h_speed = 0.707 * -flamedash_speed;
+					v_speed = 0.707 * flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashDiagDown;
+				
+					// Facing
+					face_right = false;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 40, 50, 0, 0);
+				
+				}
+				else if (dash_direction >= 247.5 && dash_direction <= 292.5)
+				{
+					// DOWN
+				
+					// Movement speed
+					h_speed = 0;
+					v_speed = flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFallDown3;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 85, 95, 0, 0);
+				
+				}
+				else if (dash_direction > 292.5 && dash_direction < 337.5)
+				{
+					// DOWN-RIGHT
+				
+					// Movement speed
+					h_speed = 0.707 * flamedash_speed;
+					v_speed = 0.707 * flamedash_speed;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashDiagDown;
+				
+					// Facing
+					face_right = true;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 130, 140, 0, 0);
+				
+				}
+				else
+				{
+					// RIGHT
+				
+					// Movement speed
+					h_speed = flamedash_speed;
+					v_speed = 0;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashSide;
+				
+					// Facing
+					face_right = true;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 175, 185, 0, 0);
+				
+				}
+			}
+			else
+			{
+				
+				// GROUNDED DASH
+				
+				dash_grounded = true;
+				
+				if ((dash_direction >= 157.5 && dash_direction < 247.5) || (!face_right && (dash_direction >= 247.5 && dash_direction <= 292.5)))
+				{
+					// LEFT
+				
+					// Movement speed
+					h_speed = -flamedash_speed;
+					v_speed = 0;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashGround;
+				
+					// Facing
+					face_right = false;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, -5, 5, 0, 0);
+				
+				}
+				else
+				{
+					// RIGHT
+				
+					// Movement speed
+					h_speed = flamedash_speed;
+					v_speed = 0;
+				
+					// Animations
+					sprite_index = sprPlayerFlameDashGround;
+				
+					// Facing
+					face_right = true;
+				
+					// Set particle direction
+					part_type_direction(global.dash_particle, 175, 185, 0, 0);
+				
+				}
 				
 			}
 			
@@ -1465,6 +1596,16 @@ switch (state)
 				h_move += sign(h_speed);
 			}
 			h_speed = h_move;
+			
+			// Enter slide or stop state after colliding with a wall
+			if (dash_grounded)
+			{
+				state = player_states.stop;
+			}
+			else
+			{
+				state = player_states.slide;
+			}
 		}
 		x = x + h_speed;
 		
@@ -1478,26 +1619,61 @@ switch (state)
 				v_move += sign(v_speed);
 			}
 			v_speed = v_move;
+			
+			// Enter heavy-land state if dashing into ground, otherwise cancel the dash if ceiling collision
+			if (v_speed > 0 || place_meeting(x, y + 1, objWall))
+			{
+				state = player_states.heavyland;
+			}
+			else
+			{
+				state = player_states.fall;
+			}
 		}
 		y = y + v_speed;
 		
-		// When state finishes, enter fall state and reset frame counter
+		// Grounded flamedash can be jumped out of
+		
+		if (dash_grounded && controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		
+		// When state finishes, enter fall or dash state
 		
 		if (frame_counter >= flamedash_frames)
 		{
-			state = player_states.fall;
+			if (dash_grounded)
+			{
+				state = player_states.dash;
+			}
+			else
+			{
+				state = player_states.fall;
+			}
+		}
+		
+		// Reset animation and frame counter if necessary
+		
+		if (state != player_states.flamedash)
+		{
 			reset_animation = true;
 			frame_counter = 0;
+			slide_fall_transition_counter = 0;
 		}
 		
 		break;
+	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: HURT
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.hurt:
 		
 		// Reset animation
@@ -1560,13 +1736,14 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: DEAD
 	//
 	// The character is...
 	//-----------------------------------------------------------------------------------------------------------------
-	
+	#region
 	case player_states.dead:
 		
 		// Reset animation
@@ -1626,9 +1803,13 @@ switch (state)
 		}
 		
 		break;
+	#endregion
 }
 
+// DEBUGGING STUFF
+#region
 if (mouse_check_button(mb_left))
 {
 	part_particles_create(global.particle_system, mouse_x, mouse_y, global.ember_particle, 1);
 }
+#endregion
