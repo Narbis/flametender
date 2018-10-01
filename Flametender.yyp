@@ -263,6 +263,14 @@
             }
         },
         {
+            "Key": "46dbc2bb-866b-486e-bdf3-8099cefd7beb",
+            "Value": {
+                "id": "bd70639d-44e9-49ee-9967-122336c63488",
+                "resourcePath": "sprites\\sprTrailDust\\sprTrailDust.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "4727ddfb-5de9-479b-ad25-4bbfca51b4f2",
             "Value": {
                 "id": "e49da908-9188-4af9-8d67-46f8c66a38c1",

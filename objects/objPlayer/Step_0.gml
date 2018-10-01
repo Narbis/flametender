@@ -1577,14 +1577,41 @@ switch (state)
 			audio_play_sound(sndFlameDash, 10, false);
 			
 			// EXPERIMENTAL: Shockwave effect
-			part_particles_create(global.particle_system, x, y, global.shockwave_particle, 1);
+			if (dash_grounded)
+			{
+				part_particles_create(global.particle_system, x, y + 7, global.shockwave_particle, 1);
+			}
+			else
+			{
+				part_particles_create(global.particle_system, x, y, global.shockwave_particle, 1);
+			}
 		}
 		
 		// EXPERIMENTAL: Particle effect
 			
-		part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
-		part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
-		part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
+		if (dash_grounded)
+		{
+			part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y + 5, y + 9, ps_shape_rectangle, ps_distr_linear);
+			part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
+			part_particles_create(global.particle_system, x, y + 7, global.ember_particle, 1);
+			if (frame_counter % 3 == 1)
+			{
+				if (face_right)
+				{
+					part_particles_create(global.particle_system, x, y, global.trail_right_dust_particle, 1);
+				}
+				else
+				{
+					part_particles_create(global.particle_system, x, y, global.trail_left_dust_particle, 1);
+				}
+			}
+		}
+		else
+		{
+			part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
+			part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
+			part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
+		}
 		
 		// Horizontal collisions
 
@@ -1640,6 +1667,13 @@ switch (state)
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
+		}
+		
+		// If grounded flamedash moves player off a ledge, cancel it
+		
+		if (dash_grounded && !place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.fall;
 		}
 		
 		// When state finishes, enter fall or dash state

@@ -128,3 +128,15 @@ part_type_sprite(global.slide_left_dust_particle, sprSlideDust, 1, 1, 0);
 part_type_scale(global.slide_left_dust_particle, -1, 1);
 part_type_alpha2(global.slide_left_dust_particle, 1, 0);
 part_type_life(global.slide_left_dust_particle, 40, 40);
+
+global.trail_right_dust_particle = part_type_create();
+part_type_sprite(global.trail_right_dust_particle, sprTrailDust, 1, 1, 0);
+part_type_scale(global.trail_right_dust_particle, 1, 1);
+part_type_alpha2(global.trail_right_dust_particle, 1, 0);
+part_type_life(global.trail_right_dust_particle, 24, 24);
+
+global.trail_left_dust_particle = part_type_create();
+part_type_sprite(global.trail_left_dust_particle, sprTrailDust, 1, 1, 0);
+part_type_scale(global.trail_left_dust_particle, -1, 1);
+part_type_alpha2(global.trail_left_dust_particle, 1, 0);
+part_type_life(global.trail_left_dust_particle, 24, 24);
