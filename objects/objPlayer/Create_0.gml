@@ -38,6 +38,8 @@ dash_grounded = true; // this is only used for flamedashes
 h_speed = 0;
 v_speed = 0;
 life = 3;
+flame = 3;
+flame_max = 3;
 
 // State counters
 
@@ -46,6 +48,7 @@ walk_transition_counter = 0;
 slide_fall_transition_counter = 0;
 hang_climb_transition_counter = 0;
 hang_slide_transition_counter = 0;
+flame_regen_counter = 0;
 frame_counter = 0;
 
 // State frame constants
@@ -59,6 +62,7 @@ flamedash_frames = 10;
 attack_frames = 20;
 hurt_frames = 20;
 dead_frames = 120;
+flame_regen_frames = 120;
 
 // Movement constants
 
@@ -140,3 +144,15 @@ part_type_sprite(global.trail_left_dust_particle, sprTrailDust, 1, 1, 0);
 part_type_scale(global.trail_left_dust_particle, -1, 1);
 part_type_alpha2(global.trail_left_dust_particle, 1, 0);
 part_type_life(global.trail_left_dust_particle, 24, 24);
+
+global.flamedash_dust_particle = part_type_create();
+part_type_sprite(global.flamedash_dust_particle, sprFlameDashDust, 1, 1, 0);
+part_type_scale(global.flamedash_dust_particle, 1, 1);
+part_type_alpha2(global.flamedash_dust_particle, 1, 0);
+part_type_life(global.flamedash_dust_particle, 24, 24);
+
+global.land_slide_dust_particle = part_type_create();
+part_type_sprite(global.land_slide_dust_particle, sprLandSlideDust, 1, 1, 0);
+part_type_scale(global.land_slide_dust_particle, 1, 1);
+part_type_alpha2(global.land_slide_dust_particle, 1, 0);
+part_type_life(global.land_slide_dust_particle, 20, 20);

@@ -135,6 +135,14 @@
             }
         },
         {
+            "Key": "21c199e3-a501-494c-87f9-06e4b614fca4",
+            "Value": {
+                "id": "fe8f1161-03a4-4d00-a15f-7c1e83cdbc11",
+                "resourcePath": "sprites\\sprFlameDashDust\\sprFlameDashDust.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "2364a8e7-594d-4649-9fae-96315a1629d5",
             "Value": {
                 "id": "e7d87749-8a0c-40de-a035-ecc6aeeca87b",
@@ -244,6 +252,14 @@
                 "id": "1eccc537-bab9-4220-bf27-81b0ceb7869d",
                 "resourcePath": "objects\\objFireballHit\\objFireballHit.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "4194a614-4629-480c-81da-ad1ab7cc78ed",
+            "Value": {
+                "id": "97aff2f3-2fea-468f-ae4c-b3118213728a",
+                "resourcePath": "sprites\\sprFlameScorch\\sprFlameScorch.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -359,6 +375,14 @@
             }
         },
         {
+            "Key": "687d6914-afc2-4775-b463-054f0334c676",
+            "Value": {
+                "id": "1bc8eb16-b899-416f-8b7d-40029cd372cc",
+                "resourcePath": "views\\687d6914-afc2-4775-b463-054f0334c676.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "6cbf1619-1cd2-41a3-992b-c1d3625cd164",
             "Value": {
                 "id": "d2994fce-7169-4d2c-baf2-a3da4318165f",
@@ -435,6 +459,14 @@
             "Value": {
                 "id": "13ba493c-9fd2-4985-92b0-575e749c7fee",
                 "resourcePath": "sprites\\sprLedgeLeft\\sprLedgeLeft.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "7ec3d817-99ef-4b13-b8b7-d120c9b9347f",
+            "Value": {
+                "id": "2119ab7a-a357-4cf4-9d71-04f534c91408",
+                "resourcePath": "sprites\\sprLandSlideDust\\sprLandSlideDust.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -620,6 +652,14 @@
                 "id": "41ad435e-ffe5-420d-8c99-dc39f59a788c",
                 "resourcePath": "sprites\\sprPlayerFlameDashSide\\sprPlayerFlameDashSide.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "ac724842-3ac2-4ed6-8a3a-90ce326f9d72",
+            "Value": {
+                "id": "7440e17e-c80d-4451-a630-dc291e55842b",
+                "resourcePath": "objects\\objUI\\objUI.yy",
+                "resourceType": "GMObject"
             }
         },
         {

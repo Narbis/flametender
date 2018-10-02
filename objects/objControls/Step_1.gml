@@ -46,13 +46,13 @@ if (gamepad)
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (gamepad_button_check_pressed(0, gp_shoulderrb))
+	else if (gamepad_button_check_pressed(0, gp_shoulderrb) && objPlayer.flame > 0)
 	{
 		action = input.dash;
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (gamepad_button_check_pressed(0, gp_face2))
+	else if (gamepad_button_check_pressed(0, gp_face2) && objPlayer.flame > 0)
 	{
 		action = input.attack;
 		buffer = true;
@@ -84,13 +84,13 @@ else
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (keyboard_check_pressed(ord("Q")))
+	else if (keyboard_check_pressed(ord("Q")) && objPlayer.flame > 0)
 	{
 		action = input.dash;
 		buffer = true;
 		buffer_counter = 0;
 	}
-	else if (keyboard_check_pressed(ord("W")))
+	else if (keyboard_check_pressed(ord("W")) && objPlayer.flame > 0)
 	{
 		action = input.attack;
 		buffer = true;

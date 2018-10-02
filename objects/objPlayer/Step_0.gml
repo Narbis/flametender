@@ -755,6 +755,10 @@ switch (state)
 		{
 			part_particles_create(global.particle_system, x, y, global.lightland_dust_particle, 1);
 		}
+		else if (abs(h_speed) > 0.3 && frame_counter % 3 == 1)
+		{
+			part_particles_create(global.particle_system, x, y, global.land_slide_dust_particle, 1);
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -863,6 +867,10 @@ switch (state)
 		{
 			part_particles_create(global.particle_system, x, y, global.heavyland_dust_particle, 1);
 		}
+		else if (abs(h_speed) > 0.3 && frame_counter % 3 == 1)
+		{
+			part_particles_create(global.particle_system, x, y, global.land_slide_dust_particle, 1);
+		}
 		
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -946,6 +954,16 @@ switch (state)
 		if (controls.action == input.dash)
 		{
 			state = player_states.flamedash;
+			if (face_right)
+			{
+				x = x - 5;
+				y = y + 3;
+			}
+			else
+			{
+				x = x + 5;
+				y = y + 3;
+			}
 			controls.action = input.none;
 			controls.buffer = false;
 			controls.buffer_counter = 0;
@@ -1262,6 +1280,10 @@ switch (state)
 		if (frame_counter == 1)
 		{
 
+			// Deduct 1 flame and reset regeneration counter
+			flame -= 1;
+			flame_regen_counter = 0;
+			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
 				// RIGHT
@@ -1349,6 +1371,10 @@ switch (state)
 		if (frame_counter == 1)
 		{
 			
+			// Deduct 1 flame and reset regeneration counter
+			flame -= 1;
+			flame_regen_counter = 0;
+			
 			// Determine dash direction
 			
 			var dash_direction;
@@ -1391,6 +1417,12 @@ switch (state)
 				
 					// Set particle direction
 					part_type_direction(global.dash_particle, 220, 230, 0, 0);
+					
+					// Create dust cloud if dashing from ground
+					if (place_meeting(x, y + 1, objWall))
+					{
+						part_particles_create(global.particle_system, x, y, global.flamedash_dust_particle, 1);
+					}
 				
 				}
 				else if (dash_direction >= 67.5 && dash_direction <= 112.5)
@@ -1406,6 +1438,12 @@ switch (state)
 				
 					// Set particle direction
 					part_type_direction(global.dash_particle, 265, 275, 0, 0);
+					
+					// Create dust cloud if dashing from ground
+					if (place_meeting(x, y + 1, objWall))
+					{
+						part_particles_create(global.particle_system, x, y, global.flamedash_dust_particle, 1);
+					}
 				
 				}
 				else if (dash_direction > 112.5 && dash_direction < 157.5)
@@ -1424,6 +1462,12 @@ switch (state)
 				
 					// Set particle direction
 					part_type_direction(global.dash_particle, 310, 320, 0, 0);
+					
+					// Create dust cloud if dashing from ground
+					if (place_meeting(x, y + 1, objWall))
+					{
+						part_particles_create(global.particle_system, x, y, global.flamedash_dust_particle, 1);
+					}
 				
 				}
 				else if (dash_direction >= 157.5 && dash_direction <= 202.5)
@@ -1840,10 +1884,43 @@ switch (state)
 	#endregion
 }
 
+// FLAME REGENERATION
+#region
+
+if (flame < flame_max)
+{
+	if (state == player_states.idle || state == player_states.walk)
+	{
+		flame_regen_counter += 3;
+	}
+	else if (state == player_states.dash || state == player_states.run)
+	{
+		flame_regen_counter += 2;
+	}
+	else
+	{
+		flame_regen_counter += 1;
+	}
+	
+	if (flame_regen_counter >= flame_regen_frames)
+	{
+		flame += 1;
+		flame_regen_counter -= flame_regen_frames;
+		
+		if (flame == flame_max)
+		{
+			flame_regen_counter = 0;
+		}
+	}
+}
+
+#endregion
+
 // DEBUGGING STUFF
 #region
 if (mouse_check_button(mb_left))
 {
+	part_particles_create(global.particle_system, mouse_x, mouse_y, global.s_flame_particle, 1);
 	part_particles_create(global.particle_system, mouse_x, mouse_y, global.ember_particle, 1);
 }
 #endregion
