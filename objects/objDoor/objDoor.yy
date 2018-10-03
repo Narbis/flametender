@@ -5,13 +5,13 @@
     "name": "objDoor",
     "eventList": [
         {
-            "id": "ee05facc-b99a-484f-92cf-9406df3ccae8",
+            "id": "b557cb59-9fe3-452b-a3c9-a1e0fce5d63e",
             "modelName": "GMEvent",
             "mvc": "1.0",
             "IsDnD": false,
-            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "collisionObjectId": "84b582ba-8e40-4546-96e7-eea5ef2c789f",
             "enumb": 0,
-            "eventtype": 3,
+            "eventtype": 4,
             "m_owner": "9bc76f82-eeb5-4aca-ab0f-10f0b4a68c0c"
         }
     ],
@@ -43,7 +43,7 @@
             "rangeMin": 0,
             "resourceFilter": 1023,
             "value": "roomTitle",
-            "varName": "target_room",
+            "varName": "linked_room",
             "varType": 5
         },
         {
@@ -57,7 +57,7 @@
             "rangeMin": 0,
             "resourceFilter": 1023,
             "value": "0",
-            "varName": "target_room_x",
+            "varName": "linked_room_x",
             "varType": 1
         },
         {
@@ -71,7 +71,7 @@
             "rangeMin": 0,
             "resourceFilter": 1023,
             "value": "0",
-            "varName": "target_room_y",
+            "varName": "linked_room_y",
             "varType": 1
         }
     ],

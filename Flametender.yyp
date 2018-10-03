@@ -703,6 +703,14 @@
             }
         },
         {
+            "Key": "b385902d-1b8b-4a31-b83b-aa4fb5cb8d2c",
+            "Value": {
+                "id": "39385e8b-df71-4728-86cb-86bc2bc90b84",
+                "resourcePath": "scripts\\scrChangeRoom\\scrChangeRoom.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "b3aff4ce-fa08-46e9-959a-0a8b1349f3e3",
             "Value": {
                 "id": "1ad2cf85-cf29-40ec-b23b-bd3a9c297726",
@@ -1040,7 +1048,7 @@
         }
     ],
     "script_order": [
-        
+        "b385902d-1b8b-4a31-b83b-aa4fb5cb8d2c"
     ],
     "tutorial": ""
 }

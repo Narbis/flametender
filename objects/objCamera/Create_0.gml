@@ -1,6 +1,7 @@
 cam = view_camera[0];
 
-follow = objPlayer;
+follow = noone;
+initialized = false;
 
 towardX = xstart;
 towardY = ystart;

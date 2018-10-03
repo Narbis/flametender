@@ -38,8 +38,8 @@ dash_grounded = true; // this is only used for flamedashes
 h_speed = 0;
 v_speed = 0;
 life = 3;
-flame = 3;
-flame_max = 3;
+flame = 1;
+flame_max = 1;
 
 // State counters
 

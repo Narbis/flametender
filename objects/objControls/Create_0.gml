@@ -6,11 +6,12 @@ enum input
 	jump,
 	dash,
 	attack,
-	start
+	start,
+	activate
 }
 
+has_control = true;
 action = input.none;
-start = false;
 debug = false;
 input_x = 0;
 input_y = 0;
@@ -36,13 +37,13 @@ global.particle_system = part_system_create_layer("Front", true);
 // Ember particle
 global.ember_particle = part_type_create();
 part_type_shape(global.ember_particle, pt_shape_pixel);
-part_type_scale(global.ember_particle, 2, 2);
+part_type_scale(global.ember_particle, 1, 1);
 part_type_color1(global.ember_particle, c_orange);
 part_type_alpha3(global.ember_particle, 1, 0.7, 0);
 part_type_blend(global.ember_particle, 1);
-part_type_speed(global.ember_particle, 1, 3, 0, 0.5);
+part_type_speed(global.ember_particle, 0.1, 1, 0, 0.5);
 part_type_direction(global.ember_particle, 80, 100, 0, 10);
-part_type_gravity(global.ember_particle, 0.03, 90);
+part_type_gravity(global.ember_particle, 0.01, 90);
 part_type_life(global.ember_particle, 30, 90);
 
 // Burst ember particle
@@ -71,27 +72,15 @@ part_type_life(global.b_flame_particle, 15, 20);
 
 // Flame particle
 global.flame_particle = part_type_create();
-part_type_sprite(global.flame_particle, sprFire, 0, 0, 1);
-part_type_size(global.flame_particle, 1, 2.5, -0.05, 0);
-part_type_orientation(global.flame_particle, 0, 360, 2, 0, 0);
+part_type_sprite(global.flame_particle, sprFireSmall, 0, 0, 1);
+part_type_size(global.flame_particle, 0.5, 1.5, -0.1, 0);
+part_type_orientation(global.flame_particle, 0, 360, 5, 0, 0);
 part_type_color2(global.flame_particle, c_orange, c_red);
 part_type_alpha3(global.flame_particle, 1, 1, 0);
 part_type_blend(global.flame_particle, 1);
 part_type_direction(global.flame_particle, 85, 95, 0, 0);
-part_type_speed(global.flame_particle, 1.5, 6, -0.1, 0);
-part_type_life(global.flame_particle, 25, 35);
-
-// Small flame particle
-global.s_flame_particle = part_type_create();
-part_type_sprite(global.s_flame_particle, sprFireSmall, 0, 0, 1);
-part_type_size(global.s_flame_particle, 0.5, 1.5, -0.1, 0);
-part_type_orientation(global.s_flame_particle, 0, 360, 5, 0, 0);
-part_type_color2(global.s_flame_particle, c_orange, c_red);
-part_type_alpha3(global.s_flame_particle, 1, 1, 0);
-part_type_blend(global.s_flame_particle, 1);
-part_type_direction(global.s_flame_particle, 85, 95, 0, 0);
-part_type_speed(global.s_flame_particle, 0.2, 1.5, -0.05, 0);
-part_type_life(global.s_flame_particle, 15, 20);
+part_type_speed(global.flame_particle, 0.2, 1.5, -0.05, 0);
+part_type_life(global.flame_particle, 15, 20);
 
 // Flamedash particle
 global.dash_particle = part_type_create();
