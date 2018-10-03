@@ -194,7 +194,7 @@
             "Key": "2fee90bc-ea87-4c6c-97cd-8dc69fd90338",
             "Value": {
                 "id": "801c0b96-95aa-4a9a-b7be-43f06a5c2b4f",
-                "resourcePath": "rooms\\room1\\room1.yy",
+                "resourcePath": "rooms\\roomStart\\roomStart.yy",
                 "resourceType": "GMRoom"
             }
         },
@@ -215,11 +215,27 @@
             }
         },
         {
+            "Key": "36066e17-8f0d-4613-882f-d725e2b8d4cb",
+            "Value": {
+                "id": "63945204-4c07-46c6-978d-e37db437b5a4",
+                "resourcePath": "views\\36066e17-8f0d-4613-882f-d725e2b8d4cb.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "385e6f43-a2f6-4be6-9a1e-b701bd1eb799",
             "Value": {
                 "id": "bfb5a8a0-7e2e-4417-b14a-ce4c108bcf0a",
                 "resourcePath": "views\\385e6f43-a2f6-4be6-9a1e-b701bd1eb799.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "38c93272-7ff8-480f-8993-faf3ea64d8cd",
+            "Value": {
+                "id": "b2f2501d-d1d9-4e26-8083-b63cf7fc9c4a",
+                "resourcePath": "sprites\\sprSpearmanPursuit\\sprSpearmanPursuit.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -247,18 +263,18 @@
             }
         },
         {
-            "Key": "417ccadb-0171-48eb-ab14-e9f88909ac63",
-            "Value": {
-                "id": "1eccc537-bab9-4220-bf27-81b0ceb7869d",
-                "resourcePath": "objects\\objFireballHit\\objFireballHit.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
             "Key": "4194a614-4629-480c-81da-ad1ab7cc78ed",
             "Value": {
                 "id": "97aff2f3-2fea-468f-ae4c-b3118213728a",
                 "resourcePath": "sprites\\sprFlameScorch\\sprFlameScorch.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "43d4b4ae-9928-4475-aee2-7ce2194592a5",
+            "Value": {
+                "id": "3b925c74-a063-45ec-bceb-ee7744dc1d9a",
+                "resourcePath": "sprites\\sprDoor\\sprDoor.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -412,14 +428,6 @@
                 "id": "9038f365-fb2f-464e-96f5-377e047bff86",
                 "resourcePath": "views\\74548c12-efb8-4e7c-bfe5-8d9e9d53457b.yy",
                 "resourceType": "GMFolder"
-            }
-        },
-        {
-            "Key": "77205f4a-4a11-497a-bd51-4e810a0e33db",
-            "Value": {
-                "id": "d4ac4003-aee9-414d-8e0a-a1fbf6b279be",
-                "resourcePath": "rooms\\room2\\room2.yy",
-                "resourceType": "GMRoom"
             }
         },
         {
@@ -583,6 +591,14 @@
             }
         },
         {
+            "Key": "9bc76f82-eeb5-4aca-ab0f-10f0b4a68c0c",
+            "Value": {
+                "id": "9c8d2fe2-e884-497d-861a-ae413607859b",
+                "resourcePath": "objects\\objDoor\\objDoor.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "a0456b0c-f9a0-4f9e-a269-d191a054643c",
             "Value": {
                 "id": "48e2ccd6-2193-493f-b38b-c44512ee92a8",
@@ -703,6 +719,14 @@
             }
         },
         {
+            "Key": "b4eb0bdc-ed22-4d02-93a4-4031a953cb68",
+            "Value": {
+                "id": "eb884e40-27a7-4b84-9920-3ffc02761877",
+                "resourcePath": "sprites\\sprSpearmanWalk\\sprSpearmanWalk.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "b784cd7c-0a64-4dda-ae2b-125d91bf5ef3",
             "Value": {
                 "id": "2b7b8b13-e669-4b55-9ba6-6cea88d65bb3",
@@ -743,6 +767,14 @@
             }
         },
         {
+            "Key": "bdfe4963-ffbb-4a7e-9cd8-40efe965f8cd",
+            "Value": {
+                "id": "82f07126-26a1-4642-a445-444a5c0ce7c3",
+                "resourcePath": "rooms\\roomLevel1\\roomLevel1.yy",
+                "resourceType": "GMRoom"
+            }
+        },
+        {
             "Key": "bfcf8f95-980e-4341-95ba-24bd63170f88",
             "Value": {
                 "id": "c09156ac-48f7-4c1a-bd13-1021d0986fb5",
@@ -772,14 +804,6 @@
                 "id": "883d2d20-0d5f-42d1-821f-3622be37a15e",
                 "resourcePath": "views\\c3685a64-5cdb-486e-a2d5-016de239bbd3.yy",
                 "resourceType": "GMFolder"
-            }
-        },
-        {
-            "Key": "c4048e0c-069a-46ba-b3d4-be8887fcf44e",
-            "Value": {
-                "id": "578a8b1d-2000-4a1a-83e6-4ccf8d9351e8",
-                "resourcePath": "sprites\\sprSpearmanWalk\\sprSpearmanWalk.yy",
-                "resourceType": "GMSprite"
             }
         },
         {
@@ -851,6 +875,14 @@
             "Value": {
                 "id": "64adb0bb-4b81-4847-b492-f9b89b70ae24",
                 "resourcePath": "sprites\\sprPlayerWalk\\sprPlayerWalk.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "e2092386-61cd-49a7-8efb-c1b3cbe2f959",
+            "Value": {
+                "id": "6fe37c67-e809-417f-8aa2-bf1e791812db",
+                "resourcePath": "sprites\\sprSpearmanPursuitWait\\sprSpearmanPursuitWait.yy",
                 "resourceType": "GMSprite"
             }
         },

@@ -1,10 +1,16 @@
 if(facing_right)
 {
-	instance_create_layer(x + 4, y, "Player", objFireballHit);
+	audio_play_sound(sndFireballHit, 0, 0);
+	part_particles_create(global.particle_system, x + 4, y, global.b_flame_particle, 30);
+	part_particles_create(global.particle_system, x + 4, y, global.b_ember_particle, 10);
+	part_particles_create(global.particle_system, x + 4, y, global.shockwave_particle, 1);
 }
 else
 {
-	instance_create_layer(x - 4, y, "Player", objFireballHit);
+	audio_play_sound(sndFireballHit, 0, 0);
+	part_particles_create(global.particle_system, x - 4, y, global.b_flame_particle, 30);
+	part_particles_create(global.particle_system, x - 4, y, global.b_ember_particle, 10);
+	part_particles_create(global.particle_system, x - 4, y, global.shockwave_particle, 1);
 }
 
 instance_destroy();

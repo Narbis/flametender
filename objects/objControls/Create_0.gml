@@ -11,6 +11,7 @@ enum input
 
 action = input.none;
 start = false;
+debug = false;
 input_x = 0;
 input_y = 0;
 

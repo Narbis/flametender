@@ -389,7 +389,7 @@ switch (state)
 		}
 		else if (h_speed != 0)
 		{
-			if (abs(controls.input_x) <= run_threshold)
+			if (abs(controls.input_x) <= run_threshold && controls.input_x != 0)
 			{				
 				walk_transition_counter += 1;
 				if (walk_transition_counter > walk_transition_frames)
@@ -996,7 +996,7 @@ switch (state)
 			}
 			face_right = !face_right;
 		}
-		else if (controls.input_y > 0)
+		else if (controls.input_y > 0.5)
 		{
 			// You need to hold down for 10 frames to slide down
 			hang_slide_transition_counter += 1;
@@ -1017,7 +1017,7 @@ switch (state)
 			}
 			hang_climb_transition_counter = 0;
 		}
-		else if (((controls.input_x > 0 && face_right) || (controls.input_x < 0 && !face_right)) || controls.input_y < 0)
+		else if (((controls.input_x > 0.5 && face_right) || (controls.input_x < -0.5 && !face_right)) || controls.input_y < 0)
 		{
 			// You need to hold up or towards the wall for 10 frames to climb up
 			hang_climb_transition_counter += 1;
@@ -1281,8 +1281,11 @@ switch (state)
 		{
 
 			// Deduct 1 flame and reset regeneration counter
-			flame -= 1;
-			flame_regen_counter = 0;
+			if (!controls.debug)
+			{
+				flame -= 1;
+				flame_regen_counter = 0;
+			}
 			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
@@ -1372,8 +1375,11 @@ switch (state)
 		{
 			
 			// Deduct 1 flame and reset regeneration counter
-			flame -= 1;
-			flame_regen_counter = 0;
+			if (!controls.debug)
+			{
+				flame -= 1;
+				flame_regen_counter = 0;
+			}
 			
 			// Determine dash direction
 			

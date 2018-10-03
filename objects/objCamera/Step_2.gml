@@ -1,32 +1,29 @@
-if(instance_exists(follow))
+if (follow.state == player_states.climb)
 {
-	if (follow.state == player_states.climb)
+	towardY = follow.y - 16;
+	if (follow.face_right)
 	{
-		towardY = follow.y - 16;
-		if (follow.face_right)
-		{
-			towardX = follow.x + 5;
-		}
-		else
-		{
-			towardX = follow.x - 5;
-		}
-		
-		// Camera moves slower when climbing so the camera doesn't snap too much
-		
-		x += (towardX - x) / 20;
-		y += (towardY - y) / 20;
+		towardX = follow.x + 5;
 	}
 	else
 	{
-		towardX = follow.x;
-		towardY = follow.y;
-		
-		// Camera moves to keep up with the player; it gets faster the farther away it is
-
-		x += (towardX - x) / 12;
-		y += (towardY - y) / 12;
+		towardX = follow.x - 5;
 	}
+		
+	// Camera moves slower when climbing so the camera doesn't snap too much
+		
+	x += (towardX - x) / 20;
+	y += (towardY - y) / 20;
+}
+else
+{
+	towardX = follow.x;
+	towardY = follow.y;
+		
+	// Camera moves to keep up with the player; it gets faster the farther away it is
+
+	x += (towardX - x) / 12;
+	y += (towardY - y) / 12;
 }
 
 // Limit the bounds of the camera to the room's width and height
