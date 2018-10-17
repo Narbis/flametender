@@ -42,7 +42,7 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "roomTitle",
+            "value": "roomStart",
             "varName": "linked_room",
             "varType": 5
         },
@@ -56,7 +56,7 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "0",
+            "value": "48",
             "varName": "linked_room_x",
             "varType": 1
         },
@@ -70,7 +70,7 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "0",
+            "value": "176",
             "varName": "linked_room_y",
             "varType": 1
         }

@@ -1,4 +1,4 @@
-enum player_states 
+enum player_states
 {
 	idle,
 	walk,
@@ -38,8 +38,8 @@ dash_grounded = true; // this is only used for flamedashes
 h_speed = 0;
 v_speed = 0;
 life = 3;
-flame = 1;
-flame_max = 1;
+flame = 0;
+flame_max = 0;
 
 // State counters
 
@@ -156,3 +156,18 @@ part_type_sprite(global.land_slide_dust_particle, sprLandSlideDust, 1, 1, 0);
 part_type_scale(global.land_slide_dust_particle, 1, 1);
 part_type_alpha2(global.land_slide_dust_particle, 1, 0);
 part_type_life(global.land_slide_dust_particle, 20, 20);
+
+// TEST
+
+// Fire attack particle
+attack_particle = part_type_create();
+part_type_sprite(attack_particle, sprFireSmall, 0, 0, 1);
+part_type_size(attack_particle, 0.1, 0.3, 0.15, 0);
+part_type_orientation(attack_particle, 0, 360, 5, 0, 0);
+part_type_color2(attack_particle, c_orange, c_red);
+part_type_alpha3(attack_particle, 1, 1, 0);
+part_type_blend(attack_particle, 1);
+part_type_direction(attack_particle, 0, 0, 0, 0);
+part_type_speed(attack_particle, 0.5, 3, -0.2, 0);
+part_type_life(attack_particle, 10, 15);
+part_type_gravity(attack_particle, 0.1, 90);

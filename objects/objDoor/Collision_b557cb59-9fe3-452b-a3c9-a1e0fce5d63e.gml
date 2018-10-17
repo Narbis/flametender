@@ -1,4 +1,4 @@
-if (objControls.action == input.activate && objPlayer.state == player_states.idle)
+if (objControls.action == input.activate)
 {
 	objUI.state = ui_states.fade_in;
 	objUI.frame_counter = 0;

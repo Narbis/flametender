@@ -12,7 +12,6 @@ frame_counter += 1;
 switch (state)
 {
 	
-	
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: IDLE
 	//
@@ -639,10 +638,15 @@ switch (state)
 			{
 				sprite_index = sprPlayerFallDown2;
 			}
-			else
+			else if (v_speed < 10)
 			{
 				sprite_index = sprPlayerFallDown3;
 				fall = fall_states.heavy;
+			}
+			else
+			{
+				sprite_index = sprPlayerFallDown3;
+				fall = fall_states.danger;
 			}
 		}
 			
@@ -704,6 +708,7 @@ switch (state)
 			reset_animation = true;
 			jump_buffer = 0;
 			frame_counter = 0;
+			fall = fall_states.light;
 		}
 		
 		break;
@@ -1922,11 +1927,22 @@ if (flame < flame_max)
 
 #endregion
 
+// CHECK FOR OUT OF BOUNDS
+#region
+
+if ((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32))
+{
+	objUI.state = ui_states.fade_in;
+	objUI.frame_counter = 0;
+	objControls.action = input.none;
+}
+
+#endregion
+
 // DEBUGGING STUFF
 #region
 if (mouse_check_button(mb_left))
 {
-	part_particles_create(global.particle_system, mouse_x, mouse_y, global.s_flame_particle, 1);
-	part_particles_create(global.particle_system, mouse_x, mouse_y, global.ember_particle, 1);
+	part_particles_create(global.particle_system, mouse_x, mouse_y, attack_particle, 10);
 }
 #endregion
