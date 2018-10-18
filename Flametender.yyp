@@ -95,6 +95,14 @@
             }
         },
         {
+            "Key": "13c19aa6-863d-4afe-89a2-ecd8c3c03291",
+            "Value": {
+                "id": "ff641842-5d90-47d2-929a-9dde050c5dad",
+                "resourcePath": "views\\13c19aa6-863d-4afe-89a2-ecd8c3c03291.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "146f1e8c-8d45-4c1a-b230-220a1d4d5cc6",
             "Value": {
                 "id": "f39abb97-bc79-4efe-a741-9bd205e0b7df",
@@ -116,6 +124,14 @@
                 "id": "75ef715b-285f-43f8-aaa1-6115c3f10567",
                 "resourcePath": "sprites\\sprPlayerFallUp1\\sprPlayerFallUp1.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "1d7564e7-ebb7-413a-bab3-1a81ff31e679",
+            "Value": {
+                "id": "80d55355-f59a-476a-80d7-9c42114b44d0",
+                "resourcePath": "views\\1d7564e7-ebb7-413a-bab3-1a81ff31e679.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -375,6 +391,14 @@
             }
         },
         {
+            "Key": "5cc4a14a-f292-4bc4-91df-a87054dfbeb5",
+            "Value": {
+                "id": "13774750-d53b-4a12-bdf1-a5f43d8d4f7a",
+                "resourcePath": "objects\\objTutorial1\\objTutorial1.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "5ef96fe5-ecb4-4eaa-87cf-d38eae488897",
             "Value": {
                 "id": "5a3775ef-63d7-4502-9669-3c4fc6bc9074",
@@ -627,6 +651,14 @@
             "Value": {
                 "id": "b145c699-cbfd-43ac-b4f9-fb17bea8b946",
                 "resourcePath": "sprites\\sprPlayerFallDown1\\sprPlayerFallDown1.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "a3e50b7c-3cb5-4338-bc5a-ca1cdb7c9dcc",
+            "Value": {
+                "id": "420e6f46-34c1-4e85-8e5c-953308f05838",
+                "resourcePath": "sprites\\sprTutorial1\\sprTutorial1.yy",
                 "resourceType": "GMSprite"
             }
         },

@@ -25,6 +25,10 @@ enum fall_states
 	danger
 }
 
+// Array to keep track of which Flame pickups have been collected
+
+flamepickups[0] = false;
+
 // State and movement variables
 
 state = player_states.idle;
