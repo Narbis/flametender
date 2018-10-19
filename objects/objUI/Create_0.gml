@@ -12,9 +12,9 @@ frame_counter = 0;
 transition_alpha = 0;
 
 // this stuff is for room transitions; super hacky solution, change this later
-transition_room = roomTitle;
-transition_x = 0;
-transition_y = 0;
+transition_room = roomStart;
+transition_x = 48;
+transition_y = 176;
 
 ui_particle_system = part_system_create();
 title_emitter = part_emitter_create(ui_particle_system);

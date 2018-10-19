@@ -910,7 +910,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: HANG
 	//
-	// The character is...
+	// The character is hanging from a ledge
 	//-----------------------------------------------------------------------------------------------------------------	
 	#region
 	case player_states.hang:
@@ -1050,7 +1050,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: CLIMB
 	//
-	// The character is...
+	// The character is transitioning from hanging to standing
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.climb:
@@ -1110,7 +1110,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: SLIDE
 	//
-	// The character is...
+	// The character is slowly sliding down a vertical surface
 	//-----------------------------------------------------------------------------------------------------------------	
 	#region
 	case player_states.slide:
@@ -1267,7 +1267,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: ATTACK
 	//
-	// The character is...
+	// The character is performing a forward-facing fire attack
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.attack:
@@ -1361,7 +1361,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: FLAMEDASH
 	//
-	// The character is...
+	// The character is dashing quickly in the input direction
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.flamedash:
@@ -1760,7 +1760,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: HURT
 	//
-	// The character is...
+	// The character is in a stunned state after being hit
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.hurt:
@@ -1773,53 +1773,74 @@ switch (state)
 			reset_animation = false;
 		}
 		
-		// Facing and animations are set on frame 1
+		// Calculate movement
 		
-		if (frame_counter == 1)
-		{
+		v_speed = v_speed + v_gravity;
 
-			if (face_right == true)
+		// Horizontal collisions
+
+		if (place_meeting(x + h_speed, y, objWall))
+		{
+			var h_move = 0;
+			while (!place_meeting(x + h_move + sign(h_speed), y, objWall))
 			{
-				// RIGHT
-				
-				// Set facing
-				image_xscale = 1;
-				
-				// Animations
-				sprite_index = sprPlayerHit;
-				
+				h_move += sign(h_speed);
+			}
+			h_speed = h_move;
+		}
+		x = x + h_speed;
+		
+		// Vertical collisions
+		
+		var v_move = 0;
+		if (place_meeting(x, y + v_speed, objWall))
+		{
+			while (!place_meeting(x, y + v_move + sign(v_speed), objWall))
+			{
+				v_move += sign(v_speed);
+			}
+			v_speed = v_move;
+		}
+		y = y + v_speed;
+		
+		// Animations
+		
+		sprite_index = sprPlayerHurt;
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// Change player to appropriate state
+		
+		if (!invuln)
+		{
+			state = player_states.fall;
+		}
+		
+		if (place_meeting(x, y + 1, objWall))
+		{
+			if (life > 0)
+			{
+				state = player_states.lightland;
 			}
 			else
 			{
-				// LEFT
-				
-				// Set facing
-				image_xscale = -1;
-				
-				// Animations
-				sprite_index = sprPlayerHit;
-				
+				state = player_states.dead;
 			}
-			
-			// Play hurt sound
-			audio_play_sound(sndPlayerHurt, 10, false);
-			
-			// Deduct life
-			life -= 1;
-			
 		}
 		
-		// When state finishes, enter dead state if out of life or enter idle state and reset frame counter
+		// Reset animation and frame counter if necessary
 		
-		if (life <= 0)
+		if (state != player_states.hurt)
 		{
-			state = player_states.dead;
-			reset_animation = true;
-			frame_counter = 0;
-		}
-		else if (frame_counter >= hurt_frames)
-		{
-			state = player_states.idle;
 			reset_animation = true;
 			frame_counter = 0;
 		}
@@ -1830,7 +1851,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: DEAD
 	//
-	// The character is...
+	// The character is out of life and falls to the ground
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.dead:
@@ -1879,21 +1900,46 @@ switch (state)
 				
 			}
 			
+			invuln = false;
+			invuln_counter = 0;
 		}
 		
-		// When state finishes, show game over screen
+		// When state finishes, restart room
 		
 		if (frame_counter >= dead_frames)
 		{
 			state = player_states.idle;
 			reset_animation = true;
 			frame_counter = 0;
-			room_restart();
+			life = 3;
+			
+			objUI.transition_room = roomStart;
+			objUI.transition_x = 48;
+			objUI.transition_y = 176;
+			objUI.state = ui_states.fade_in;
+			objUI.frame_counter = 0;
+			objControls.action = input.none;
 		}
 		
 		break;
 	#endregion
 }
+
+// INVULNERABILITY
+#region
+
+if (invuln)
+{
+	invuln_counter += 1;
+	
+	if (invuln_counter == invuln_frames && life > 0)
+	{
+		invuln_counter = 0;
+		invuln = !invuln;
+	}
+}
+
+#endregion
 
 // FLAME REGENERATION
 #region

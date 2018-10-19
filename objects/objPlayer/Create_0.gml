@@ -40,6 +40,7 @@ reset_animation = false;
 finish_animation = false;
 ledge = noone;
 dash_grounded = true; // this is only used for flamedashes
+invuln = false; // used for having a moment to escape after getting hurt
 
 h_speed = 0;
 v_speed = 0;
@@ -56,6 +57,7 @@ hang_climb_transition_counter = 0;
 hang_slide_transition_counter = 0;
 flame_regen_counter = 0;
 frame_counter = 0;
+invuln_counter = 0;
 
 // State frame constants
 
@@ -67,8 +69,9 @@ hang_slide_transition_frames = 10;
 flamedash_frames = 10;
 attack_frames = 20;
 hurt_frames = 20;
-dead_frames = 120;
+dead_frames = 100;
 flame_regen_frames = 120;
+invuln_frames = 60;
 
 // Movement constants
 
