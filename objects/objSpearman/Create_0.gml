@@ -2,6 +2,7 @@ enum spearman_states
 {
 	idle,
 	patrol,
+	alerted,
 	pursuit,
 	attack,
 	hurt,

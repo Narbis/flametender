@@ -37,6 +37,20 @@ switch(state)
 				part_particles_create(ui_particle_system, 64 + (64 * previous_flame), 64, ui_ember_particle, 10);
 			}
 		}
+		
+		if (new_flame_animation)
+		{
+			draw_sprite_ext(sprNewFlame, new_flame_frame / 5, 64 + (64 * (objPlayer.flame_max)), 64, 4, 4, 0, c_white, 1);
+			new_flame_frame += 1;
+			
+			if (new_flame_frame >= 80)
+			{
+				new_flame_animation = false;
+				new_flame_frame = 0;
+				objPlayer.flame_max += 1;
+				objPlayer.flame = objPlayer.flame_max;
+			}
+		}
 
 		part_system_drawit(ui_particle_system);
 

@@ -24,6 +24,8 @@ part_emitter_region(ui_particle_system, embers_emitter, 0, 1920, 1080, 1080, ps_
 part_system_automatic_draw(ui_particle_system, false);
 
 previous_flame = 0; // keeps track of when to do ember bursts
+new_flame_animation = false; // set to true to do the particle effect of picking up a new flame
+new_flame_frame = 0;
 
 // Flame particle
 title_flame_particle = part_type_create();
