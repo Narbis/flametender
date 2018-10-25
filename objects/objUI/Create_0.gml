@@ -27,6 +27,9 @@ previous_flame = 0; // keeps track of when to do ember bursts
 new_flame_animation = false; // set to true to do the particle effect of picking up a new flame
 new_flame_frame = 0;
 
+new_life_animation = false;
+new_life_frame = 0;
+
 // Flame particle
 title_flame_particle = part_type_create();
 part_type_sprite(title_flame_particle, sprFire, 0, 0, 1);

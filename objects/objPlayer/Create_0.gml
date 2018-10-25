@@ -25,11 +25,15 @@ enum fall_states
 	danger
 }
 
-// Array to keep track of which Flame pickups have been collected
+// Arrays to keep track of which Flame and Life pickups have been collected
 
 flamepickups[0] = false;
 flamepickups[1] = false;
 flamepickups[2] = false;
+
+lifepickups[0] = false;
+lifepickups[1] = false;
+lifepickups[2] = false;
 
 // State and movement variables
 
@@ -45,6 +49,7 @@ invuln = false; // used for having a moment to escape after getting hurt
 h_speed = 0;
 v_speed = 0;
 life = 3;
+life_max = 3;
 flame = 0;
 flame_max = 0;
 

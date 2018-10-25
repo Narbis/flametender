@@ -1911,7 +1911,7 @@ switch (state)
 			state = player_states.idle;
 			reset_animation = true;
 			frame_counter = 0;
-			life = 3;
+			life = life_max;
 			
 			objUI.transition_room = roomStart;
 			objUI.transition_x = 48;
@@ -1976,11 +1976,21 @@ if (flame < flame_max)
 // CHECK FOR OUT OF BOUNDS
 #region
 
-if ((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32))
+if (((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32)))
 {
 	objUI.state = ui_states.fade_in;
 	objUI.frame_counter = 0;
 	objControls.action = input.none;
+	
+	if (!invuln)
+	{
+		state = player_states.hurt;
+		reset_animation = true;
+		frame_counter = 0;
+		image_speed = 1;
+		invuln = true;
+		life -= 1;
+	}
 }
 
 #endregion
@@ -1989,6 +1999,6 @@ if ((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32))
 #region
 if (mouse_check_button(mb_left))
 {
-	part_particles_create(global.particle_system, mouse_x, mouse_y, attack_particle, 10);
+	
 }
 #endregion

@@ -250,9 +250,14 @@ switch (state)
 			h_speed = -move_speed;
 		}
 		
-		// Spearman should stop moving when encountering a wall or ledge
+		// Spearman should stop moving when encountering a wall or ledge OR when the player is above or below but not moving
 		
-		if (place_meeting(x + 1, y, objWall) || place_meeting(x + h_speed, y + 1, objLedge))
+		if ((place_meeting(x + 1, y, objWall) || place_meeting(x + h_speed, y + 1, objLedge)) || (objPlayer.h_speed == 0 && abs(objPlayer.y - y) > 20))
+		{
+			h_speed = 0;
+		}
+		
+		if (objPlayer.state == player_states.dead)
 		{
 			h_speed = 0;
 		}
@@ -294,7 +299,7 @@ switch (state)
 		
 		// If the player gets within attacking distance, enter the attack state
 		
-		if (distance_to_object(objPlayer) < attack_distance)
+		if (objPlayer.state != player_states.dead && distance_to_object(objPlayer) < attack_distance)
 		{
 			state = spearman_states.attack;
 		}

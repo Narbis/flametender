@@ -15,13 +15,17 @@ switch(state)
 	
 	case ui_states.game:
 	
-		draw_set_color(c_white);
+		// Hide cursor
+		
+		window_set_cursor(cr_none);
+
+		// UI Flame
 
 		for (i = 0; i < objPlayer.flame_max; i += 1)
 		{
 			if (i >= objPlayer.flame)
 			{
-				draw_sprite_ext(sprFlameScorch, 0, 64 + (64 * i), 64, 2, 2, 0, c_white, 1);
+				draw_sprite_ext(sprFlameScorch, 0, 64 + (64 * i), 64, 4, 4, 0, c_white, 1);
 			}
 			else
 			{
@@ -51,6 +55,34 @@ switch(state)
 				objPlayer.flame = objPlayer.flame_max;
 			}
 		}
+		
+		// UI Life
+
+		for (i = 0; i < objPlayer.life_max; i += 1)
+		{
+			if (i >= objPlayer.life)
+			{
+				draw_sprite_ext(sprLifeEmpty, 0, 1856 - (64 * i), 64, 4, 4, 0, c_white, 1);
+			}
+			else
+			{
+				draw_sprite_ext(sprLife, 0, 1856 - (64 * i), 64, 4, 4, 0, c_white, 1);
+			}
+		}
+		
+		if (new_life_animation)
+		{
+			draw_sprite_ext(sprNewLife, new_life_frame / 5, 1856 - (64 * (objPlayer.life_max)), 64, 4, 4, 0, c_white, 1);
+			new_life_frame += 1;
+			
+			if (new_life_frame >= 80)
+			{
+				new_life_animation = false;
+				new_life_frame = 0;
+				objPlayer.life_max += 1;
+				objPlayer.life = objPlayer.life_max;
+			}
+		}
 
 		part_system_drawit(ui_particle_system);
 
@@ -60,6 +92,10 @@ switch(state)
 	
 	case ui_states.fade_in:
 	
+		// Hide cursor
+		
+		window_set_cursor(cr_none);
+		
 		if (transition_alpha < 1)
 		{
 			transition_alpha += 0.1;
@@ -82,6 +118,10 @@ switch(state)
 	
 	case ui_states.fade_out:
 
+		// Hide cursor
+		
+		window_set_cursor(cr_none);
+		
 		if (transition_alpha > 0)
 		{
 			transition_alpha -= 0.1;
