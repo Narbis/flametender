@@ -373,4 +373,61 @@ switch (state)
 		
 		break;
 	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: DEAD
+	//
+	// The spearman is dead
+	//-----------------------------------------------------------------------------------------------------------------
+	#region
+	case spearman_states.dead:
+		
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Animations
+		
+		sprite_index = sprSpearmanDeath;
+			
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		// Death particles
+		
+		x_spread += 0.1;
+		y_spread += 0.2
+		if (face_right)
+		{
+			part_emitter_region(global.particle_system, emitter, (x - 3) - x_spread, (x - 3) + x_spread, (y + 3) - y_spread, (y + 3) + y_spread, ps_shape_rectangle, ps_distr_invgaussian);
+		}
+		else
+		{
+			part_emitter_region(global.particle_system, emitter, (x + 3) - x_spread, (x + 3) + x_spread, (y + 3) - y_spread, (y + 3) + y_spread, ps_shape_rectangle, ps_distr_invgaussian);
+		}
+		part_emitter_burst(global.particle_system, emitter, global.flame_particle, 10);
+		part_emitter_burst(global.particle_system, emitter, ash_ember_particle, 2);
+		
+		// Destroy instance after animation completes
+		
+		if (frame_counter >= 48)
+		{
+			part_emitter_burst(global.particle_system, emitter, ash_particle, 50);
+			instance_destroy();
+		}
+		
+		break;
+	#endregion
 }

@@ -1,0 +1,1 @@
+y = scrWaveMotion(ystart - 1.5, ystart + 1.5, 1, 0);

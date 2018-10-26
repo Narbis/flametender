@@ -1989,7 +1989,10 @@ if (((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32)))
 		frame_counter = 0;
 		image_speed = 1;
 		invuln = true;
-		life -= 1;
+		if (!controls.debug)
+		{
+			life -= 1;
+		}
 	}
 }
 

@@ -8,6 +8,14 @@ if (keyboard_check_pressed(vk_escape))
 }
 if (keyboard_check_pressed(vk_backspace))
 {
+	objUI.state = ui_states.fade_in;
+	objUI.frame_counter = 0;
+	objControls.action = input.none;
+	
+	reset_animation = true;
+	frame_counter = 0;
+	image_speed = 1;
+
 	room_restart();
 }
 

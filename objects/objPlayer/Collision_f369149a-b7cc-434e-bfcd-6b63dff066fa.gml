@@ -33,7 +33,10 @@ if (state != player_states.dead && !invuln)
 	
 	v_speed = -2;
 	h_speed = 2 * sign(x - other.x);
-	life -= 1;
+	if (!controls.debug)
+	{
+		life -= 1;
+	}
 	
 	reset_animation = true;
 	frame_counter = 0;

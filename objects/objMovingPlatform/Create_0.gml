@@ -1,0 +1,1 @@
+duration_counter = 0;
