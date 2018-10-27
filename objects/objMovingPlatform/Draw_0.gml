@@ -1,0 +1,1 @@
+draw_sprite(sprMovingPlatform, 0, x, y);

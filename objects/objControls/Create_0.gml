@@ -10,6 +10,9 @@ enum input
 	activate
 }
 
+surface_resize(application_surface, 480, 270);
+display_set_gui_size(480, 270);
+
 has_control = true;
 action = input.none;
 debug = false;

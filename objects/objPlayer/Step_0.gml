@@ -286,16 +286,6 @@ switch (state)
 		{
 			h_speed = max(target_speed, h_speed - (move_speed / 8));
 		}
-		/*
-		if (sign(controls.input_x) == -sign(h_speed))
-		{
-			h_speed = 0;
-		}
-		else
-		{
-			h_speed = sign(controls.input_x) * move_speed;
-		}
-		*/
 		v_speed = 0;
 		
 		// Horizontal collisions
@@ -1906,12 +1896,10 @@ switch (state)
 		
 		// When state finishes, restart room
 		
-		if (frame_counter >= dead_frames)
+		if (frame_counter == dead_frames)
 		{
-			state = player_states.idle;
-			reset_animation = true;
-			frame_counter = 0;
 			life = life_max;
+			image_speed = 0;
 			
 			objUI.transition_room = roomStart;
 			objUI.transition_x = 48;
