@@ -31,6 +31,11 @@ switch(state)
 		if (frame_counter == 1)
 		{
 			objControls.has_control = false;
+			objControls.input_x = 0;
+			objControls.input_y = 0;
+			objControls.action = input.none;
+			objControls.buffer = false;
+			objControls.buffer_counter = 0;
 		}
 
 	break;

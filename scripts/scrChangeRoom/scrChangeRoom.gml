@@ -8,6 +8,12 @@
 room_goto(argument0);
 objPlayer.x = argument1;
 objPlayer.y = argument2;
-objPlayer.state = player_states.idle;
-objPlayer.reset_animation = true;
-objPlayer.image_speed = 1;
+
+// Reset state variables
+
+if (objPlayer.state != player_states.hurt)
+{
+	objPlayer.state = player_states.idle;
+	objPlayer.reset_animation = true;
+	objPlayer.image_speed = 1;
+}

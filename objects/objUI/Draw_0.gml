@@ -152,5 +152,4 @@ switch(state)
 surface_reset_target();
 
 // Draw the UI surface
-
 draw_surface(ui_surface, camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]));
