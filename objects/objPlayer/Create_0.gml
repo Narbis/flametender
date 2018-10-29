@@ -13,6 +13,7 @@ enum player_states
 	climb,
 	slide,
 	attack,
+	aerialattack,
 	flamedash,
 	hurt,
 	dead
@@ -73,6 +74,7 @@ hang_climb_transition_frames = 10;
 hang_slide_transition_frames = 10;
 flamedash_frames = 10;
 attack_frames = 20;
+aerial_attack_frames = 44;
 hurt_frames = 20;
 dead_frames = 100;
 flame_regen_frames = 120;

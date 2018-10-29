@@ -1349,6 +1349,14 @@
                 "resourcePath": "objects\\objSpearman\\objSpearman.yy",
                 "resourceType": "GMObject"
             }
+        },
+        {
+            "Key": "ffaece94-3f91-4ef2-a348-7ffe24866abc",
+            "Value": {
+                "id": "03de9a42-764f-4866-949a-10894faf343f",
+                "resourcePath": "sprites\\sprPlayerAttackAerial\\sprPlayerAttackAerial.yy",
+                "resourceType": "GMSprite"
+            }
         }
     ],
     "script_order": [

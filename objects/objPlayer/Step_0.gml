@@ -671,6 +671,13 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
+		if (controls.action == input.attack)
+		{
+			state = player_states.aerialattack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
 		else if (jump_buffer > 0 && controls.action == input.jump)
 		{
 			state = player_states.jump;
@@ -1257,7 +1264,7 @@ switch (state)
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: ATTACK
 	//
-	// The character is performing a forward-facing fire attack
+	// The character is performing a forward-facing fire attack on the ground
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
 	case player_states.attack:
@@ -1341,6 +1348,145 @@ switch (state)
 		if (frame_counter >= attack_frames)
 		{
 			state = player_states.idle;
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		
+		break;
+	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: AERIAL ATTACK
+	//
+	// The character is performing a forward-facing fire attack in the air
+	//-----------------------------------------------------------------------------------------------------------------
+	#region
+	case player_states.aerialattack:
+	
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Calculate movement
+		
+		var target_speed = sign(controls.input_x) * max(move_speed, abs(h_speed));
+		if (h_speed < target_speed)
+		{
+			h_speed = min(target_speed, h_speed + (move_speed / 16));
+		}
+		else
+		{
+			h_speed = max(target_speed, h_speed - (move_speed / 16));
+		}
+		
+		v_speed = v_speed + v_gravity;
+		if (v_speed > 10)
+		{
+			v_speed = 10;
+		}
+
+		// Horizontal collisions
+
+		if (place_meeting(x + h_speed, y, objWall))
+		{
+			var h_move = 0;
+			while (!place_meeting(x + h_move + sign(h_speed), y, objWall))
+			{
+				h_move += sign(h_speed);
+			}
+			h_speed = h_move;
+		}
+		x = x + h_speed;
+		
+		// Vertical collisions
+		
+		var v_move = 0;
+		if (place_meeting(x, y + v_speed, objWall))
+		{
+			while (!place_meeting(x, y + v_move + sign(v_speed), objWall))
+			{
+				v_move += sign(v_speed);
+			}
+			v_speed = v_move;
+		}
+		y = y + v_speed;
+		
+		// Facing and animations are set on frame 1
+		
+		if (frame_counter == 1)
+		{
+
+			// Deduct 1 flame and reset regeneration counter
+			if (!controls.debug)
+			{
+				flame -= 1;
+				flame_regen_counter = 0;
+			}
+			
+			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
+			{
+				// RIGHT
+				
+				// Set facing
+				face_right = true;
+				image_xscale = 1;
+				
+				// Animations
+				sprite_index = sprPlayerAttackAerial;
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Set facing
+				face_right = false;
+				image_xscale = -1;
+				
+				// Animations
+				sprite_index = sprPlayerAttackAerial;
+				
+			}
+			
+		}
+		
+		// Sounds and projectile creation are done on frame 7
+		
+		if (frame_counter == 7)
+		{
+			if (face_right)
+			{
+				// Create fireball instance
+				var fireball = instance_create_layer(x + 14, y + 6, "Player", objFireball);
+			}
+			else
+			{
+				// Create fireball instance
+				var fireball = instance_create_layer(x - 14, y + 6, "Player", objFireball);
+			}
+			
+			// Play sound
+			audio_play_sound(sndFireballAttack, 10, false);
+		}
+		
+		// If player collides with the ground before the animation finishes, cancel it and enter the heavy land state
+		
+		if (v_speed >= 0 && place_meeting(x, y + 1, objWall))
+		{
+			state = player_states.heavyland;
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		
+		// If animation finishes, enter fall state and reset frame counter
+		
+		if (frame_counter >= aerial_attack_frames)
+		{
+			state = player_states.fall;
 			reset_animation = true;
 			frame_counter = 0;
 		}
