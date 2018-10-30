@@ -1,0 +1,101 @@
+{
+    "id": "f05ca202-1a3e-4450-b3af-1d07fd3a6ffa",
+    "modelName": "GMObject",
+    "mvc": "1.0",
+    "name": "objGroundTorch",
+    "eventList": [
+        {
+            "id": "da7c2488-503b-4000-b482-b20f442f4d53",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 0,
+            "eventtype": 3,
+            "m_owner": "f05ca202-1a3e-4450-b3af-1d07fd3a6ffa"
+        },
+        {
+            "id": "e8fe2b91-a29c-4609-99f5-f9a286e25cc3",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 0,
+            "eventtype": 0,
+            "m_owner": "f05ca202-1a3e-4450-b3af-1d07fd3a6ffa"
+        },
+        {
+            "id": "78785a42-d0ea-48e9-8f37-012783fe8149",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "13087e99-4929-43ab-bae0-66f015df5a39",
+            "enumb": 0,
+            "eventtype": 4,
+            "m_owner": "f05ca202-1a3e-4450-b3af-1d07fd3a6ffa"
+        }
+    ],
+    "maskSpriteId": "00000000-0000-0000-0000-000000000000",
+    "overriddenProperties": null,
+    "parentObjectId": "00000000-0000-0000-0000-000000000000",
+    "persistent": false,
+    "physicsAngularDamping": 0.1,
+    "physicsDensity": 0.5,
+    "physicsFriction": 0.2,
+    "physicsGroup": 0,
+    "physicsKinematic": false,
+    "physicsLinearDamping": 0.1,
+    "physicsObject": false,
+    "physicsRestitution": 0.1,
+    "physicsSensor": false,
+    "physicsShape": 1,
+    "physicsShapePoints": null,
+    "physicsStartAwake": true,
+    "properties": [
+        {
+            "id": "38b5c238-a2ee-4b81-86e4-61a3cbc56d57",
+            "modelName": "GMObjectProperty",
+            "mvc": "1.0",
+            "listItems": null,
+            "multiselect": false,
+            "rangeEnabled": false,
+            "rangeMax": 10,
+            "rangeMin": 0,
+            "resourceFilter": 1023,
+            "value": "False",
+            "varName": "lit",
+            "varType": 3
+        },
+        {
+            "id": "7293a9f5-cf9c-4df1-8e0f-342990e26a63",
+            "modelName": "GMObjectProperty",
+            "mvc": "1.0",
+            "listItems": null,
+            "multiselect": false,
+            "rangeEnabled": false,
+            "rangeMax": 10,
+            "rangeMin": 0,
+            "resourceFilter": 1023,
+            "value": "180",
+            "varName": "lit_frames",
+            "varType": 1
+        },
+        {
+            "id": "6173f499-c03c-4515-8f8b-c14d0e2c03dd",
+            "modelName": "GMObjectProperty",
+            "mvc": "1.0",
+            "listItems": null,
+            "multiselect": false,
+            "rangeEnabled": false,
+            "rangeMax": 10,
+            "rangeMin": 0,
+            "resourceFilter": 1023,
+            "value": "0",
+            "varName": "puzzle_num",
+            "varType": 1
+        }
+    ],
+    "solid": false,
+    "spriteId": "6365bdaf-16b9-4e25-bf4d-c7db0fa98649",
+    "visible": true
+}

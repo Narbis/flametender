@@ -1,0 +1,1 @@
+lit_counter = 0;

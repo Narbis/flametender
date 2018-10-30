@@ -26,7 +26,7 @@ enum fall_states
 	danger
 }
 
-// Arrays to keep track of which Flame and Life pickups have been collected
+// Arrays to keep track of which Flame and Life pickups have been collected / which puzzles have been finished
 
 flamepickups[0] = false;
 flamepickups[1] = false;
@@ -35,6 +35,10 @@ flamepickups[2] = false;
 lifepickups[0] = false;
 lifepickups[1] = false;
 lifepickups[2] = false;
+
+puzzles[0] = false;
+puzzles[1] = false;
+puzzles[2] = false;
 
 // State and movement variables
 
