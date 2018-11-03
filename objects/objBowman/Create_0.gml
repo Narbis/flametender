@@ -1,9 +1,6 @@
-enum spearman_states 
+enum bowman_states
 {
 	idle,
-	patrol,
-	alerted,
-	pursuit,
 	attack,
 	hurt,
 	dead
@@ -11,8 +8,15 @@ enum spearman_states
 
 // State and movement variables
 
-state = spearman_states.idle;
-face_right = true;
+state = bowman_states.idle;
+if (image_xscale == 1)
+{
+	face_right = true;
+}
+else
+{
+	face_right = false;
+}
 reset_animation = false;
 
 h_speed = 0;
@@ -21,7 +25,7 @@ h_speed = 0;
 
 frame_counter = 0;
 
-life = 2;
+life = 1;
 
 attack_frames = 20;
 hurt_frames = 20;

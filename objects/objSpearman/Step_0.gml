@@ -375,6 +375,83 @@ switch (state)
 	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: HURT
+	//
+	// The spearman is invulnable after being hurt
+	//-----------------------------------------------------------------------------------------------------------------
+	#region
+	case spearman_states.hurt:
+		
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Calculate movement
+		
+		v_speed = v_speed + objPlayer.v_gravity;
+		
+		// Horizontal collisions
+
+		if (place_meeting(x + h_speed, y, objWall))
+		{
+			var h_move = 0;
+			while (!place_meeting(x + h_move + sign(h_speed), y, objWall))
+			{
+				h_move += sign(h_speed);
+			}
+			h_speed = h_move;
+		}
+		x = x + h_speed;
+		
+		// Vertical collisions
+		
+		var v_move = 0;
+		if (place_meeting(x, y + v_speed, objWall))
+		{
+			while (!place_meeting(x, y + v_move + sign(v_speed), objWall))
+			{
+				v_move += sign(v_speed);
+			}
+			v_speed = v_move;
+		}
+		y = y + v_speed;
+		
+		// Animations
+		
+		sprite_index = sprSpearmanHit;
+			
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		if (place_meeting(x, y + 1, objWall))
+		{
+			state = spearman_states.pursuit;
+		}
+		
+		// Reset animation and frame counter if necessary
+		
+		if (state != spearman_states.hurt)
+		{
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		
+		break;
+	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: DEAD
 	//
 	// The spearman is dead

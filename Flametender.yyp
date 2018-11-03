@@ -455,6 +455,14 @@
             }
         },
         {
+            "Key": "551494a6-89fa-4f03-9b87-3d4e00540315",
+            "Value": {
+                "id": "42e7bd8e-811e-497a-b526-db0e347df4c7",
+                "resourcePath": "views\\551494a6-89fa-4f03-9b87-3d4e00540315.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "55de86ac-a0aa-40e0-bd6e-68a18e3fcac5",
             "Value": {
                 "id": "be6d81a3-bbad-4b6d-86ff-7cbba86a716c",
@@ -495,6 +503,14 @@
             }
         },
         {
+            "Key": "605999fb-6ce9-45d1-ad27-76f30cd474b1",
+            "Value": {
+                "id": "a2157d5d-41c8-43f0-b66a-aa26c52823da",
+                "resourcePath": "views\\605999fb-6ce9-45d1-ad27-76f30cd474b1.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "61525b00-8db4-45f9-af87-ae77fb2eb399",
             "Value": {
                 "id": "bb492e36-cc36-4b6c-8e74-db9b2631ba31",
@@ -515,6 +531,14 @@
             "Value": {
                 "id": "a9155b15-bd06-4e1d-b478-b158170de3e8",
                 "resourcePath": "sprites\\sprStopDust\\sprStopDust.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "6838b1a9-0394-478a-9c88-5095fb0d880b",
+            "Value": {
+                "id": "fe97fb80-5dd2-4092-a7e9-6937cd9b3c0e",
+                "resourcePath": "sprites\\sprBowmanIdle\\sprBowmanIdle.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -571,6 +595,14 @@
             "Value": {
                 "id": "dc091eb8-5fe8-440a-9fdb-196dd762fb11",
                 "resourcePath": "objects\\objSpikesDown\\objSpikesDown.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "7159c508-f259-4330-9a4f-c6f2404b0b02",
+            "Value": {
+                "id": "b84bd8c2-5711-4a1d-aab7-e707a6d70e28",
+                "resourcePath": "objects\\objBowman\\objBowman.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -715,14 +747,6 @@
             "Value": {
                 "id": "c2ae8c98-af71-419b-8bf3-2448a44cc864",
                 "resourcePath": "objects\\objPlayer\\objPlayer.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
-            "Key": "852bb078-f9b2-4b35-9e3c-35a3bb213b8d",
-            "Value": {
-                "id": "6b0928bc-c5dd-4afa-a546-f6baa9cb0067",
-                "resourcePath": "objects\\objSpearmanAshes\\objSpearmanAshes.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -1083,6 +1107,14 @@
             "Value": {
                 "id": "c09156ac-48f7-4c1a-bd13-1021d0986fb5",
                 "resourcePath": "sprites\\sprLedgeRight\\sprLedgeRight.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "bfd2321b-0e29-4dac-bab5-b6662b786872",
+            "Value": {
+                "id": "7ebddf26-0dea-4ccd-b8eb-f31a084b7a46",
+                "resourcePath": "sprites\\sprBowmanAttack\\sprBowmanAttack.yy",
                 "resourceType": "GMSprite"
             }
         },

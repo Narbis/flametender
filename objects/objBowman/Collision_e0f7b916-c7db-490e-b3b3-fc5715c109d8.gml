@@ -1,8 +1,8 @@
 // Collision with a fireball will overwrite whatever state the spearman is currently in
 
-if (state != spearman_states.dead && state != spearman_states.hurt)
+if (state != bowman_states.dead && state != bowman_states.hurt)
 {	
-	state = spearman_states.hurt;
+	state = bowman_states.hurt;
 	
 	v_speed = -1.5;
 	h_speed = 1.5 * sign(x - other.x);
@@ -10,7 +10,7 @@ if (state != spearman_states.dead && state != spearman_states.hurt)
 	
 	if (life <= 0)
 	{
-		state = spearman_states.dead;
+		state = bowman_states.dead;
 		audio_play_sound(sndBurn, 10, false);
 	}
 	else
