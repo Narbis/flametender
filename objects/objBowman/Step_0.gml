@@ -41,9 +41,9 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// After 2 seconds, change to attack state
+		// After 1 second, change to attack state
 		
-		if (frame_counter >= 120)
+		if (frame_counter >= 60)
 		{	
 			state = bowman_states.attack;
 		}
@@ -77,7 +77,7 @@ switch (state)
 		
 		// Animations
 		
-		sprite_index = sprSpearmanAttack;
+		sprite_index = sprBowmanAttack;
 			
 		// Set facing of sprite based on state of the face_right variable
 		
@@ -90,21 +90,21 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// On frame 2, create attack hitbox
+		// On frame 7, create arrow
 		
-		if (frame_counter == 6)
+		if (frame_counter == 36)
 		{
-			with(instance_create_layer(x, y, "Player", objSpearmanHitbox))
-			{
-				image_xscale = other.image_xscale;
-			}
+			//with(instance_create_layer(x, y, "Player", objSpearmanHitbox))
+			//{
+			//	image_xscale = other.image_xscale;
+			//}
 		}
 		
-		// Change pack to pursuit state after animation completes
+		// Change pack to idle state after animation completes
 		
-		if (frame_counter >= 30)
+		if (frame_counter >= 96)
 		{
-			state = bowman_states.pursuit;
+			state = bowman_states.idle;
 		}
 		
 		// Reset animation and frame counter if necessary
@@ -181,7 +181,7 @@ switch (state)
 		
 		if (place_meeting(x, y + 1, objWall))
 		{
-			state = bowman_states.pursuit;
+			state = bowman_states.idle;
 		}
 		
 		// Reset animation and frame counter if necessary
