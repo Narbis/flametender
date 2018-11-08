@@ -90,14 +90,17 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// On frame 7, create arrow
+		// On frame 7, create arrow and play sound
 		
 		if (frame_counter == 36)
 		{
-			//with(instance_create_layer(x, y, "Player", objSpearmanHitbox))
-			//{
-			//	image_xscale = other.image_xscale;
-			//}
+			with(instance_create_layer(x, y, "Player", objBowmanArrow))
+			{
+				face_right = other.face_right;
+				image_xscale = other.image_xscale;
+			}
+			
+			audio_play_sound(sndBowmanAttack, 10, false);
 		}
 		
 		// Change pack to idle state after animation completes
@@ -213,7 +216,7 @@ switch (state)
 		
 		// Animations
 		
-		sprite_index = sprSpearmanDeath;
+		sprite_index = sprBowmanDeath;
 			
 		// Set facing of sprite based on state of the face_right variable
 		

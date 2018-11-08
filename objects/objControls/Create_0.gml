@@ -114,4 +114,4 @@ part_type_gravity(global.shockwave_particle, 0, 0);
 
 // Play some meme song?
 
-//audio_play_sound(mscMenu, 10, true);
+audio_play_sound(mscMenu, 10, true);

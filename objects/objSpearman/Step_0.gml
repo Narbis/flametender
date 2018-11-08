@@ -346,7 +346,7 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		// On frame 2, create attack hitbox
+		// On frame 2, create attack hitbox and play sound
 		
 		if (frame_counter == 6)
 		{
@@ -354,6 +354,8 @@ switch (state)
 			{
 				image_xscale = other.image_xscale;
 			}
+			
+			audio_play_sound(sndSpearmanAttack, 10, false);
 		}
 		
 		// Change pack to pursuit state after animation completes

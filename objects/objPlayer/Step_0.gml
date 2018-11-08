@@ -762,6 +762,13 @@ switch (state)
 			part_particles_create(global.particle_system, x, y, global.land_slide_dust_particle, 1);
 		}
 		
+		// Sounds
+		
+		if (frame_counter == 1)
+		{
+			audio_play_sound(sndJumpLand, 10, false);
+		}
+		
 		// Set facing of sprite based on state of the face_right variable
 		
 		if (face_right)
@@ -872,6 +879,13 @@ switch (state)
 		else if (abs(h_speed) > 0.3 && frame_counter % 3 == 1)
 		{
 			part_particles_create(global.particle_system, x, y, global.land_slide_dust_particle, 1);
+		}
+		
+		// Sounds
+		
+		if (frame_counter == 1)
+		{
+			audio_play_sound(sndJumpLand, 10, false);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
