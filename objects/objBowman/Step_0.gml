@@ -43,7 +43,7 @@ switch (state)
 		
 		// After 1 second, change to attack state
 		
-		if (frame_counter >= 60)
+		if (frame_counter >= 30)
 		{	
 			state = bowman_states.attack;
 		}
@@ -100,7 +100,7 @@ switch (state)
 				image_xscale = other.image_xscale;
 			}
 			
-			audio_play_sound(sndBowmanAttack, 10, false);
+			scrPlaySound(sndBowmanAttack, x, y);
 		}
 		
 		// Change pack to idle state after animation completes

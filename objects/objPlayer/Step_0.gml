@@ -523,7 +523,7 @@ switch (state)
 		
 		// Play sounds
 		
-		audio_play_sound(sndJump, 5, false);
+		scrPlaySound(sndJump, x, y);
 		
 		// Enter fall state
 		
@@ -766,7 +766,7 @@ switch (state)
 		
 		if (frame_counter == 1)
 		{
-			audio_play_sound(sndJumpLand, 10, false);
+			scrPlaySound(sndJumpLand, x, y);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -885,7 +885,7 @@ switch (state)
 		
 		if (frame_counter == 1)
 		{
-			audio_play_sound(sndJumpLand, 10, false);
+			scrPlaySound(sndJumpLand, x, y);
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -1354,7 +1354,7 @@ switch (state)
 			}
 			
 			// Play sound
-			audio_play_sound(sndFireballAttack, 10, false);
+			scrPlaySound(sndFireballAttack, x, y);
 		}
 		
 		// When state finishes, enter idle state and reset frame counter
@@ -1484,7 +1484,7 @@ switch (state)
 			}
 			
 			// Play sound
-			audio_play_sound(sndFireballAttack, 10, false);
+			scrPlaySound(sndFireballAttack, x, y);
 		}
 		
 		// If player collides with the ground before the animation finishes, cancel it and enter the heavy land state
@@ -1779,7 +1779,7 @@ switch (state)
 			// Play sound
 			
 			audio_sound_pitch(sndFlameDash, random_range(0.95, 1.05));
-			audio_play_sound(sndFlameDash, 10, false);
+			scrPlaySound(sndFlameDash, x, y);
 			
 			// EXPERIMENTAL: Shockwave effect
 			if (dash_grounded)

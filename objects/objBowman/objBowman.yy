@@ -62,7 +62,20 @@
     "physicsShapePoints": null,
     "physicsStartAwake": true,
     "properties": [
-        
+        {
+            "id": "eedf2169-aa1f-41f2-9fbe-506c13984804",
+            "modelName": "GMObjectProperty",
+            "mvc": "1.0",
+            "listItems": null,
+            "multiselect": false,
+            "rangeEnabled": true,
+            "rangeMax": 30,
+            "rangeMin": 0,
+            "resourceFilter": 1023,
+            "value": "0",
+            "varName": "shoot_offset",
+            "varType": 1
+        }
     ],
     "solid": false,
     "spriteId": "6838b1a9-0394-478a-9c88-5095fb0d880b",

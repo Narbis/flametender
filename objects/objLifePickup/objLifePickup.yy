@@ -5,16 +5,6 @@
     "name": "objLifePickup",
     "eventList": [
         {
-            "id": "95c3d820-6a04-4f6d-be41-fa04c6a0b57b",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
-            "enumb": 0,
-            "eventtype": 0,
-            "m_owner": "8b111f0a-c20d-494b-892c-d1664db6bc3b"
-        },
-        {
             "id": "369bd888-5c8f-44e2-a64a-681756e2d5ef",
             "modelName": "GMEvent",
             "mvc": "1.0",

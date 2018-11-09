@@ -1,9 +1,9 @@
 if (lit)
 {
-	part_particles_create(global.particle_system, x, y - 16, global.flame_particle, 3);
+	part_particles_create(global.particle_system, x, y - (16 * sign(image_yscale)), global.flame_particle, 3);
 	
 	lit_counter++;
-	if (lit_counter == lit_frames)
+	if (lit_counter >= lit_seconds * 60)
 	{
 		lit = false;
 	}

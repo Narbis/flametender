@@ -33,6 +33,10 @@ buffer = false;
 buffer_size = 5;
 buffer_counter = 0;
 
+// Set audio falloff model
+
+audio_falloff_set_model(audio_falloff_exponent_distance_clamped);
+
 // Global particle system stuff
 
 global.particle_system = part_system_create_layer("Front", true);
@@ -114,4 +118,4 @@ part_type_gravity(global.shockwave_particle, 0, 0);
 
 // Play some meme song?
 
-audio_play_sound(mscMenu, 10, true);
+//audio_play_sound(mscMenu, 10, true);

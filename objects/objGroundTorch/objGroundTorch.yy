@@ -76,9 +76,9 @@
             "rangeMax": 10,
             "rangeMin": 0,
             "resourceFilter": 1023,
-            "value": "180",
-            "varName": "lit_frames",
-            "varType": 1
+            "value": "3",
+            "varName": "lit_seconds",
+            "varType": 0
         },
         {
             "id": "6173f499-c03c-4515-8f8b-c14d0e2c03dd",

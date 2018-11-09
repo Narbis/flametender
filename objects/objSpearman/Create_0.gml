@@ -24,8 +24,6 @@ frame_counter = 0;
 life = 2;
 
 attack_frames = 20;
-hurt_frames = 20;
-dead_frames = 120;
 
 aggro_distance = 100;
 attack_distance = 20;

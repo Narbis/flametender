@@ -10,7 +10,7 @@ if (face_right)
 		
 		x = x + h_move;
 		part_particles_create(global.particle_system, x, y, arrow_deflect_particle, 1);
-		audio_play_sound(sndArrowHit, 10, false);
+		scrPlaySound(sndArrowHit, x, y);
 		instance_destroy();
 	}
 	else
@@ -31,7 +31,7 @@ else
 		x = x + h_move;
 		part_type_scale(arrow_deflect_particle, -1, 1);
 		part_particles_create(global.particle_system, x, y, arrow_deflect_particle, 1);
-		audio_play_sound(sndArrowHit, 10, false);
+		scrPlaySound(sndArrowHit, x, y);
 		instance_destroy();
 	}
 	else

@@ -23,7 +23,7 @@ h_speed = 0;
 
 // State counters and constants
 
-frame_counter = 0;
+frame_counter = shoot_offset;
 
 life = 1;
 

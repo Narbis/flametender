@@ -38,7 +38,7 @@ if (state != player_states.dead && !invuln)
 		life -= 1;
 	}
 	
-	audio_play_sound(sndPlayerHurt, 10, false);
+	scrPlaySound(sndPlayerHurt, x, y);
 	
 	reset_animation = true;
 	frame_counter = 0;

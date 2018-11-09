@@ -145,49 +145,6 @@
             ]
         },
         {
-            "id": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-            "modelName": "GMSpriteFrame",
-            "mvc": "1.0",
-            "SpriteId": "92dcc7af-1933-4768-a97e-ac0589e2adc5",
-            "compositeImage": {
-                "id": "854d1150-a124-41d1-8bc5-b1b897104d21",
-                "modelName": "GMSpriteImage",
-                "mvc": "1.0",
-                "FrameId": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-                "LayerId": "00000000-0000-0000-0000-000000000000"
-            },
-            "images": [
-                {
-                    "id": "7debe66a-a483-4203-8350-db637e5a4bc5",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-                    "LayerId": "aa9a5ff5-e86f-4e2e-9132-bf716bec0300"
-                },
-                {
-                    "id": "0c14b7a1-3786-4c6d-bf84-d02bd6aa30ae",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-                    "LayerId": "d0c8341a-c9ca-4d3a-84ab-35ad369e5360"
-                },
-                {
-                    "id": "9d34af58-da8c-4a33-9efc-bd8521c3b20d",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-                    "LayerId": "7e09767c-1e47-4d37-8467-5e5a5f3b97eb"
-                },
-                {
-                    "id": "ab9d865f-0c4e-4364-8f0e-37c076f1cb60",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "f260d0a7-687e-454b-aff7-c80258fc6daa",
-                    "LayerId": "240c9f46-b574-4a45-a90a-0cc4d6a5ceee"
-                }
-            ]
-        },
-        {
             "id": "bbe4505d-960a-4883-a44c-ec1e41ab7655",
             "modelName": "GMSpriteFrame",
             "mvc": "1.0",

@@ -355,7 +355,7 @@ switch (state)
 				image_xscale = other.image_xscale;
 			}
 			
-			audio_play_sound(sndSpearmanAttack, 10, false);
+			scrPlaySound(sndSpearmanAttack, x, y);
 		}
 		
 		// Change pack to pursuit state after animation completes

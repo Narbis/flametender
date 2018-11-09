@@ -11,11 +11,11 @@ if (state != bowman_states.dead && state != bowman_states.hurt)
 	if (life <= 0)
 	{
 		state = bowman_states.dead;
-		audio_play_sound(sndBurn, 10, false);
+		scrPlaySound(sndBurn, x, y);
 	}
 	else
 	{
-		audio_play_sound(sndSpearmanHurt, 10, false);
+		scrPlaySound(sndSpearmanHurt, x, y);
 	}
 	
 	reset_animation = true;
