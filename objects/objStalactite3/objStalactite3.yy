@@ -1,14 +1,14 @@
 {
-    "id": "087e29d5-493c-43d0-9e4a-4c6197b56860",
+    "id": "6742759a-7b22-4eba-8e6e-dd3520c6c8d3",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "objOutsideDoor",
+    "name": "objStalactite3",
     "eventList": [
         
     ],
-    "maskSpriteId": "43d4b4ae-9928-4475-aee2-7ce2194592a5",
+    "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
-    "parentObjectId": "9bc76f82-eeb5-4aca-ab0f-10f0b4a68c0c",
+    "parentObjectId": "00000000-0000-0000-0000-000000000000",
     "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
@@ -24,6 +24,6 @@
     "physicsStartAwake": true,
     "properties": null,
     "solid": false,
-    "spriteId": "c44d3ca5-606c-4d79-8a3c-624ee88b5295",
+    "spriteId": "1933dade-c630-482a-b135-6f9ad29e5977",
     "visible": true
 }

@@ -2,14 +2,14 @@
     "id": "7d240bb0-d3a4-4aab-a4dd-8e4665dd1eda",
     "modelName": "GMTileSet",
     "mvc": "1.11",
-    "name": "tilBackground",
+    "name": "tilCaveWall",
     "auto_tile_sets": [
         {
             "id": "6dfea180-e95d-444d-8499-7f7290f38b13",
             "modelName": "GMAutoTileSet",
             "mvc": "1.0",
             "closed_edge": false,
-            "name": "autotile_1",
+            "name": "autotileCave",
             "tiles": [
                 47,
                 1,
@@ -134,10 +134,10 @@
     ],
     "tile_animation_speed": 15,
     "tile_count": 48,
-    "tileheight": 32,
+    "tileheight": 16,
     "tilehsep": 0,
     "tilevsep": 0,
-    "tilewidth": 32,
+    "tilewidth": 16,
     "tilexoff": 0,
     "tileyoff": 0
 }

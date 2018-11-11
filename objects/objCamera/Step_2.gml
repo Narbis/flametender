@@ -48,6 +48,15 @@ if (initialized)
 	}
 
 	camera_set_view_pos(cam, x - view_w_half, y - view_h_half);
+	
+	if (layer_exists("Parallax_F"))
+	{
+		layer_x("Parallax_F", x * 0.3);
+	}
+	if (layer_exists("Parallax_B"))
+	{
+		layer_x("Parallax_B", x * 0.6);
+	}
 }
 else
 {
