@@ -2,7 +2,7 @@
     "id": "142466c9-74e5-4200-86c4-0e45324ec45c",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "objPickupSpawnerCombat",
+    "name": "objPickupSpawnerKey",
     "eventList": [
         {
             "id": "cb2fcbae-47aa-4050-a7fb-4ba9e874a5ff",

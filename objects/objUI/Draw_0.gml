@@ -151,5 +151,9 @@ switch(state)
 // Reset surface when finished
 surface_reset_target();
 
-// Draw the UI surface
+//if (mouse_check_button(mb_left))
+//{
+//	surface_copy(ui_surface, mouse_x - camera_get_view_x(view_camera[0]), mouse_y - camera_get_view_y(view_camera[0]), application_surface);
+//}
+
 draw_surface(ui_surface, camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]));

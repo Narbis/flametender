@@ -1355,6 +1355,8 @@ switch (state)
 			
 			// Play sound
 			scrPlaySound(sndFireballAttack, x, y);
+			
+			attacks++;
 		}
 		
 		// When state finishes, enter idle state and reset frame counter
@@ -1485,6 +1487,8 @@ switch (state)
 			
 			// Play sound
 			scrPlaySound(sndFireballAttack, x, y);
+			
+			attacks++;
 		}
 		
 		// If player collides with the ground before the animation finishes, cancel it and enter the heavy land state
@@ -1534,6 +1538,8 @@ switch (state)
 			{
 				flame -= 1;
 				flame_regen_counter = 0;
+				
+				dashes++;
 			}
 			
 			// Determine dash direction
@@ -2058,6 +2064,7 @@ switch (state)
 		
 		if (frame_counter == dead_frames)
 		{
+			deaths++;
 			life = life_max;
 			image_speed = 0;
 			

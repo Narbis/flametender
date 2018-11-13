@@ -17,3 +17,6 @@ if (objPlayer.state != player_states.hurt)
 	objPlayer.reset_animation = true;
 	objPlayer.image_speed = 1;
 }
+
+// Clear remaining particles
+part_particles_clear(global.particle_system);

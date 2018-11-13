@@ -39,6 +39,17 @@ lifepickups[2] = false;
 puzzles[0] = false;
 puzzles[1] = false;
 puzzles[2] = false;
+puzzles[3] = false;
+puzzles[4] = false;
+puzzles[5] = false;
+puzzles[6] = false;
+
+key = false;
+bunny = false;
+
+deaths = 0;
+dashes = 0;
+attacks = 0;
 
 // State and movement variables
 
@@ -82,7 +93,7 @@ aerial_attack_frames = 44;
 hurt_frames = 20;
 dead_frames = 100;
 flame_regen_frames = 120;
-invuln_frames = 60;
+invuln_frames = 90;
 
 // Movement constants
 
