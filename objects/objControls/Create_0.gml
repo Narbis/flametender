@@ -16,6 +16,7 @@ display_set_gui_size(480, 270);
 has_control = true;
 action = input.none;
 debug = false;
+paused = false;
 input_x = 0;
 input_y = 0;
 

@@ -33,6 +33,10 @@ new_flame_frame = 0;
 new_life_animation = false;
 new_life_frame = 0;
 
+debug_on = false;
+debug_message_counter = 0;
+debug_message_frames = 120;
+
 // Flame particle
 title_flame_particle = part_type_create();
 part_type_sprite(title_flame_particle, sprFire, 0, 0, 1);

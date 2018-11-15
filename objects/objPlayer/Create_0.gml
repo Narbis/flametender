@@ -44,6 +44,9 @@ puzzles[4] = false;
 puzzles[5] = false;
 puzzles[6] = false;
 
+keys[0] = false;
+keys[1] = false;
+
 key = false;
 bunny = false;
 

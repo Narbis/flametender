@@ -123,9 +123,9 @@ switch (state)
 		}
 		x = x + h_speed;
 		
-		// Flip directions when encountering a wall or ledge
+		// Flip directions when encountering a wall, ledge, or another enemy
 		
-		if (place_meeting(x + 1, y, objWall) || place_meeting(x, y + 1, objLedge))
+		if (place_meeting(x + sign(h_speed), y, objWall) || place_meeting(x, y + 1, objLedge) || instance_place(x + h_speed, y, objEnemy))
 		{
 			face_right = !face_right;
 		}
@@ -250,9 +250,9 @@ switch (state)
 			h_speed = -move_speed;
 		}
 		
-		// Spearman should stop moving when encountering a wall or ledge OR when the player is above or below but not moving
+		// Spearman should stop moving when encountering a wall, ledge, or enemy, OR when the player is above or below but not moving
 		
-		if ((place_meeting(x + 1, y, objWall) || place_meeting(x + h_speed, y + 1, objLedge)) || (objPlayer.h_speed == 0 && abs(objPlayer.y - y) > 20))
+		if ((place_meeting(x + sign(h_speed), y, objWall) || place_meeting(x + h_speed, y + 1, objLedge) || instance_place(x + (sign(h_speed) * 12), y, objEnemy)) || (objPlayer.h_speed == 0 && abs(objPlayer.y - y) > 20))
 		{
 			h_speed = 0;
 		}

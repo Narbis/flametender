@@ -1976,7 +1976,7 @@ switch (state)
 		
 		// Change player to appropriate state
 		
-		if (!invuln)
+		if (!invuln || (frame_counter >= hurt_frames && life > 0))
 		{
 			state = player_states.fall;
 		}

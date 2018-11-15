@@ -4,7 +4,10 @@ if (!surface_exists(ui_surface))
 	ui_surface = surface_create(480, 270);
 }
 surface_set_target(ui_surface);
-draw_clear_alpha(c_black, 0);
+if (state != ui_states.menu)
+{
+	draw_clear_alpha(c_black, 0);
+}
 
 switch(state)
 {
@@ -18,6 +21,8 @@ switch(state)
 	break;
 	
 	case ui_states.menu:
+	
+		draw_sprite_ext(sprPauseMenui, 0, 240, 135, 1, 1, 0, c_white, 1);
 	
 	break;
 	
@@ -52,10 +57,10 @@ switch(state)
 		
 		if (new_flame_animation)
 		{
-			draw_sprite_ext(sprNewFlame, new_flame_frame / 5, 16 + (16 * (objPlayer.flame_max)), 16, 1, 1, 0, c_white, 1);
+			draw_sprite_ext(sprNewFlame, new_flame_frame / 3, 16 + (16 * (objPlayer.flame_max)), 16, 1, 1, 0, c_white, 1);
 			new_flame_frame += 1;
 			
-			if (new_flame_frame >= 80)
+			if (new_flame_frame >= 48)
 			{
 				new_flame_animation = false;
 				new_flame_frame = 0;
@@ -80,15 +85,54 @@ switch(state)
 		
 		if (new_life_animation)
 		{
-			draw_sprite_ext(sprNewLife, new_life_frame / 5, 464 - (16 * (objPlayer.life_max)), 16, 1, 1, 0, c_white, 1);
+			draw_sprite_ext(sprNewLife, new_life_frame / 2, 464 - (16 * (objPlayer.life_max)), 16, 1, 1, 0, c_white, 1);
 			new_life_frame += 1;
 			
-			if (new_life_frame >= 80)
+			if (new_life_frame >= 32)
 			{
 				new_life_animation = false;
 				new_life_frame = 0;
 				objPlayer.life_max += 1;
 				objPlayer.life = objPlayer.life_max;
+			}
+		}
+		
+		if (debug_message_counter != 0 || debug_on != objControls.debug)
+		{
+			if (debug_on != objControls.debug)
+			{
+				debug_message_counter = 0;
+				debug_on = !debug_on;
+			}
+			
+			debug_message_counter++;
+			
+			if (debug_message_counter >= debug_message_frames)
+			{
+				debug_message_counter = 0;
+			}
+			
+			if (debug_on)
+			{
+				if (objControls.gamepad)
+				{
+					draw_sprite_ext(sprDebugMessage, 0, 0, 16, 1, 1, 0, c_white, 1);
+				}
+				else
+				{
+					draw_sprite_ext(sprDebugMessage, 1, 0, 16, 1, 1, 0, c_white, 1);
+				}
+			}
+			else
+			{
+				if (objControls.gamepad)
+				{
+					draw_sprite_ext(sprDebugMessage, 2, 0, 16, 1, 1, 0, c_white, 1);
+				}
+				else
+				{
+					draw_sprite_ext(sprDebugMessage, 3, 0, 16, 1, 1, 0, c_white, 1);
+				}
 			}
 		}
 
@@ -150,10 +194,5 @@ switch(state)
 
 // Reset surface when finished
 surface_reset_target();
-
-//if (mouse_check_button(mb_left))
-//{
-//	surface_copy(ui_surface, mouse_x - camera_get_view_x(view_camera[0]), mouse_y - camera_get_view_y(view_camera[0]), application_surface);
-//}
 
 draw_surface(ui_surface, camera_get_view_x(view_camera[0]), camera_get_view_y(view_camera[0]));

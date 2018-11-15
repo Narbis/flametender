@@ -6,7 +6,7 @@ if (keyboard_check_pressed(vk_escape))
 {
 	game_end();
 }
-if (keyboard_check_pressed(vk_backspace))
+if (!paused && keyboard_check_pressed(vk_backspace))
 {
 	objUI.state = ui_states.fade_in;
 	objUI.frame_counter = 0;
@@ -49,32 +49,35 @@ if (has_control)
 			action = input.start;
 			buffer = false;
 		}
-		else if (gamepad_button_check_pressed(0, gp_face3))
+		else if (instance_exists(objPlayer))
 		{
-			action = input.activate;
-			buffer = false;
-		}
-		else if (gamepad_button_check_pressed(0, gp_face1))
-		{
-			action = input.jump;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (gamepad_button_check_pressed(0, gp_shoulderrb) && (objPlayer.flame > 0 || debug))
-		{
-			action = input.dash;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (gamepad_button_check_pressed(0, gp_face2) && (objPlayer.flame > 0 || debug))
-		{
-			action = input.attack;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (gamepad_button_check_pressed(0, gp_padu))
-		{
-			debug = !debug;
+			if (gamepad_button_check_pressed(0, gp_face3))
+			{
+				action = input.activate;
+				buffer = false;
+			}
+			else if (gamepad_button_check_pressed(0, gp_face1))
+			{
+				action = input.jump;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (gamepad_button_check_pressed(0, gp_shoulderrb) && (objPlayer.flame > 0 || debug))
+			{
+				action = input.dash;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (gamepad_button_check_pressed(0, gp_face2) && (objPlayer.flame > 0 || debug))
+			{
+				action = input.attack;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (gamepad_button_check_pressed(0, gp_padu))
+			{
+				debug = !debug;
+			}
 		}
 		else
 		{
@@ -97,32 +100,35 @@ if (has_control)
 			action = input.start;
 			buffer = false;
 		}
-		else if (keyboard_check_pressed(ord("E")))
+		else if (instance_exists(objPlayer))
 		{
-			action = input.activate;
-			buffer = false;
-		}
-		else if (keyboard_check_pressed(vk_space))
-		{
-			action = input.jump;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (keyboard_check_pressed(ord("Q")) && (objPlayer.flame > 0 || debug))
-		{
-			action = input.dash;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (keyboard_check_pressed(ord("W")) && (objPlayer.flame > 0 || debug))
-		{
-			action = input.attack;
-			buffer = true;
-			buffer_counter = 0;
-		}
-		else if (keyboard_check_pressed(vk_tab))
-		{
-			debug = !debug;
+			if (keyboard_check_pressed(ord("E")))
+			{
+				action = input.activate;
+				buffer = false;
+			}
+			else if (keyboard_check_pressed(vk_space))
+			{
+				action = input.jump;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (keyboard_check_pressed(ord("Q")) && (objPlayer.flame > 0 || debug))
+			{
+				action = input.dash;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (keyboard_check_pressed(ord("W")) && (objPlayer.flame > 0 || debug))
+			{
+				action = input.attack;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (keyboard_check_pressed(vk_tab))
+			{
+				debug = !debug;
+			}
 		}
 		else
 		{
@@ -151,5 +157,38 @@ if (action == input.start)
 		part_type_speed(global.ember_particle, 0.1, 1, 0, 0.5);
 		part_type_gravity(global.ember_particle, 0.01, 90);
 		part_type_scale(global.ember_particle, 1, 1);
+	}
+	else if (objUI.state == ui_states.game || objUI.state == ui_states.menu)
+	{
+		if (!paused)
+		{
+			audio_play_sound(sndSelect, 10, false);
+			action = input.none;
+			buffer = false;
+			buffer_counter = 0;
+			
+			paused = true;
+			objUI.state = ui_states.menu;
+			
+			surface_copy(objUI.ui_surface, (objCamera.x - 240) - camera_get_view_x(view_camera[0]), (objCamera.y - 135) - camera_get_view_y(view_camera[0]), application_surface);
+			part_system_automatic_update(global.particle_system, false);
+			
+			instance_deactivate_all(true);
+			instance_activate_object(objUI);
+		}
+		else
+		{
+			audio_play_sound(sndSelect, 10, false);
+			action = input.none;
+			buffer = false;
+			buffer_counter = 0;
+			
+			paused = false;
+			objUI.state = ui_states.game;
+			
+			part_system_automatic_update(global.particle_system, true);
+			
+			instance_activate_all();
+		}
 	}
 }

@@ -10,12 +10,27 @@ if (cooldown)
 	if (respawn_counter >= respawn_frames)
 	{
 		cooldown = false;
+		respawning = true;
 		respawn_counter = 0;
-		sprite_index = sprFlamePickup;
+		scrPlaySound(sndFlameRestorePickupSpawn, x, y);
+		sprite_index = sprFlameRestorePickupSpawn;
 		image_speed = 1;
 	}
 }
 else
 {
-	y = scrWaveMotion(ystart - 2, ystart + 2, 1, 0);
+	if (respawning)
+	{
+		respawn_counter++;
+		if (respawn_counter >= 16)
+		{
+			respawning = false;
+			respawn_counter = 0;
+			sprite_index = sprFlamePickup;
+		}
+	}
+	else
+	{
+		y = scrWaveMotion(ystart - 2, ystart + 2, 1, 0);
+	}
 }

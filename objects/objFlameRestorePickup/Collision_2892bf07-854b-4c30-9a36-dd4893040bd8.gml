@@ -1,4 +1,4 @@
-if (!cooldown && objPlayer.flame < objPlayer.flame_max)
+if ((!cooldown && !respawning) && objPlayer.flame < objPlayer.flame_max)
 {
 	cooldown = true;
 	sprite_index = sprFlameRestorePickupBurst;
