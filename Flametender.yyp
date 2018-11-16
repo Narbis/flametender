@@ -375,6 +375,14 @@
             }
         },
         {
+            "Key": "32449455-e428-4ce1-ba32-f172a6ac5af6",
+            "Value": {
+                "id": "7ae05e1f-ff7d-4e7f-a2e1-38e865ef18e1",
+                "resourcePath": "objects\\objResults\\objResults.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "32a6562a-ae5d-4d08-89e1-4ea283e7d0c9",
             "Value": {
                 "id": "c4b50f91-eb0f-4f9f-b5e5-0aad9ca5a8d9",
@@ -836,6 +844,14 @@
                 "id": "fd0774fc-a58e-4b82-a04c-00d1d5686b46",
                 "resourcePath": "views\\6ce755db-6dcb-4be3-a7d6-e8ebe194857c.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "6d6d702b-9a4b-4f5e-92bb-7c3ecdf58b87",
+            "Value": {
+                "id": "cc440d50-cce8-4f87-8003-d3d2a88a4024",
+                "resourcePath": "fonts\\fntGeorgia\\fntGeorgia.yy",
+                "resourceType": "GMFont"
             }
         },
         {
@@ -1723,6 +1739,14 @@
             "Value": {
                 "id": "3d373c72-aca6-41e2-a806-9b00132c603b",
                 "resourcePath": "sprites\\sprSpikesDown\\sprSpikesDown.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "e0aae7b8-9d48-4874-97ad-ff91a068ff7e",
+            "Value": {
+                "id": "d0e8aef0-7e9b-427b-89a1-aaf7db997521",
+                "resourcePath": "sprites\\sprResults\\sprResults.yy",
                 "resourceType": "GMSprite"
             }
         },

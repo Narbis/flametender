@@ -11,6 +11,8 @@ state = ui_states.title;
 frame_counter = 0;
 transition_alpha = 0;
 
+game_over = false;
+
 //Surface used to draw UI stuff
 ui_surface = noone;
 

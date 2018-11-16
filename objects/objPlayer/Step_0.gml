@@ -1533,13 +1533,13 @@ switch (state)
 		if (frame_counter == 1)
 		{
 			
+			dashes++;
+			
 			// Deduct 1 flame and reset regeneration counter
 			if (!controls.debug)
 			{
 				flame -= 1;
 				flame_regen_counter = 0;
-				
-				dashes++;
 			}
 			
 			// Determine dash direction

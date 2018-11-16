@@ -19,7 +19,7 @@ switch(state)
 	
 	case ui_states.game:
 	
-		if (frame_counter == 1)
+		if (!game_over && frame_counter == 1)
 		{
 			objControls.has_control = true;
 		}
@@ -36,6 +36,11 @@ switch(state)
 			objControls.action = input.none;
 			objControls.buffer = false;
 			objControls.buffer_counter = 0;
+			
+			if (transition_room == roomEnd)
+			{
+				game_over = true;
+			}
 		}
 
 	break;
