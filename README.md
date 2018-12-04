@@ -22,8 +22,6 @@ Pause: Enter
 
 DEBUG INFO:
 -Press the ESC key to exit the game at any time.
-
 -Press backspace to reset a room if you get stuck in a wall or something (do this at your own risk, it can cause some super weird issues).
-
 -Press UP on the D-PAD (XBOX) or TAB (keyboard) to activate DEBUG MODE. This gives you unlimited Flame and you don't lose Life when you
 get hurt or fall. Using this is just for playing around with the mechanics, though. Don't be a dirty cheater.
