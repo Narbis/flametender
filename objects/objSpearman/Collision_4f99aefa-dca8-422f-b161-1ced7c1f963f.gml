@@ -4,8 +4,8 @@ if (state != spearman_states.dead && state != spearman_states.hurt)
 {	
 	state = spearman_states.hurt;
 	
-	v_speed = -1.5;
-	h_speed = 1.5 * sign(x - other.x);
+	v_speed = -1;
+	h_speed = sign(x - other.x);
 	life -= 1;
 	
 	if (life <= 0)

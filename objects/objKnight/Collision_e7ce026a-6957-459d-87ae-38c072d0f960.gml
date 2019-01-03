@@ -14,8 +14,8 @@ if (state != knight_states.dead && state != knight_states.hurt)
 	{
 		state = knight_states.hurt;
 	
-		v_speed = -1;
-		h_speed = 1 * sign(x - other.x);
+		v_speed = -0.75;
+		h_speed = 0.75 * sign(x - other.x);
 		life -= 1;
 	
 		if (life <= 0)

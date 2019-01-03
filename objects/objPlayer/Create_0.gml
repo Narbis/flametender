@@ -90,7 +90,7 @@ walk_transition_frames = 10;
 slide_fall_transition_frames = 20;
 hang_climb_transition_frames = 10;
 hang_slide_transition_frames = 10;
-flamedash_frames = 10;
+flamedash_frames = 12;
 attack_frames = 20;
 aerial_attack_frames = 44;
 hurt_frames = 20;
@@ -100,10 +100,10 @@ invuln_frames = 90;
 
 // Movement constants
 
-v_gravity = 0.22;
+v_gravity = 0.15;
 move_speed = 1.8;
-jump_speed = 3;
-flamedash_speed = 5;
+jump_speed = 2.2;
+flamedash_speed = 3.2;
 
 run_threshold = 0.5;
 fast_fall_threshold = 0.5;

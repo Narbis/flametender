@@ -31,8 +31,8 @@ if ((state != player_states.dead && state != player_states.flamedash) && !invuln
 	state = player_states.hurt;
 	invuln = true;
 	
-	v_speed = -2;
-	h_speed = 2 * sign(x - other.x);
+	v_speed = -1;
+	h_speed = sign(x - other.x);
 	if (!controls.debug)
 	{
 		life -= 1;
