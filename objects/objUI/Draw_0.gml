@@ -22,7 +22,7 @@ switch(state)
 	
 	case ui_states.menu:
 	
-		draw_sprite_ext(sprPauseMenui, 0, 240, 135, 1, 1, 0, c_white, 1);
+		draw_sprite_ext(sprPauseMenu, 0, 240, 135, 1, 1, 0, c_white, 1);
 	
 	break;
 	
@@ -42,13 +42,13 @@ switch(state)
 			{
 				if (i >= objPlayer.flame)
 				{
-					draw_sprite_ext(sprFlameScorch, 0, 16 + (16 * i), 16, 1, 1, 0, c_white, 1);
+					draw_sprite_ext(sprFlameScorch, 0, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * i), 16, 1, 1, 0, c_white, 1);
 				}
 				else
 				{
-					part_particles_create(ui_particle_system, 16 + (16 * i), 16, ui_flame_particle, 1);
+					part_particles_create(ui_particle_system, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * i), 16, ui_flame_particle, 1);
 				}
-	
+				/*
 				if (previous_flame > objPlayer.flame)
 				{
 					part_particles_create(ui_particle_system, 16 + (16 * objPlayer.flame), 16, ui_ember_particle, 10);
@@ -57,11 +57,12 @@ switch(state)
 				{
 					part_particles_create(ui_particle_system, 16 + (16 * previous_flame), 16, ui_ember_particle, 10);
 				}
+				*/
 			}
 		
 			if (new_flame_animation)
 			{
-				draw_sprite_ext(sprNewFlame, new_flame_frame / 3, 16 + (16 * (objPlayer.flame_max)), 16, 1, 1, 0, c_white, 1);
+				draw_sprite_ext(sprNewFlame, new_flame_frame / 3, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * objPlayer.flame_max), 16, 1, 1, 0, c_white, 1);
 				new_flame_frame += 1;
 			
 				if (new_flame_frame >= 48)
@@ -70,34 +71,6 @@ switch(state)
 					new_flame_frame = 0;
 					objPlayer.flame_max += 1;
 					objPlayer.flame = objPlayer.flame_max;
-				}
-			}
-		
-			// UI Life
-
-			for (i = 0; i < objPlayer.life_max; i += 1)
-			{
-				if (i >= objPlayer.life)
-				{
-					draw_sprite_ext(sprLifeEmpty, 0, 464 - (16 * i), 16, 1, 1, 0, c_white, 1);
-				}
-				else
-				{
-					draw_sprite_ext(sprLife, 0, 464 - (16 * i), 16, 1, 1, 0, c_white, 1);
-				}
-			}
-		
-			if (new_life_animation)
-			{
-				draw_sprite_ext(sprNewLife, new_life_frame / 2, 464 - (16 * (objPlayer.life_max)), 16, 1, 1, 0, c_white, 1);
-				new_life_frame += 1;
-			
-				if (new_life_frame >= 32)
-				{
-					new_life_animation = false;
-					new_life_frame = 0;
-					objPlayer.life_max += 1;
-					objPlayer.life = objPlayer.life_max;
 				}
 			}
 		
@@ -159,19 +132,6 @@ switch(state)
 				else
 				{
 					part_particles_create(ui_particle_system, 158 + (16 * i), 84, ui_flame_particle, 1);
-				}
-			}
-			
-			// Hearts
-			for (i = 3; i < 6; i += 1)
-			{
-				if (i >= objPlayer.life_max)
-				{
-					draw_sprite_ext(sprLifeEmpty, 0, 200 + (16 * (i - 3)), 120, 1, 1, 0, c_white, 1);
-				}
-				else
-				{
-					draw_sprite_ext(sprLife, 0, 200 + (16 * (i - 3)), 120, 1, 1, 0, c_white, 1);
 				}
 			}
 			

@@ -31,7 +31,7 @@ if gamepad_is_connected(0)
 }
 
 buffer = false;
-buffer_size = 5;
+buffer_size = 10;
 buffer_counter = 0;
 
 // Global particle system stuff

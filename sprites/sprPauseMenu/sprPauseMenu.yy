@@ -2,7 +2,7 @@
     "id": "d9905430-a086-4283-b425-c069549c5b2c",
     "modelName": "GMSprite",
     "mvc": "1.12",
-    "name": "sprPauseMenui",
+    "name": "sprPauseMenu",
     "For3D": false,
     "HTile": false,
     "VTile": false,

@@ -32,9 +32,6 @@ previous_flame = 0; // keeps track of when to do ember bursts
 new_flame_animation = false; // set to true to do the particle effect of picking up a new flame
 new_flame_frame = 0;
 
-new_life_animation = false;
-new_life_frame = 0;
-
 debug_on = false;
 debug_message_counter = 0;
 debug_message_frames = 120;

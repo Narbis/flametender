@@ -678,9 +678,29 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (jump_buffer > 0 && controls.action == input.jump)
+		else if (controls.action == input.jump && jump_buffer > 0)
 		{
 			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.jump && ((position_meeting(x + 6, y + 15, objWall) && position_meeting(x + 6, y - 7, objWall)) || (position_meeting(x - 6, y + 15, objWall) && position_meeting(x - 6, y - 7, objWall))))
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+			
+			// Add horizontal speed from jumping
+			if (position_meeting(x - 6, y, objWall))
+			{
+				h_speed = move_speed;
+			}
+			else
+			{
+				h_speed = -move_speed;
+			}
 		}
 		else if (v_speed >= 0 && place_meeting(x, y + 1, objWall))
 		{
@@ -1976,14 +1996,14 @@ switch (state)
 		
 		// Change player to appropriate state
 		
-		if (!invuln || (frame_counter >= hurt_frames && life > 0))
+		if (!invuln || (frame_counter >= hurt_frames && flame > 0))
 		{
 			state = player_states.fall;
 		}
 		
 		if (place_meeting(x, y + 1, objWall))
 		{
-			if (life > 0)
+			if (flame > 0)
 			{
 				state = player_states.lightland;
 			}
@@ -2065,7 +2085,7 @@ switch (state)
 		if (frame_counter == dead_frames)
 		{
 			deaths++;
-			life = life_max;
+			flame = flame_max;
 			image_speed = 0;
 			
 			objUI.transition_room = roomStart;
@@ -2087,7 +2107,7 @@ if (invuln)
 {
 	invuln_counter += 1;
 	
-	if (invuln_counter == invuln_frames && life > 0)
+	if (invuln_counter == invuln_frames && flame > 0)
 	{
 		invuln_counter = 0;
 		invuln = !invuln;
@@ -2146,7 +2166,7 @@ if (((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32)))
 		invuln = true;
 		if (!controls.debug)
 		{
-			life -= 1;
+			// get hurt?
 		}
 	}
 }

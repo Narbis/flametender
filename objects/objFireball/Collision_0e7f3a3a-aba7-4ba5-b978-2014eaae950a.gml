@@ -1,3 +1,10 @@
+with(other)
+{
+	part_type_scale(arrow_deflect_particle, sign(image_xscale), 1);
+	part_particles_create(global.particle_system, x, y, arrow_deflect_particle, 1);
+	instance_destroy();
+}
+
 if(facing_right)
 {
 	scrPlaySound(sndFireballHit, x, y);

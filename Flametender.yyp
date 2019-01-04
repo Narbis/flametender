@@ -1674,7 +1674,7 @@
             "Key": "d9905430-a086-4283-b425-c069549c5b2c",
             "Value": {
                 "id": "e72dfd8c-24ea-43d4-91ab-901c7a5a8f7c",
-                "resourcePath": "sprites\\sprPauseMenui\\sprPauseMenui.yy",
+                "resourcePath": "sprites\\sprPauseMenu\\sprPauseMenu.yy",
                 "resourceType": "GMSprite"
             }
         },

@@ -33,10 +33,6 @@ if ((state != player_states.dead && state != player_states.flamedash) && !invuln
 	
 	v_speed = -1;
 	h_speed = sign(x - other.x);
-	if (!controls.debug)
-	{
-		life -= 1;
-	}
 	
 	scrPlaySound(sndPlayerHurt, x, y);
 	
