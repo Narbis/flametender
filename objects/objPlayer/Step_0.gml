@@ -557,11 +557,11 @@ switch (state)
 		var target_speed = sign(controls.input_x) * max(move_speed, abs(h_speed));
 		if (h_speed < target_speed)
 		{
-			h_speed = min(target_speed, h_speed + (move_speed / 16));
+			h_speed = min(target_speed, h_speed + (move_speed / 18));
 		}
 		else
 		{
-			h_speed = max(target_speed, h_speed - (move_speed / 16));
+			h_speed = max(target_speed, h_speed - (move_speed / 18));
 		}
 		
 		v_speed = v_speed + v_gravity;
@@ -1316,12 +1316,14 @@ switch (state)
 		if (frame_counter == 1)
 		{
 
+			/*
 			// Deduct 1 flame and reset regeneration counter
 			if (!controls.debug)
 			{
 				flame -= 1;
 				flame_regen_counter = 0;
 			}
+			*/
 			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
@@ -1362,15 +1364,10 @@ switch (state)
 		
 		if (frame_counter == 7)
 		{
-			if (face_right)
+			// Create fireball instance
+			with(instance_create_layer(x, y, "Player", objFireball))
 			{
-				// Create fireball instance
-				var fireball = instance_create_layer(x + 7, y + 3, "Player", objFireball);
-			}
-			else
-			{
-				// Create fireball instance
-				var fireball = instance_create_layer(x - 7, y + 3, "Player", objFireball);
+				attack = attack_types.ground;
 			}
 			
 			// Play sound
@@ -1456,12 +1453,14 @@ switch (state)
 		if (frame_counter == 1)
 		{
 
+			/*
 			// Deduct 1 flame and reset regeneration counter
 			if (!controls.debug)
 			{
 				flame -= 1;
 				flame_regen_counter = 0;
 			}
+			*/
 			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
@@ -1494,15 +1493,10 @@ switch (state)
 		
 		if (frame_counter == 7)
 		{
-			if (face_right)
+			// Create fireball instance
+			with(instance_create_layer(x, y, "Player", objFireball))
 			{
-				// Create fireball instance
-				var fireball = instance_create_layer(x + 14, y + 6, "Player", objFireball);
-			}
-			else
-			{
-				// Create fireball instance
-				var fireball = instance_create_layer(x - 14, y + 6, "Player", objFireball);
+				attack = attack_types.aerial;
 			}
 			
 			// Play sound
@@ -1555,12 +1549,14 @@ switch (state)
 			
 			dashes++;
 			
+			/*
 			// Deduct 1 flame and reset regeneration counter
 			if (!controls.debug)
 			{
 				flame -= 1;
 				flame_regen_counter = 0;
 			}
+			*/
 			
 			// Determine dash direction
 			
@@ -2118,7 +2114,7 @@ if (invuln)
 
 // FLAME REGENERATION
 #region
-
+/*
 if (flame < flame_max)
 {
 	if (state == player_states.idle || state == player_states.walk)
@@ -2145,7 +2141,7 @@ if (flame < flame_max)
 		}
 	}
 }
-
+*/
 #endregion
 
 // CHECK FOR OUT OF BOUNDS

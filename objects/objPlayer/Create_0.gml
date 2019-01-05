@@ -63,8 +63,8 @@ invuln = false; // used for having a moment to escape after getting hurt
 
 h_speed = 0;
 v_speed = 0;
-flame = 0;
-flame_max = 0;
+flame = 30;
+flame_max = 30;
 
 // State counters
 

@@ -38,15 +38,57 @@ switch(state)
 		
 			// UI Flame
 
-			for (i = 0; i < objPlayer.flame_max; i += 1)
+			for (i = 10; i <= objPlayer.flame_max; i += 10)
 			{
-				if (i >= objPlayer.flame)
+				if (i <= objPlayer.flame)
 				{
-					draw_sprite_ext(sprFlameScorch, 0, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * i), 16, 1, 1, 0, c_white, 1);
+					part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_10, 1);
+				}
+				else if (i - 10 < objPlayer.flame)
+				{
+					// Flame size decreases depending on remaining flame
+					switch (10 - (i - objPlayer.flame))
+					{
+						case 9:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_9, 1);
+							break;
+							
+						case 8:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_8, 1);
+							break;
+							
+						case 7:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_7, 1);
+							break;
+							
+						case 6:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_6, 1);
+							break;
+							
+						case 5:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_5, 1);
+							break;
+							
+						case 4:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_4, 1);
+							break;
+							
+						case 3:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_3, 1);
+							break;
+							
+						case 2:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_2, 1);
+							break;
+							
+						case 1:
+							part_particles_create(ui_particle_system, (16 * (i / 10)), 16, ui_flame_particle_1, 1);
+							break;
+					}
 				}
 				else
 				{
-					part_particles_create(ui_particle_system, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * i), 16, ui_flame_particle, 1);
+					draw_sprite_ext(sprFlameScorch, 0, (16 * (i / 10)), 16, 1, 1, 0, c_white, 1);
 				}
 				/*
 				if (previous_flame > objPlayer.flame)
@@ -62,14 +104,14 @@ switch(state)
 		
 			if (new_flame_animation)
 			{
-				draw_sprite_ext(sprNewFlame, new_flame_frame / 3, (240 - (8 * (objPlayer.flame_max - 1))) + (16 * objPlayer.flame_max), 16, 1, 1, 0, c_white, 1);
+				draw_sprite_ext(sprNewFlame, new_flame_frame / 3, (16 * (objPlayer.flame_max / 10)) + 16, 16, 1, 1, 0, c_white, 1);
 				new_flame_frame += 1;
 			
 				if (new_flame_frame >= 48)
 				{
 					new_flame_animation = false;
 					new_flame_frame = 0;
-					objPlayer.flame_max += 1;
+					objPlayer.flame_max += 10;
 					objPlayer.flame = objPlayer.flame_max;
 				}
 			}
