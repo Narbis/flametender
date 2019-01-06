@@ -1316,14 +1316,7 @@ switch (state)
 		if (frame_counter == 1)
 		{
 
-			/*
-			// Deduct 1 flame and reset regeneration counter
-			if (!controls.debug)
-			{
-				flame -= 1;
-				flame_regen_counter = 0;
-			}
-			*/
+			flame_regen_counter = 0;
 			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
@@ -1453,14 +1446,7 @@ switch (state)
 		if (frame_counter == 1)
 		{
 
-			/*
-			// Deduct 1 flame and reset regeneration counter
-			if (!controls.debug)
-			{
-				flame -= 1;
-				flame_regen_counter = 0;
-			}
-			*/
+			flame_regen_counter = 0;
 			
 			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
 			{
@@ -1548,15 +1534,7 @@ switch (state)
 		{
 			
 			dashes++;
-			
-			/*
-			// Deduct 1 flame and reset regeneration counter
-			if (!controls.debug)
-			{
-				flame -= 1;
-				flame_regen_counter = 0;
-			}
-			*/
+			flame_regen_counter = 0;
 			
 			// Determine dash direction
 			
@@ -2114,8 +2092,7 @@ if (invuln)
 
 // FLAME REGENERATION
 #region
-/*
-if (flame < flame_max)
+if (flame % 10 != 0)
 {
 	if (state == player_states.idle || state == player_states.walk)
 	{
@@ -2135,13 +2112,12 @@ if (flame < flame_max)
 		flame += 1;
 		flame_regen_counter -= flame_regen_frames;
 		
-		if (flame == flame_max)
+		if (flame % 10 == 0)
 		{
 			flame_regen_counter = 0;
 		}
 	}
 }
-*/
 #endregion
 
 // CHECK FOR OUT OF BOUNDS

@@ -75,7 +75,7 @@ part_type_life(ui_ember_particle, 30, 90);
 // UI flame particle size 10
 ui_flame_particle_10 = part_type_create();
 part_type_sprite(ui_flame_particle_10, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_10, 0.5, 1.5, -0.1, 0);
+part_type_size(ui_flame_particle_10, 1, 2, -0.1, 0);
 part_type_orientation(ui_flame_particle_10, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_10, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_10, 1, 1, 0);
@@ -87,7 +87,7 @@ part_type_life(ui_flame_particle_10, 15, 20);
 // UI flame particle size 9
 ui_flame_particle_9 = part_type_create();
 part_type_sprite(ui_flame_particle_9, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_9, 0.45, 1.4, -0.09, 0);
+part_type_size(ui_flame_particle_9, 0.5, 1.9, -0.09, 0);
 part_type_orientation(ui_flame_particle_9, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_9, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_9, 1, 1, 0);
@@ -99,7 +99,7 @@ part_type_life(ui_flame_particle_9, 15, 20);
 // UI flame particle size 8
 ui_flame_particle_8 = part_type_create();
 part_type_sprite(ui_flame_particle_8, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_8, 0.4, 1.3, -0.08, 0);
+part_type_size(ui_flame_particle_8, 0.45, 1.7, -0.08, 0);
 part_type_orientation(ui_flame_particle_8, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_8, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_8, 1, 1, 0);
@@ -111,7 +111,7 @@ part_type_life(ui_flame_particle_8, 15, 20);
 // UI flame particle size 7
 ui_flame_particle_7 = part_type_create();
 part_type_sprite(ui_flame_particle_7, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_7, 0.35, 1.2, -0.07, 0);
+part_type_size(ui_flame_particle_7, 0.4, 1.5, -0.07, 0);
 part_type_orientation(ui_flame_particle_7, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_7, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_7, 1, 1, 0);
@@ -123,7 +123,7 @@ part_type_life(ui_flame_particle_7, 15, 20);
 // UI flame particle size 6
 ui_flame_particle_6 = part_type_create();
 part_type_sprite(ui_flame_particle_6, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_6, 0.3, 1.1, -0.06, 0);
+part_type_size(ui_flame_particle_6, 0.35, 1.3, -0.06, 0);
 part_type_orientation(ui_flame_particle_6, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_6, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_6, 1, 1, 0);
@@ -135,7 +135,7 @@ part_type_life(ui_flame_particle_6, 15, 20);
 // UI flame particle size 5
 ui_flame_particle_5 = part_type_create();
 part_type_sprite(ui_flame_particle_5, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_5, 0.25, 1, -0.05, 0);
+part_type_size(ui_flame_particle_5, 0.3, 1.1, -0.05, 0);
 part_type_orientation(ui_flame_particle_5, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_5, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_5, 1, 1, 0);
@@ -147,7 +147,7 @@ part_type_life(ui_flame_particle_5, 15, 20);
 // UI flame particle size 4
 ui_flame_particle_4 = part_type_create();
 part_type_sprite(ui_flame_particle_4, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_4, 0.2, 0.9, -0.04, 0);
+part_type_size(ui_flame_particle_4, 0.25, 0.9, -0.04, 0);
 part_type_orientation(ui_flame_particle_4, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_4, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_4, 1, 1, 0);
@@ -159,7 +159,7 @@ part_type_life(ui_flame_particle_4, 15, 20);
 // UI flame particle size 3
 ui_flame_particle_3 = part_type_create();
 part_type_sprite(ui_flame_particle_3, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_3, 0.15, 0.8, -0.03, 0);
+part_type_size(ui_flame_particle_3, 0.2, 0.7, -0.03, 0);
 part_type_orientation(ui_flame_particle_3, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_3, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_3, 1, 1, 0);
@@ -171,7 +171,7 @@ part_type_life(ui_flame_particle_3, 15, 20);
 // UI flame particle size 2
 ui_flame_particle_2 = part_type_create();
 part_type_sprite(ui_flame_particle_2, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_2, 0.1, 0.7, -0.02, 0);
+part_type_size(ui_flame_particle_2, 0.1, 0.5, -0.02, 0);
 part_type_orientation(ui_flame_particle_2, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_2, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_2, 1, 1, 0);
@@ -183,7 +183,7 @@ part_type_life(ui_flame_particle_2, 15, 20);
 // UI flame particle size 1
 ui_flame_particle_1 = part_type_create();
 part_type_sprite(ui_flame_particle_1, sprFireSmall, 0, 0, 1);
-part_type_size(ui_flame_particle_1, 0.05, 0.6, -0.01, 0);
+part_type_size(ui_flame_particle_1, 0.05, 0.3, -0.01, 0);
 part_type_orientation(ui_flame_particle_1, 0, 360, 5, 0, 0);
 part_type_color2(ui_flame_particle_1, c_orange, c_red);
 part_type_alpha3(ui_flame_particle_1, 1, 1, 0);
