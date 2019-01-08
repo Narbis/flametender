@@ -1331,7 +1331,14 @@ switch (state)
 				image_xscale = 1;
 				
 				// Animations
-				sprite_index = sprPlayerAttack;
+				if (attack_combo == 0)
+				{
+					sprite_index = sprPlayerAttack;
+				}
+				else if (attack_combo == 1)
+				{
+					sprite_index = sprPlayerAttackSecond;
+				}
 				
 			}
 			else
@@ -1347,7 +1354,14 @@ switch (state)
 				image_xscale = -1;
 				
 				// Animations
-				sprite_index = sprPlayerAttack;
+				if (attack_combo == 0)
+				{
+					sprite_index = sprPlayerAttack;
+				}
+				else if (attack_combo == 1)
+				{
+					sprite_index = sprPlayerAttackSecond;
+				}
 				
 			}
 			
@@ -1373,9 +1387,27 @@ switch (state)
 		
 		if (frame_counter >= attack_frames)
 		{
+			if (controls.action == input.attack && attack_combo < max_combo)
+			{
+				state = player_states.attack;
+				controls.action = input.none;
+				controls.buffer = false;
+				controls.buffer_counter = 0;
+				
+				reset_animation = true;
+				frame_counter = 0;
+				
+				attack_combo++;
+			}
+		}
+		
+		if (frame_counter >= attack_complete_frames)
+		{
 			state = player_states.idle;
 			reset_animation = true;
 			frame_counter = 0;
+				
+			attack_combo = 0;
 		}
 		
 		break;
@@ -1491,18 +1523,32 @@ switch (state)
 			attacks++;
 		}
 		
-		// If player collides with the ground before the animation finishes, cancel it and enter the heavy land state
+		// If player collides with the ground before the animation finishes, cancel it and enter the heavy land state; otherwise land normally
 		
-		if (v_speed >= 0 && place_meeting(x, y + 1, objWall))
+		if (place_meeting(x, y + 1, objWall))
 		{
-			state = player_states.heavyland;
+			if (frame_counter < aerial_attack_frames)
+			{
+				state = player_states.heavyland;
+			}
+			else
+			{
+				state = player_states.lightland;
+			}
 			reset_animation = true;
 			frame_counter = 0;
 		}
-		
-		// If animation finishes, enter fall state and reset frame counter
-		
-		if (frame_counter >= aerial_attack_frames)
+		else if (controls.action == input.dash && frame_counter >= aerial_attack_frames)
+		{
+			state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+			
+			reset_animation = true;
+			frame_counter = 0;
+		}
+		else if (frame_counter >= aerial_attack_complete_frames)
 		{
 			state = player_states.fall;
 			reset_animation = true;

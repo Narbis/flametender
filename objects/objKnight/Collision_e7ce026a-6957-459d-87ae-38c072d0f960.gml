@@ -2,7 +2,7 @@
 
 if (state != knight_states.dead && state != knight_states.hurt)
 {	
-	if (shield_active && ((face_right && other.x - x >= 0) || (!face_right && other.x - x <= 0)))
+	if (shield_active && ((face_right && objPlayer.x - x >= 0) || (!face_right && objPlayer.x - x <= 0)))
 	{
 		state = knight_states.block;
 		

@@ -36,6 +36,7 @@ if ((state != player_states.dead && state != player_states.flamedash) && !invuln
 	
 	scrPlaySound(sndPlayerHurt, x, y);
 	
+	attack_combo = 0;
 	reset_animation = true;
 	frame_counter = 0;
 	image_speed = 1;
