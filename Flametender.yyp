@@ -735,6 +735,14 @@
             }
         },
         {
+            "Key": "5f10525c-a14e-47cc-9266-a9b18f6e90f3",
+            "Value": {
+                "id": "2c8a1ced-80d8-4d74-a467-fd608081a9bd",
+                "resourcePath": "sprites\\sprPlayerCrouch\\sprPlayerCrouch.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "605999fb-6ce9-45d1-ad27-76f30cd474b1",
             "Value": {
                 "id": "a2157d5d-41c8-43f0-b66a-aa26c52823da",

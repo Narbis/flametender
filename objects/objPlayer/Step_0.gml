@@ -82,6 +82,10 @@ switch (state)
 				state = player_states.walk;
 			}
 		}
+		else if (controls.input_y >= crouch_threshold)
+		{
+			state = player_states.crouch;
+		}
 		
 		// Reset animation and frame counter if necessary
 		
@@ -89,6 +93,109 @@ switch (state)
 		{
 			reset_animation = true;
 			frame_counter = 0;
+		}
+		
+		break;
+	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: CROUCH
+	//
+	// The character is crouching close to the ground
+	//-----------------------------------------------------------------------------------------------------------------
+	#region 
+	case player_states.crouch:
+		
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Calculate movement
+		
+		h_speed = 0;
+		v_speed = 0;
+		
+		// Animations
+		
+		sprite_index = sprPlayerCrouch;
+		
+		// Set facing of sprite based on state of the face_right variable
+		
+		if (face_right)
+		{
+			image_xscale = 1;
+		}
+		else
+		{
+			image_xscale = -1;
+		}
+		
+		if (controls.input_y >= crouch_threshold)
+		{
+			if (image_index < 2)
+			{
+				image_speed = 1;
+			}
+			else
+			{
+				image_speed = 0;
+			}
+		}
+		else
+		{
+			image_speed = -1;
+		}
+		
+		// Change player to appropriate state 
+		
+		if (controls.action == input.attack)
+		{
+			state = player_states.attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.dash)
+		{
+			state = player_states.flamedash;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.action == input.jump)
+		{
+			state = player_states.jump;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
+		else if (controls.input_x != 0 && !place_meeting(x + sign(controls.input_x), y, objWall))
+		{
+			if (abs(controls.input_x) > run_threshold)
+			{
+				state = player_states.dash;
+			}
+			else
+			{
+				state = player_states.walk;
+			}
+		}
+		else if (image_speed < 0 && image_index < 0.5)
+		{
+			state = player_states.idle;
+		}
+		
+		// Reset animation and frame counter if necessary
+		
+		if (state != player_states.crouch)
+		{
+			reset_animation = true;
+			frame_counter = 0;
+			image_speed = 1;
 		}
 		
 		break;
@@ -191,6 +298,10 @@ switch (state)
 			{
 				state = player_states.dash;
 			}
+		}
+		else if (controls.input_y >= crouch_threshold)
+		{
+			state = player_states.crouch;
 		}
 		else
 		{
@@ -491,6 +602,10 @@ switch (state)
 			{
 				state = player_states.dash;
 			}
+		}
+		else if (controls.input_y >= crouch_threshold)
+		{
+			state = player_states.crouch;
 		}
 		else if (image_index > image_number - 1)
 		{
@@ -837,6 +952,10 @@ switch (state)
 			{
 				state = player_states.dash;
 			}
+		}
+		else if (controls.input_y >= crouch_threshold)
+		{
+			state = player_states.crouch;
 		}
 		else if (image_index > image_number - 1)
 		{

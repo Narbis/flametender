@@ -1,6 +1,7 @@
 enum player_states
 {
 	idle,
+	crouch,
 	walk,
 	dash,
 	run,
@@ -105,6 +106,7 @@ flamedash_speed = 3.2;
 
 run_threshold = 0.5;
 fast_fall_threshold = 0.5;
+crouch_threshold = 0.5;
 
 if (instance_exists(objControls))
 {

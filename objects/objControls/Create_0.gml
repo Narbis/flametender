@@ -27,7 +27,7 @@ gamepad = false;
 if gamepad_is_connected(0) 
 {
 	gamepad = true;
-	gamepad_set_axis_deadzone(0, 0.2);
+	gamepad_set_axis_deadzone(0, 0.35);
 }
 
 buffer = false;
