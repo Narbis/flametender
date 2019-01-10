@@ -60,6 +60,7 @@ reset_animation = false;
 finish_animation = false;
 ledge = noone;
 dash_grounded = true; // this is only used for flamedashes
+dash_ready = true;
 invuln = false; // used for having a moment to escape after getting hurt
 attack_combo = 0; // keeps track of how many hits in a multi-hit attack have been done
 max_combo = 1;

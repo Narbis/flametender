@@ -28,6 +28,8 @@ switch (state)
 			reset_animation = false;
 		}
 		
+		dash_ready = true;
+		
 		// Calculate movement
 		
 		h_speed = 0;
@@ -57,7 +59,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action == input.dash)
+		else if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -159,7 +161,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action == input.dash)
+		else if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -216,6 +218,8 @@ switch (state)
 			image_index = 0;
 			reset_animation = false;
 		}
+		
+		dash_ready = true;
 		
 		// Calculate movement
 		
@@ -278,7 +282,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action == input.dash)
+		else if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -334,6 +338,8 @@ switch (state)
 			image_index = 0;
 			reset_animation = false;
 		}
+		
+		dash_ready = true;
 		
 		// Animations and particles
 		
@@ -473,7 +479,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action = input.dash)
+		else if (controls.action = input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -578,7 +584,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action = input.dash)
+		else if (controls.action = input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -779,7 +785,7 @@ switch (state)
 		
 		// Change player to appropriate state
 		
-		if (controls.action == input.dash)
+		if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -862,6 +868,8 @@ switch (state)
 			reset_animation = false;
 		}
 		
+		dash_ready = true;
+		
 		// Calculate movement
 		
 		if (!(frame_counter == 1 && controls.action == input.jump))
@@ -928,7 +936,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action = input.dash)
+		else if (controls.action = input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -988,6 +996,8 @@ switch (state)
 			image_index = 0;
 			reset_animation = false;
 		}
+		
+		dash_ready = true;
 		
 		// Calculate movement
 		
@@ -1091,6 +1101,8 @@ switch (state)
 		{
 			x = ledge.x;
 			y = ledge.y;
+			
+			dash_ready = true;
 		}
 		
 		// Set facing of sprite based on state of the face_right variable
@@ -1106,7 +1118,7 @@ switch (state)
 		
 		// Change player to appropriate state
 
-		if (controls.action == input.dash)
+		if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			if (face_right)
@@ -1352,7 +1364,7 @@ switch (state)
 		{
 			state = player_states.lightland;
 		}
-		else if (controls.action == input.dash)
+		else if (controls.action == input.dash && dash_ready)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -1657,7 +1669,7 @@ switch (state)
 			reset_animation = true;
 			frame_counter = 0;
 		}
-		else if (controls.action == input.dash && frame_counter >= aerial_attack_frames)
+		else if (controls.action == input.dash && dash_ready && frame_counter >= aerial_attack_frames)
 		{
 			state = player_states.flamedash;
 			controls.action = input.none;
@@ -1726,6 +1738,7 @@ switch (state)
 				// AERIAL DASH
 				
 				dash_grounded = false;
+				dash_ready = false;
 				
 				if (dash_direction > 22.5 && dash_direction < 67.5)
 				{
@@ -1963,7 +1976,6 @@ switch (state)
 		{
 			part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y + 5, y + 9, ps_shape_rectangle, ps_distr_linear);
 			part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
-			part_particles_create(global.particle_system, x, y + 7, global.ember_particle, 1);
 			if (frame_counter % 3 == 1)
 			{
 				if (face_right)
@@ -1980,7 +1992,6 @@ switch (state)
 		{
 			part_emitter_region(global.particle_system, flamedash_emitter, x - 2, x + 2, y - 2, y + 2, ps_shape_rectangle, ps_distr_linear);
 			part_emitter_burst(global.particle_system, flamedash_emitter, global.dash_particle, 5);
-			part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
 		}
 		
 		// Horizontal collisions
@@ -2238,6 +2249,16 @@ switch (state)
 		break;
 	#endregion
 }
+
+// NO FLAMEDASH INDICATOR
+#region
+	
+if (!dash_ready && frame_counter % 3 == 0)
+{
+	part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
+}
+	
+#endregion
 
 // INVULNERABILITY
 #region
