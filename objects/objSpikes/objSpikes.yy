@@ -4,7 +4,16 @@
     "mvc": "1.0",
     "name": "objSpikes",
     "eventList": [
-        
+        {
+            "id": "6381ef95-7213-4fe3-a351-5fa037979071",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "84b582ba-8e40-4546-96e7-eea5ef2c789f",
+            "enumb": 0,
+            "eventtype": 4,
+            "m_owner": "72f872d8-55ea-4b6f-a12c-8ffcde3b8ebc"
+        }
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,

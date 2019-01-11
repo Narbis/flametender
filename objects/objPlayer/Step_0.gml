@@ -745,11 +745,11 @@ switch (state)
 			{
 				sprite_index = sprPlayerFallDown1;
 			}
-			else if (v_speed < (jump_speed * 1.5))
+			else if (v_speed < (jump_speed * 2))
 			{
 				sprite_index = sprPlayerFallDown2;
 			}
-			else if (v_speed < 10)
+			else if (v_speed < 25)
 			{
 				sprite_index = sprPlayerFallDown3;
 				fall = fall_states.heavy;
@@ -806,7 +806,7 @@ switch (state)
 			controls.buffer = false;
 			controls.buffer_counter = 0;
 		}
-		else if (controls.action == input.jump && ((position_meeting(x + 6, y + 15, objWall) && position_meeting(x + 6, y - 7, objWall)) || (position_meeting(x - 6, y + 15, objWall) && position_meeting(x - 6, y - 7, objWall))))
+		else if (controls.action == input.jump && ((position_meeting(x + 6, y + 10, objWall) && position_meeting(x + 6, y - 4, objWall)) || (position_meeting(x - 6, y + 10, objWall) && position_meeting(x - 6, y - 4, objWall))))
 		{
 			state = player_states.jump;
 			controls.action = input.none;
@@ -2253,9 +2253,10 @@ switch (state)
 // NO FLAMEDASH INDICATOR
 #region
 	
-if (!dash_ready && frame_counter % 3 == 0)
+if (!dash_ready)
 {
-	part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
+	part_emitter_region(global.particle_system, flamedash_emitter, x - 4, x + 4, y - 4, y + 4, ps_shape_rectangle, ps_distr_linear);
+	part_emitter_burst(global.particle_system, flamedash_emitter, global.ember_particle, -5);
 }
 	
 #endregion
@@ -2324,7 +2325,7 @@ if (((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32)))
 		invuln = true;
 		if (!controls.debug)
 		{
-			// get hurt?
+			flame -= 3;
 		}
 	}
 }
