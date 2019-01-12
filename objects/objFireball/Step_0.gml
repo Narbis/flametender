@@ -10,7 +10,7 @@ switch (attack)
 			x_motion = 10;
 		}
 		
-		x_motion -= (x_motion / 3);
+		x_motion -= (x_motion / 4);
 		
 		if (follow.face_right)
 		{
@@ -34,7 +34,7 @@ switch (attack)
 			y_motion = -2;
 		}
 		
-		x_motion -= (x_motion / 3);
+		x_motion -= (x_motion / 4);
 		y_motion -= (y_motion / 8);
 		
 		if (follow.face_right)
