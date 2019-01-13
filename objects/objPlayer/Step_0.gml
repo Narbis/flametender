@@ -1545,6 +1545,124 @@ switch (state)
 	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: CHARGE ATTACK
+	//
+	// The character is performing a powered-up forward-facing fire attack on the ground
+	//-----------------------------------------------------------------------------------------------------------------
+	#region
+	case player_states.charge_attack:
+	
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Facing and animations are set on frame 1
+		
+		if (frame_counter == 1)
+		{
+
+			flame_regen_counter = 0;
+			
+			if (controls.input_x > 0 || (controls.input_x == 0 && face_right == true))
+			{
+				// RIGHT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				face_right = true;
+				image_xscale = 1;
+				
+				// Animations
+				if (attack_combo == 0)
+				{
+					sprite_index = sprPlayerAttack;
+				}
+				else if (attack_combo == 1)
+				{
+					sprite_index = sprPlayerAttackSecond;
+				}
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				face_right = false;
+				image_xscale = -1;
+				
+				// Animations
+				if (attack_combo == 0)
+				{
+					sprite_index = sprPlayerAttack;
+				}
+				else if (attack_combo == 1)
+				{
+					sprite_index = sprPlayerAttackSecond;
+				}
+				
+			}
+			
+		}
+		
+		// Sounds and projectile creation are done on frame 7
+		
+		if (frame_counter == 7)
+		{
+			// Create fireball instance
+			with(instance_create_layer(x, y, "Player", objFireball))
+			{
+				attack = attack_types.ground;
+			}
+			
+			// Play sound
+			scrPlaySound(sndFireballAttack, x, y);
+			
+			attacks++;
+		}
+		
+		// When state finishes, enter idle state and reset frame counter
+		
+		if (frame_counter >= attack_frames)
+		{
+			if (controls.action == input.attack && attack_combo < max_combo)
+			{
+				state = player_states.attack;
+				controls.action = input.none;
+				controls.buffer = false;
+				controls.buffer_counter = 0;
+				
+				reset_animation = true;
+				frame_counter = 0;
+				
+				attack_combo++;
+			}
+		}
+		
+		if (frame_counter >= attack_complete_frames)
+		{
+			state = player_states.idle;
+			reset_animation = true;
+			frame_counter = 0;
+				
+			attack_combo = 0;
+		}
+		
+		break;
+	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: AERIAL ATTACK
 	//
 	// The character is performing a forward-facing fire attack in the air

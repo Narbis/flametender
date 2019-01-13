@@ -6,6 +6,7 @@ enum input
 	jump,
 	dash,
 	attack,
+	charge,
 	start,
 	activate
 }

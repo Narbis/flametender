@@ -51,7 +51,20 @@ if (has_control)
 		}
 		else if (instance_exists(objPlayer))
 		{
-			if (gamepad_button_check_pressed(0, gp_face3))
+			
+			if (gamepad_button_check_released(0, gp_face2))
+			{
+				action = input.attack;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (gamepad_button_check_pressed(0, gp_face2))
+			{
+				action = input.charge;
+				buffer = true;
+				buffer_counter = 0;
+			}
+			else if (gamepad_button_check_pressed(0, gp_face3))
 			{
 				action = input.activate;
 				buffer = false;
@@ -65,12 +78,6 @@ if (has_control)
 			else if (gamepad_button_check_pressed(0, gp_shoulderrb))
 			{
 				action = input.dash;
-				buffer = true;
-				buffer_counter = 0;
-			}
-			else if (gamepad_button_check_pressed(0, gp_face2))
-			{
-				action = input.attack;
 				buffer = true;
 				buffer_counter = 0;
 			}
