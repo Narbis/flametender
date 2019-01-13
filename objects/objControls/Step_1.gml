@@ -51,18 +51,17 @@ if (has_control)
 		}
 		else if (instance_exists(objPlayer))
 		{
-			
-			if (gamepad_button_check_released(0, gp_face2))
+			if (gamepad_button_check_pressed(0, gp_face2))
 			{
 				action = input.attack;
 				buffer = true;
 				buffer_counter = 0;
+				
+				charging_attack = true;
 			}
-			else if (gamepad_button_check_pressed(0, gp_face2))
+			else if (gamepad_button_check_released(0, gp_face2))
 			{
-				action = input.charge;
-				buffer = true;
-				buffer_counter = 0;
+				charging_attack = false;
 			}
 			else if (gamepad_button_check_pressed(0, gp_face3))
 			{

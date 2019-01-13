@@ -1459,18 +1459,7 @@ switch (state)
 				
 				// Set facing
 				face_right = true;
-				image_xscale = 1;
-				
-				// Animations
-				if (attack_combo == 0)
-				{
-					sprite_index = sprPlayerAttack;
-				}
-				else if (attack_combo == 1)
-				{
-					sprite_index = sprPlayerAttackSecond;
-				}
-				
+				image_xscale = 1;			
 			}
 			else
 			{
@@ -1483,40 +1472,67 @@ switch (state)
 				// Set facing
 				face_right = false;
 				image_xscale = -1;
-				
-				// Animations
-				if (attack_combo == 0)
-				{
-					sprite_index = sprPlayerAttack;
-				}
-				else if (attack_combo == 1)
-				{
-					sprite_index = sprPlayerAttackSecond;
-				}
-				
+			}
+			
+			// Animations
+			if (attack_combo == 0)
+			{
+				sprite_index = sprPlayerAttack;
+			}
+			else if (attack_combo == 1)
+			{
+				sprite_index = sprPlayerAttackSecond;
 			}
 			
 		}
 		
-		// Sounds and projectile creation are done on frame 7
+		// Sounds and projectile creation are done on frame 11
 		
-		if (frame_counter == 7)
+		if (frame_counter == 11 + charge_counter)
 		{
-			// Create fireball instance
-			with(instance_create_layer(x, y, "Player", objFireball))
+			if (!controls.charging_attack)
 			{
-				attack = attack_types.ground;
+				if (charge_counter > 0)
+				{
+					// Animations
+					if (attack_combo == 0)
+					{
+						sprite_index = sprPlayerAttack;
+					}
+					else if (attack_combo == 1)
+					{
+						sprite_index = sprPlayerAttackSecond;
+					}
+					
+					image_index = 1.9;
+				}
+				
+				// Create fireball instance
+				with(instance_create_layer(x, y, "Player", objFireball))
+				{
+					attack = attack_types.ground;
+				}
+			
+				// Play sound
+				scrPlaySound(sndFireballAttack, x, y);
+			
+				attacks++;
 			}
-			
-			// Play sound
-			scrPlaySound(sndFireballAttack, x, y);
-			
-			attacks++;
+			else
+			{
+				if (charge_counter == 0)
+				{
+					sprite_index = sprPlayerAttackCharge;
+					image_index = 0;
+				}
+				
+				charge_counter++;
+			}
 		}
 		
 		// When state finishes, enter idle state and reset frame counter
 		
-		if (frame_counter >= attack_frames)
+		if (frame_counter >= attack_frames + charge_counter)
 		{
 			if (controls.action == input.attack && attack_combo < max_combo)
 			{
@@ -1529,28 +1545,41 @@ switch (state)
 				frame_counter = 0;
 				
 				attack_combo++;
+				charge_counter = 0;
 			}
 		}
+		else if (charge_counter == charge_frames)
+		{
+			state = player_states.charged_attack;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+				
+			reset_animation = true;
+			frame_counter = 0;
+			charge_counter = 0;
+		}
 		
-		if (frame_counter >= attack_complete_frames)
+		if (frame_counter >= attack_complete_frames + charge_counter)
 		{
 			state = player_states.idle;
 			reset_animation = true;
 			frame_counter = 0;
 				
 			attack_combo = 0;
+			charge_counter = 0;
 		}
 		
 		break;
 	#endregion
 	
 	//-----------------------------------------------------------------------------------------------------------------
-	// STATE: CHARGE ATTACK
+	// STATE: CHARGED ATTACK
 	//
-	// The character is performing a powered-up forward-facing fire attack on the ground
+	// The character is performing a charged forward-facing fire attack on the ground
 	//-----------------------------------------------------------------------------------------------------------------
 	#region
-	case player_states.charge_attack:
+	case player_states.charged_attack:
 	
 		// Reset animation
 		
@@ -1577,18 +1606,7 @@ switch (state)
 				
 				// Set facing
 				face_right = true;
-				image_xscale = 1;
-				
-				// Animations
-				if (attack_combo == 0)
-				{
-					sprite_index = sprPlayerAttack;
-				}
-				else if (attack_combo == 1)
-				{
-					sprite_index = sprPlayerAttackSecond;
-				}
-				
+				image_xscale = 1;			
 			}
 			else
 			{
@@ -1601,54 +1619,34 @@ switch (state)
 				// Set facing
 				face_right = false;
 				image_xscale = -1;
-				
-				// Animations
-				if (attack_combo == 0)
-				{
-					sprite_index = sprPlayerAttack;
-				}
-				else if (attack_combo == 1)
-				{
-					sprite_index = sprPlayerAttackSecond;
-				}
-				
 			}
+			
+			// Animations
+			
+			sprite_index = sprPlayerAttackUnleash;
 			
 		}
 		
-		// Sounds and projectile creation are done on frame 7
+		// Sounds and projectile creation are done on frame 11
 		
-		if (frame_counter == 7)
+		if (frame_counter == 11)
 		{
+				
 			// Create fireball instance
-			with(instance_create_layer(x, y, "Player", objFireball))
+			with(instance_create_layer(x, y, "Player", objFireballCharged))
 			{
 				attack = attack_types.ground;
 			}
 			
 			// Play sound
-			scrPlaySound(sndFireballAttack, x, y);
+			scrPlaySound(sndBurn, x, y);
 			
 			attacks++;
 		}
 		
-		// When state finishes, enter idle state and reset frame counter
 		
-		if (frame_counter >= attack_frames)
-		{
-			if (controls.action == input.attack && attack_combo < max_combo)
-			{
-				state = player_states.attack;
-				controls.action = input.none;
-				controls.buffer = false;
-				controls.buffer_counter = 0;
-				
-				reset_animation = true;
-				frame_counter = 0;
-				
-				attack_combo++;
-			}
-		}
+		
+		// When state finishes, enter idle state and reset frame counter
 		
 		if (frame_counter >= attack_complete_frames)
 		{
@@ -1657,11 +1655,12 @@ switch (state)
 			frame_counter = 0;
 				
 			attack_combo = 0;
+			charge_counter = 0;
 		}
 		
 		break;
 	#endregion
-	
+		
 	//-----------------------------------------------------------------------------------------------------------------
 	// STATE: AERIAL ATTACK
 	//

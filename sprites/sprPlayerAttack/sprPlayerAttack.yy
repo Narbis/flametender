@@ -358,49 +358,6 @@
                     "LayerId": "1dea265c-d27c-476f-a1a0-10020bd10039"
                 }
             ]
-        },
-        {
-            "id": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-            "modelName": "GMSpriteFrame",
-            "mvc": "1.0",
-            "SpriteId": "55de86ac-a0aa-40e0-bd6e-68a18e3fcac5",
-            "compositeImage": {
-                "id": "2159207b-a59c-422d-8adb-a059e41a5d2d",
-                "modelName": "GMSpriteImage",
-                "mvc": "1.0",
-                "FrameId": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-                "LayerId": "00000000-0000-0000-0000-000000000000"
-            },
-            "images": [
-                {
-                    "id": "9640aa1a-3a26-4c4c-8e76-2f4f412ac8f9",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-                    "LayerId": "1459fb3d-d5e9-4604-980e-e5b3fc13f4d7"
-                },
-                {
-                    "id": "710f5d64-82c4-42db-beee-3525386e22b3",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-                    "LayerId": "6103bc77-d286-4394-8439-2e73ce7b9061"
-                },
-                {
-                    "id": "ca909a98-227c-45ce-8f25-c3842753b0cb",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-                    "LayerId": "1fe122e0-db7e-43d5-9573-9cdf2b74dac2"
-                },
-                {
-                    "id": "1c74b9b9-ec67-4148-8b72-7d0f0798be1f",
-                    "modelName": "GMSpriteImage",
-                    "mvc": "1.0",
-                    "FrameId": "0bba165b-3d54-42d3-adc8-4c257ada271d",
-                    "LayerId": "1dea265c-d27c-476f-a1a0-10020bd10039"
-                }
-            ]
         }
     ],
     "gridX": 0,
@@ -454,7 +411,7 @@
     ],
     "origin": 4,
     "originLocked": false,
-    "playbackSpeed": 15,
+    "playbackSpeed": 12,
     "playbackSpeedType": 0,
     "premultiplyAlpha": false,
     "sepmasks": false,

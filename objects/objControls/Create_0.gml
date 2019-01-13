@@ -6,7 +6,6 @@ enum input
 	jump,
 	dash,
 	attack,
-	charge,
 	start,
 	activate
 }
@@ -20,6 +19,7 @@ debug = false;
 paused = false;
 input_x = 0;
 input_y = 0;
+charging_attack = false;
 
 // When the game starts check if a control is connected or not
 

@@ -4,7 +4,7 @@ switch (attack)
 	
 		if (life_counter == 0)
 		{
-			x = follow.x + ((sign(follow.image_xscale)) * 5);
+			x = follow.x + (player_x_sign * 5);
 			y = follow.y + 3;
 			
 			x_motion = 10;
@@ -12,7 +12,7 @@ switch (attack)
 		
 		x_motion -= (x_motion / 4);
 		
-		if (follow.face_right)
+		if (player_x_sign)
 		{
 			x = (x + x_motion) + (follow.x - player_previous_x);
 		}
@@ -27,7 +27,7 @@ switch (attack)
 	
 		if (life_counter == 0)
 		{
-			x = follow.x + ((sign(follow.image_xscale)) * 8);
+			x = follow.x + (player_x_sign * 8);
 			y = follow.y + 12;
 			
 			x_motion = 10;
@@ -37,7 +37,7 @@ switch (attack)
 		x_motion -= (x_motion / 4);
 		y_motion -= (y_motion / 8);
 		
-		if (follow.face_right)
+		if (player_x_sign)
 		{
 			x = (x + x_motion) + (follow.x - player_previous_x);
 			y = (y + y_motion) + (follow.y - player_previous_y);
@@ -58,12 +58,11 @@ part_type_size(attack_particle, size - 0.1, size + 0.1, 0.15, 0);
 image_xscale += 0.05;
 image_yscale += 0.05;
 
-if (life_counter > duration)
+if (life_counter == duration)
 {
 	instance_destroy();
 }
-
-if (life_counter < duration)
+else
 {
 	part_particles_create(global.particle_system, x, y, attack_particle, 3);
 	//part_particles_create(global.particle_system, x, y, global.ember_particle, 1);

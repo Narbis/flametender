@@ -1487,6 +1487,14 @@
             }
         },
         {
+            "Key": "b7e0add5-8d64-4a3e-8bcd-77410b0c3256",
+            "Value": {
+                "id": "cd787df2-9827-4974-b2a7-357875c26210",
+                "resourcePath": "objects\\objFireballCharged\\objFireballCharged.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "b8061a0e-2cf9-4abe-b69b-b124706282ef",
             "Value": {
                 "id": "9a9ef150-a42a-45ec-b49a-f437b88ba5fe",

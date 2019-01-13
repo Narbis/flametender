@@ -14,7 +14,7 @@ enum player_states
 	climb,
 	slide,
 	attack,
-	charge_attack,
+	charged_attack,
 	aerialattack,
 	flamedash,
 	hurt,
@@ -65,7 +65,7 @@ dash_ready = true;
 invuln = false; // used for having a moment to escape after getting hurt
 attack_combo = 0; // keeps track of how many hits in a multi-hit attack have been done
 max_combo = 1;
-attack_charge_counter = 0;
+charge_counter = 0;
 
 h_speed = 0;
 v_speed = 0;
@@ -91,11 +91,11 @@ slide_fall_transition_frames = 20;
 hang_climb_transition_frames = 10;
 hang_slide_transition_frames = 10;
 flamedash_frames = 12;
-attack_frames = 20;
-attack_complete_frames = 36;
+attack_frames = 15;
+attack_complete_frames = 30;
 aerial_attack_frames = 20;
 aerial_attack_complete_frames = 44;
-attack_charge_frames = 60;
+charge_frames = 60;
 hurt_frames = 20;
 dead_frames = 100;
 flame_regen_frames = 500;
