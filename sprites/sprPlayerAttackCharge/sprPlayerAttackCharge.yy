@@ -7,9 +7,9 @@
     "HTile": false,
     "VTile": false,
     "bbox_bottom": 31,
-    "bbox_left": 1,
-    "bbox_right": 29,
-    "bbox_top": 3,
+    "bbox_left": 3,
+    "bbox_right": 20,
+    "bbox_top": 9,
     "bboxmode": 0,
     "colkind": 1,
     "coltolerance": 0,
@@ -459,7 +459,7 @@
             "isLocked": false,
             "name": "Layer 1",
             "opacity": 60,
-            "visible": true
+            "visible": false
         },
         {
             "id": "200a3bc7-337f-42fb-a8e0-dd3030b147e6",

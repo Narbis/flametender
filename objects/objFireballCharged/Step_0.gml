@@ -18,11 +18,11 @@ else
 }
 
 life_counter += 1;
-size += 0.06;
-part_type_size(attack_particle, size - 0.1, size + 0.1, 0.15, 0);
+size += 0.04;
+part_type_size(attack_particle, size - 0.01, size + 0.01, 0.05, 0);
 
-image_xscale += 0.06;
-image_yscale += 0.06;
+image_xscale += 0.02;
+image_yscale += 0.02;
 
 if (life_counter > duration)
 {

@@ -206,3 +206,26 @@ part_type_blend(new_flame_particle, 1);
 part_type_direction(new_flame_particle, 0, 0, 0, 0);
 part_type_speed(new_flame_particle, 0.5, 3, -0.2, 0);
 part_type_life(new_flame_particle, 10, 15);
+
+///Particle Test
+flame_charge_particle = part_type_create();
+part_type_sprite(flame_charge_particle, sprFireSmall, 0, 1, 0);
+part_type_speed(flame_charge_particle, 1, 3, .5, 0);
+part_type_orientation(flame_charge_particle, 0, 360, 5, 0, 0);
+part_type_color2(flame_charge_particle, c_orange, c_red);
+part_type_alpha3(flame_charge_particle, 1, 1, 0);
+part_type_blend(flame_charge_particle, 1);
+part_type_life(flame_charge_particle, 5, 10);
+part_type_size(flame_charge_particle, .1, .3, .01, 0);
+
+// Flame particle
+charging_flame_particle = part_type_create();
+part_type_sprite(charging_flame_particle, sprFireSmall, 0, 0, 1);
+part_type_size(charging_flame_particle, 0.3, 1, -0.05, 0);
+part_type_orientation(charging_flame_particle, 0, 360, 5, 0, 0);
+part_type_color2(charging_flame_particle, c_orange, c_red);
+part_type_alpha3(charging_flame_particle, 1, 1, 0);
+part_type_blend(charging_flame_particle, 1);
+part_type_direction(charging_flame_particle, 85, 95, 0, 0);
+part_type_speed(charging_flame_particle, 0.2, 1.5, -0.05, 0);
+part_type_life(charging_flame_particle, 15, 20);

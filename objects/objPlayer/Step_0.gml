@@ -1526,6 +1526,22 @@ switch (state)
 					image_index = 0;
 				}
 				
+				if (charge_counter > 12)
+				{
+					var _dir = random(360);
+					var _dist = 10;
+					var _x = (x - (sign(image_xscale) * 4)) + lengthdir_x(_dist, _dir);
+					var _y = (y + 6) + lengthdir_y(_dist, _dir);
+					var _part_dir = point_direction(_x, _y, (x - (sign(image_xscale) * 4)), (y + 6));
+					part_type_direction(flame_charge_particle, _part_dir, _part_dir, 0, 0);
+					part_particles_create(global.particle_system, _x, _y, flame_charge_particle, 1);
+				}
+				
+				if (charge_counter > 24)
+				{
+					part_particles_create(global.particle_system, x - (sign(image_xscale) * 4), y + 7, charging_flame_particle, 1);
+				}
+				
 				charge_counter++;
 			}
 		}
@@ -1627,9 +1643,9 @@ switch (state)
 			
 		}
 		
-		// Sounds and projectile creation are done on frame 11
+		// Sounds and projectile creation are done on frame 6 onwards
 		
-		if (frame_counter == 11)
+		if ((frame_counter >= 6 && frame_counter < 21) && frame_counter % 2 == 0)
 		{
 				
 			// Create fireball instance
@@ -1638,10 +1654,16 @@ switch (state)
 				attack = attack_types.ground;
 			}
 			
-			// Play sound
-			scrPlaySound(sndBurn, x, y);
 			
-			attacks++;
+			if (frame_counter == 6)
+			{
+				part_particles_create(global.particle_system, x + (sign(image_xscale) * 13), y + 3, global.shockwave_particle, 1);
+			
+				// Play sound
+				scrPlaySound(sndBurn, x, y);
+			
+				attacks++;
+			}
 		}
 		
 		
@@ -2451,8 +2473,8 @@ if (((x < -32 || x > room_width + 32) || (y < -32 || y > room_height + 32)))
 
 // DEBUGGING STUFF
 #region
-if (mouse_check_button(mb_left))
+if(mouse_check_button(mb_left))
 {
-	
+    
 }
 #endregion
