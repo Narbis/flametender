@@ -210,7 +210,7 @@ part_type_life(new_flame_particle, 10, 15);
 ///Particle Test
 flame_charge_particle = part_type_create();
 part_type_sprite(flame_charge_particle, sprFireSmall, 0, 1, 0);
-part_type_speed(flame_charge_particle, 1, 3, .5, 0);
+part_type_speed(flame_charge_particle, 2, 4, 0, 0);
 part_type_orientation(flame_charge_particle, 0, 360, 5, 0, 0);
 part_type_color2(flame_charge_particle, c_orange, c_red);
 part_type_alpha3(flame_charge_particle, 1, 1, 0);
