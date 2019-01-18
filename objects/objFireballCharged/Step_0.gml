@@ -34,5 +34,14 @@ else
 	//part_particles_create(global.particle_system, x, y, global.ember_particle, 1);
 }
 
+if (wait_counter > 0)
+{
+	wait_counter++;
+	if (wait_counter == 10)
+	{
+		wait_counter = 0;
+	}
+}
+
 player_previous_x = follow.x;
 player_previous_y = follow.y;

@@ -1,4 +1,4 @@
-if (other.invuln_counter == 0)
+if (!other.invuln)
 {
 	other.flame -= 3;
 }

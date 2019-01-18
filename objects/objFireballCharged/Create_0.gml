@@ -16,6 +16,7 @@ image_yscale = 0.5;
 
 duration = 30;
 life_counter = 0;
+wait_counter = 0;
 size = 0.05;
 
 // Fire attack particle
