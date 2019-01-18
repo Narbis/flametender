@@ -1,5 +1,18 @@
 if (initialized)
 {
+	if (follow.state == player_states.save && follow.save_animation_counter == 0)
+	{
+		view_h_half *= .99;
+		view_w_half *= .99;
+	}
+	else
+	{
+		view_h_half = min(view_h_half * 1.1, 135);
+		view_w_half = min(view_w_half * 1.1, 240);
+	}
+	
+	camera_set_view_size(cam, view_w_half * 2, view_h_half * 2);
+		
 	if (follow.state == player_states.climb)
 	{
 		towardY = follow.y - 16;
@@ -65,4 +78,13 @@ else
 		follow = objPlayer;
 		initialized = true;
 	}
+}
+
+if (keyboard_check_pressed(vk_space))
+{
+	camera_set_view_size(cam, view_w_half, view_h_half);
+}
+if (keyboard_check_released(vk_space))
+{
+	camera_set_view_size(cam, view_w_half * 2, view_h_half * 2);
 }

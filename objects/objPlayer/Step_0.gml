@@ -88,6 +88,13 @@ switch (state)
 		{
 			state = player_states.crouch;
 		}
+		else if (controls.action == input.select)
+		{
+			state = player_states.save;
+			controls.action = input.none;
+			controls.buffer = false;
+			controls.buffer_counter = 0;
+		}
 		
 		// Reset animation and frame counter if necessary
 		
@@ -1490,7 +1497,7 @@ switch (state)
 		
 		if (frame_counter == 11 + charge_counter)
 		{
-			if (!controls.charging_attack)
+			if (!controls.charging_attack || flame <= 10) // Charging is only possible if more than one flame is remaining
 			{
 				if (charge_counter > 0)
 				{
@@ -1661,6 +1668,19 @@ switch (state)
 			
 				// Play sound
 				scrPlaySound(sndBurn, x, y);
+				
+				// Subtract flame
+				if (flame % 10 == 0)
+				{
+					flame -= 10;
+				}
+				else
+				{
+					while (flame % 10 != 0)
+					{
+						flame--;
+					}
+				}
 			
 				attacks++;
 			}
@@ -2383,6 +2403,91 @@ switch (state)
 			objUI.state = ui_states.fade_in;
 			objUI.frame_counter = 0;
 			objControls.action = input.none;
+		}
+		
+		break;
+	#endregion
+	
+	//-----------------------------------------------------------------------------------------------------------------
+	// STATE: SAVE
+	//
+	// The character is creating a save point
+	//-----------------------------------------------------------------------------------------------------------------
+	#region
+	case player_states.save:
+		
+		// Reset animation
+		
+		if (reset_animation == true)
+		{
+			image_index = 0;
+			reset_animation = false;
+		}
+		
+		// Facing and animations are set on frame 1
+		
+		if (frame_counter == 1)
+		{
+
+			if (face_right == true)
+			{
+				// RIGHT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				image_xscale = 1;
+				
+				// Animations
+				sprite_index = sprPlayerSave;
+				
+			}
+			else
+			{
+				// LEFT
+				
+				// Movement speed
+				h_speed = 0;
+				v_speed = 0;
+				
+				// Set facing
+				image_xscale = -1;
+				
+				// Animations
+				sprite_index = sprPlayerSave;
+				
+			}
+		}
+		
+		
+		
+		// When state finishes, create checkpoint
+		
+		if (save_animation_counter == 0 && (controls.saving && frame_counter == save_frames))
+		{
+			// CREATE_CHECKPOINT.EXE
+			part_particles_create(global.particle_system, x, y, global.b_ember_particle, 30);
+			controls.saving = false;
+		}
+		
+		if (!controls.saving || save_animation_counter > 0)
+		{
+			if (save_animation_counter == 0)
+			{
+				image_index = 0;
+			}
+			
+			save_animation_counter++;
+			
+			if (save_animation_counter >= 7)
+			{
+				state = player_states.idle;
+				reset_animation = true;
+				frame_counter = 0;
+				save_animation_counter = 0;
+			}
 		}
 		
 		break;

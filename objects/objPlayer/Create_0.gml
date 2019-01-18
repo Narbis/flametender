@@ -18,7 +18,8 @@ enum player_states
 	aerialattack,
 	flamedash,
 	hurt,
-	dead
+	dead,
+	save
 }
 
 enum fall_states
@@ -66,6 +67,7 @@ invuln = false; // used for having a moment to escape after getting hurt
 attack_combo = 0; // keeps track of how many hits in a multi-hit attack have been done
 max_combo = 1;
 charge_counter = 0;
+save_animation_counter = 0;
 
 h_speed = 0;
 v_speed = 0;
@@ -100,6 +102,7 @@ hurt_frames = 20;
 dead_frames = 100;
 flame_regen_frames = 500;
 invuln_frames = 90;
+save_frames = 90;
 
 // Movement constants
 

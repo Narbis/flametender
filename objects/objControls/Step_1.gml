@@ -80,6 +80,17 @@ if (has_control)
 				buffer = true;
 				buffer_counter = 0;
 			}
+			else if (gamepad_button_check_pressed(0, gp_select))
+			{
+				action = input.select;
+				buffer = false;
+				
+				saving = true;
+			}
+			else if (gamepad_button_check_released(0, gp_select))
+			{
+				saving = false;
+			}
 			else if (gamepad_button_check_pressed(0, gp_padu))
 			{
 				debug = !debug;
