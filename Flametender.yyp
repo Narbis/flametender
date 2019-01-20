@@ -119,6 +119,14 @@
             }
         },
         {
+            "Key": "0b06bbf2-0d84-4459-8260-1ec81a8c421a",
+            "Value": {
+                "id": "c8540742-2605-47b4-9959-d6a56fb64c05",
+                "resourcePath": "objects\\objBatHitbox\\objBatHitbox.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "0ce2b04f-2089-4e0a-af1c-fe008b5f464b",
             "Value": {
                 "id": "b34c79b2-ba4d-4d69-a244-89645679aab9",
@@ -1007,6 +1015,14 @@
             }
         },
         {
+            "Key": "79e9498c-a6cd-4abf-a394-97f1f6f731d4",
+            "Value": {
+                "id": "f9248465-a506-495c-9729-a19f8f8db9a7",
+                "resourcePath": "sprites\\sprBatHitbox\\sprBatHitbox.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "7a3fc532-18e9-493e-acfe-ec9c745e9e17",
             "Value": {
                 "id": "bed472eb-3ce8-400c-acc9-d036612b0661",
@@ -1052,6 +1068,14 @@
                 "id": "67a6d9d9-a9f3-407c-98a5-fa3de475a6c3",
                 "resourcePath": "tilesets\\tilCaveWall\\tilCaveWall.yy",
                 "resourceType": "GMTileSet"
+            }
+        },
+        {
+            "Key": "7e71f926-6622-41bc-a940-01ce01c8c82a",
+            "Value": {
+                "id": "4fbbc5e5-96fb-4d40-94ef-f62a7d9b1a73",
+                "resourcePath": "objects\\objBatAggroZone\\objBatAggroZone.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1147,6 +1171,14 @@
             "Value": {
                 "id": "79398289-9d00-4ae0-9549-8b1914265aa6",
                 "resourcePath": "sprites\\sprHeavyLandDust\\sprHeavyLandDust.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "8ce97e7f-bf0a-4f18-ac2a-b0bbabd64cae",
+            "Value": {
+                "id": "3635b827-1d83-4354-8508-9e6e2500c338",
+                "resourcePath": "sprites\\sprBatHurt\\sprBatHurt.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -2116,6 +2148,14 @@
                 "id": "62df3646-58a8-4e54-a800-6b361a33ef5b",
                 "resourcePath": "rooms\\roomLevel5\\roomLevel5.yy",
                 "resourceType": "GMRoom"
+            }
+        },
+        {
+            "Key": "fa18a3f2-e3f4-4f78-afac-2865e2185b0e",
+            "Value": {
+                "id": "84a1ecde-ebcd-417d-b7f1-3fe40a248fb7",
+                "resourcePath": "sprites\\sprBatAggroZone\\sprBatAggroZone.yy",
+                "resourceType": "GMSprite"
             }
         },
         {

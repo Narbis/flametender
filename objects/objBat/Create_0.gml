@@ -1,7 +1,6 @@
 enum bat_states 
 {
 	idle,
-	alerted,
 	attack,
 	hurt,
 	dead
@@ -14,17 +13,23 @@ face_right = true;
 reset_animation = false;
 
 h_speed = 0;
+v_speed = 0;
 
 // State counters and constants
 
 frame_counter = 0;
-
 life = 2;
+alert_distance = 150;
+hurt_frames = 30;
+hurt_counter = 0;
 
-attack_frames = 20;
+// Aggro Zone
 
-alert_distance = 100;
-attack_distance = 20;
+aggro_zone = instance_create_layer(x, y, "Player", objBatAggroZone);
+
+// Hitbox
+
+hitbox = noone;
 
 // Movement constants
 
