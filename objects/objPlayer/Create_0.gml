@@ -53,6 +53,18 @@ deaths = 0;
 dashes = 0;
 attacks = 0;
 
+// this stuff is for room transitions and checkpoints
+
+transition_room = roomStart;
+transition_x = 48;
+transition_y = 176;
+
+checkpoint_set = false;
+checkpoint_room = roomStart;
+checkpoint_x = 48;
+checkpoint_y = 176;
+checkpoint_flame = 30;
+
 // State and movement variables
 
 state = player_states.idle;

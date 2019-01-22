@@ -46,21 +46,30 @@ switch (state)
 			image_xscale = -1;
 		}
 		
-		with(aggro_zone)
+		
+		if (wait_counter > wait_frames)
 		{
-			if (place_meeting(x, y, objPlayer))
+			with(aggro_zone)
 			{
-				other.state = bat_states.attack;
+				if (place_meeting(x, y, objPlayer))
+				{
+					other.state = bat_states.attack;
+					other.wait_counter = 0;
 				
-				if (objPlayer.x > x)
-				{
-					other.face_right = true;
-				}
-				else
-				{
-					other.face_right = false;
+					if (objPlayer.x > x)
+					{
+						other.face_right = true;
+					}
+					else
+					{
+						other.face_right = false;
+					}
 				}
 			}
+		}
+		else
+		{
+			wait_counter++;
 		}
 		
 		// Reset animation and frame counter if necessary
@@ -325,7 +334,7 @@ switch (state)
 		
 		// Destroy instance after animation completes
 		
-		if (frame_counter >= 48 || place_meeting(x, y + 1, objWall))
+		if (frame_counter >= 48)
 		{
 			part_emitter_burst(global.particle_system, emitter, ash_particle, 50);
 			instance_destroy(aggro_zone);

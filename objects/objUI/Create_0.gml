@@ -16,11 +16,6 @@ game_over = false;
 //Surface used to draw UI stuff
 ui_surface = noone;
 
-// this stuff is for room transitions; super hacky solution, change this later
-transition_room = roomStart;
-transition_x = 48;
-transition_y = 176;
-
 ui_particle_system = part_system_create();
 title_emitter = part_emitter_create(ui_particle_system);
 part_emitter_region(ui_particle_system, title_emitter, 0, 480, 270, 270, ps_shape_rectangle, ps_distr_linear);

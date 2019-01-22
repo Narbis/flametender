@@ -4,19 +4,19 @@
     "mvc": "1.0",
     "name": "objBatHitbox",
     "eventList": [
-        {
-            "id": "f5ed0b59-7e5a-48b1-8088-bd30f7232783",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "84b582ba-8e40-4546-96e7-eea5ef2c789f",
-            "enumb": 0,
-            "eventtype": 4,
-            "m_owner": "0b06bbf2-0d84-4459-8260-1ec81a8c421a"
-        }
+        
     ],
     "maskSpriteId": "79e9498c-a6cd-4abf-a394-97f1f6f731d4",
-    "overriddenProperties": null,
+    "overriddenProperties": [
+        {
+            "id": "bccbd540-1d2d-4730-9573-5d46fe7d204c",
+            "modelName": "GMOverriddenProperty",
+            "mvc": "1.0",
+            "objectId": "f044034c-bc13-4901-88a9-1d8fb1379091",
+            "propertyId": "b3afeb05-d000-4137-bd0b-2fe13857677f",
+            "value": "5"
+        }
+    ],
     "parentObjectId": "f044034c-bc13-4901-88a9-1d8fb1379091",
     "persistent": false,
     "physicsAngularDamping": 0.1,
@@ -34,5 +34,5 @@
     "properties": null,
     "solid": false,
     "spriteId": "79e9498c-a6cd-4abf-a394-97f1f6f731d4",
-    "visible": true
+    "visible": false
 }

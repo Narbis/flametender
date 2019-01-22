@@ -20,8 +20,12 @@ v_speed = 0;
 frame_counter = 0;
 life = 2;
 alert_distance = 150;
+
 hurt_frames = 30;
 hurt_counter = 0;
+
+wait_frames = 40;
+wait_counter = 0;
 
 // Aggro Zone
 

@@ -88,7 +88,7 @@ switch (state)
 		{
 			state = player_states.crouch;
 		}
-		else if (controls.action == input.select)
+		else if (flame > 10 && controls.action == input.select)
 		{
 			state = player_states.save;
 			controls.action = input.none;
@@ -2397,9 +2397,11 @@ switch (state)
 			flame = flame_max;
 			image_speed = 0;
 			
-			objUI.transition_room = roomStart;
-			objUI.transition_x = 48;
-			objUI.transition_y = 176;
+			transition_room = checkpoint_room;
+			transition_x = checkpoint_x;
+			transition_y = checkpoint_y;
+			flame = checkpoint_flame;
+			
 			objUI.state = ui_states.fade_in;
 			objUI.frame_counter = 0;
 			objControls.action = input.none;
@@ -2461,14 +2463,30 @@ switch (state)
 			}
 		}
 		
-		
-		
 		// When state finishes, create checkpoint
 		
 		if (save_animation_counter == 0 && (controls.saving && frame_counter == save_frames))
 		{
-			// CREATE_CHECKPOINT.EXE
-			part_particles_create(global.particle_system, x, y, global.b_ember_particle, 30);
+			// Subtract flame
+			if (flame % 10 == 0)
+			{
+				flame -= 10;
+			}
+			else
+			{
+				while (flame % 10 != 0)
+				{
+					flame--;
+				}
+			}
+			
+			checkpoint_set = true;
+			instance_create_layer(x, y, "Player", objCheckpoint);
+			checkpoint_room = room;
+			checkpoint_x = x;
+			checkpoint_y = y;
+			checkpoint_flame = flame;
+			
 			controls.saving = false;
 		}
 		

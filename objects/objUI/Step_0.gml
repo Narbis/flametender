@@ -37,7 +37,7 @@ switch(state)
 			objControls.buffer = false;
 			objControls.buffer_counter = 0;
 			
-			if (transition_room == roomEnd)
+			if (objPlayer.transition_room == roomEnd)
 			{
 				game_over = true;
 			}
@@ -49,7 +49,10 @@ switch(state)
 
 		if (frame_counter == 1)
 		{
-			scrChangeRoom(transition_room, transition_x, transition_y);
+			with (objPlayer)
+			{
+				scrChangeRoom(transition_room, transition_x, transition_y);
+			}
 		}
 	
 	break;

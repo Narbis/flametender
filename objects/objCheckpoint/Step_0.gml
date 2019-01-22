@@ -1,0 +1,1 @@
+part_emitter_burst(global.particle_system, checkpoint_emitter, checkpoint_particle, 2);

@@ -4,19 +4,19 @@
     "mvc": "1.0",
     "name": "objSpikes",
     "eventList": [
-        {
-            "id": "6381ef95-7213-4fe3-a351-5fa037979071",
-            "modelName": "GMEvent",
-            "mvc": "1.0",
-            "IsDnD": false,
-            "collisionObjectId": "84b582ba-8e40-4546-96e7-eea5ef2c789f",
-            "enumb": 0,
-            "eventtype": 4,
-            "m_owner": "72f872d8-55ea-4b6f-a12c-8ffcde3b8ebc"
-        }
+        
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
-    "overriddenProperties": null,
+    "overriddenProperties": [
+        {
+            "id": "fdd8825e-bd61-49c2-bc82-6172dc3b24f4",
+            "modelName": "GMOverriddenProperty",
+            "mvc": "1.0",
+            "objectId": "f044034c-bc13-4901-88a9-1d8fb1379091",
+            "propertyId": "b3afeb05-d000-4137-bd0b-2fe13857677f",
+            "value": "3"
+        }
+    ],
     "parentObjectId": "f044034c-bc13-4901-88a9-1d8fb1379091",
     "persistent": false,
     "physicsAngularDamping": 0.1,

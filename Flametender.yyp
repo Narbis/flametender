@@ -1487,6 +1487,14 @@
             }
         },
         {
+            "Key": "b01bd436-54ed-4890-a908-57455854e59a",
+            "Value": {
+                "id": "0bf2ed5b-c34f-4122-b077-ba2960bfff7a",
+                "resourcePath": "objects\\objCheckpoint\\objCheckpoint.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "b07182bd-992a-4e19-b71a-cdeb071687fb",
             "Value": {
                 "id": "68117582-f39c-4371-bdea-16e40955c30a",
@@ -1971,6 +1979,14 @@
             "Value": {
                 "id": "88f15b0c-b60b-41a5-bf3a-f9a79fc683f5",
                 "resourcePath": "sprites\\sprKnightHitbox\\sprKnightHitbox.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "e8ac97b8-5f4c-45e3-8e10-b28da8587aaf",
+            "Value": {
+                "id": "6b85b5a5-c4e3-4501-ac57-b7cb959b278f",
+                "resourcePath": "sprites\\sprCheckpoint\\sprCheckpoint.yy",
                 "resourceType": "GMSprite"
             }
         },
