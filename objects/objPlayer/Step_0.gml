@@ -2481,11 +2481,18 @@ switch (state)
 			}
 			
 			checkpoint_set = true;
-			instance_create_layer(x, y, "Player", objCheckpoint);
 			checkpoint_room = room;
 			checkpoint_x = x;
 			checkpoint_y = y;
 			checkpoint_flame = flame;
+			
+			if (instance_exists(objCheckpoint))
+			{
+				instance_destroy(objCheckpoint);
+			}
+			instance_create_layer(x, y, "Player", objCheckpoint);
+			part_particles_create_color(global.particle_system, x, y, global.b_ember_particle, c_aqua, 15);
+			part_particles_create(global.particle_system, x, y, objCheckpoint.shockwave_particle, 1);
 			
 			controls.saving = false;
 		}

@@ -120,7 +120,7 @@ save_frames = 90;
 
 v_gravity = 0.14;
 move_speed = 1.8;
-jump_speed = 2.3;
+jump_speed = 2.3; // 3.2 for traditional jump, but aerial drift should be lowered
 flamedash_speed = 3.2;
 
 run_threshold = 0.5;
