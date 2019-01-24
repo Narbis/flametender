@@ -1,0 +1,14 @@
+Features to Implement:
+-Multi-directional attacks
+-More basic enemies
+-Human enemies more interesting
+-Fire-based puzzles (melting ice, lighting torches, burning brush, etc)
+-Actual levels
+-Bosses
+
+Ideas:
+-Progression via combat VS progression via platforming
+	-Combat involves fighting enemies to proceed, killing enemies restores flame
+	-Platforming allows the player to avoid fighting by being sneakier, less fighting means flames can be used for saving when needed
+-Bosses have special abilities that the player gets when defeating them
+	-Killing absorbs the ability, or you can let the boss use their flame attacks to wear themselves out then use a special power to take their power

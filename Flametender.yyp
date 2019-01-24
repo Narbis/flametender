@@ -823,6 +823,14 @@
             }
         },
         {
+            "Key": "67361f1b-6f00-41de-beca-7c7316cb12d5",
+            "Value": {
+                "id": "5cbd45ad-39b5-40e4-ba33-3d93dd18b085",
+                "resourcePath": "sprites\\sprPlayerAttackUpward\\sprPlayerAttackUpward.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "6742759a-7b22-4eba-8e6e-dd3520c6c8d3",
             "Value": {
                 "id": "f88f90c0-80ba-4501-b02e-378d1dbf734d",
